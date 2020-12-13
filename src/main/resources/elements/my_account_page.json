@@ -1,0 +1,9 @@
+{
+  "verify_page": "xpath, //span[@class='navigation_page'] || xpath, //h1[@class='page-heading']",
+  "my_account_heading": "xpath, //h1[@class='page-heading']",
+  "oh_details_link": "xpath, //span[contains(text(),'Order history and details')]",
+  "my_credit_slips_link": "xpath, //span[contains(text(),'My credit slips')]",
+  "my_addresses_link": "xpath, //span[contains(text(),'My addresses')]",
+  "my_personal_information_link": "xpath, //span[contains(text(),'My personal information')]",
+  "my_wishlists_link": "xpath, //span[contains(text(),'My wishlists')]"
+}

@@ -1,0 +1,21 @@
+{
+  "back_to_bag": "xpath, //img[@class=\"css-8atqhb\"]",
+  "profile_return_user": "xpath, //*[@id=\"signInContainer__returnUser\"]",
+  "profile_guest_user": "xpath, //*[@id=\"signInContainer__guestUser\"]",
+  "bag_count": "xpath, //*[@id=\"shoppingBag__titleItemCount\"]",
+  "order_total": "button, //*[@class=\"sds_tx_right orderSummary__totalText\"]",
+  "checkoutBtn": "id,checkout-button",
+  "signInGuest": "xpath, //div[@id='signInContainer__guestUser']",
+  "guestcheckoutEmail": "id,GuestSignInForm__email",
+  "guestcheckoutContinueAsGuest": "id,guestSignInForm__continue--button",
+  "guestcheckoutSelectShippingType": "xpath,//div[@class='shippingMethod__scrollWrapper']//button//div[text()='REPLACE']]",
+  "guestcheckoutfullName": "id, addressForm__fullName",
+  "guestcheckoutstreetAddress": "id, addressForm__address",
+  "guestcheckoutAptUnit": "id,addressForm__apt",
+  "guestcheckoutTown": "id, addressForm__town",
+  "guestcheckoutState": "id, addressForm__state",
+  "guestcheckoutZipCode": "id, addressForm__zip",
+  "guestcheckoutPhone": "id, addressForm__phone",
+  "guestcheckoutPickupPerson": "id, bopisForm__fullName",
+  "guestcheckoutContinueToPay": "id,bopis__button--cont-to-payment"
+}

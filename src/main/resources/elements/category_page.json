@@ -1,0 +1,5 @@
+{
+  "verify_page": "xpath, //*[@id=\"nebula_div_btn\"]/img",
+  "first_product": "xpath, //*[@id=\"product440760012\"]/div/div",
+  "second_product": "xpath, //*[@id=\"faceted-grid\"]/div/div[2]/div/div/div/div/div[2]"
+}

@@ -1,0 +1,3 @@
+{
+  "verify_page": "xpath, /html/body/pre"
+}

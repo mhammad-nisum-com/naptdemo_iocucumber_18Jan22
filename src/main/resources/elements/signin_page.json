@@ -1,0 +1,11 @@
+{
+  "authentication_text": "xpath, //h1[@class='page-heading']",
+  "create_account_tile": "xpath, //h3[contains(text(),'Create an account')]",
+  "create_email_textbox": "xpath, //input[@id='email_create']",
+  "create_account_button": "xpath, //form[@id='create-account_form']//span[1]",
+  "already_registered_tile": "xpath, //h3[contains(text(),'Already registered?')]",
+  "email_textbox": "id, email",
+  "password_textbox": "id, passwd",
+  "forgot_link": "xpath, //a[contains(text(),'Forgot your password?')]",
+  "signin_button": "id, SubmitLogin"
+}
