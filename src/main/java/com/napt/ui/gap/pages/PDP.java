@@ -18,7 +18,7 @@ public class PDP {
     }
 
     public void checkout(){
-        Wait.secondsUntilElementPresent("product_page.checkoutBtn",5);
+        Wait.secondsUntilElementToBeClickable("product_page.checkoutBtn",10);
         Clicks.click("product_page.checkoutBtn");
     }
     public void addToBag()throws Exception{
