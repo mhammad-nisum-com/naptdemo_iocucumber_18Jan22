@@ -1,12 +1,14 @@
 package com.napt.ui.gap.steps;
 
 import com.napt.framework.ui.runner.WebDriverManager;
+import com.napt.framework.ui.utils.StepUtils;
 import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import java.net.MalformedURLException;
@@ -22,6 +24,9 @@ public class Hooks {
     public void beforeScenario(Scenario sc) throws MalformedURLException {
         log.info("Scenario: " + sc.getName());
         WebDriverManager.setDriver2();
+        if(!StepUtils.MEW()){
+            WebDriverManager.getDriver().manage().window().maximize();
+        }
     }
 
     /**

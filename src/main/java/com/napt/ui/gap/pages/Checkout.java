@@ -16,6 +16,7 @@ public class Checkout {
         Clicks.javascriptClick("checkout_page.signInGuest");
         TextBoxes.typeTextbox("checkout_page.guestcheckoutEmail",add.getEmail());
         Wait.secondsUntilElementToBeClickable("checkout_page.guestcheckoutContinueAsGuest",5);
+        Element.moveToElement("checkout_page.guestcheckoutContinueAsGuest");
         Clicks.click("checkout_page.guestcheckoutContinueAsGuest");
         TextBoxes.typeTextbox("checkout_page.guestcheckoutfullName",add.getFullName());
         TextBoxes.typeTextbox("checkout_page.guestcheckoutstreetAddress",add.getStreetAddress());
