@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "features",
         glue = {"com.napt.api.wsi"},
-        tags = {"@checkout"},
+        tags = {"@accountlookup"},
         plugin = {"pretty", "html:target/cucumber_target.html", "json:target/cucumber.json", "rerun:target/failed_scenarios.txt"})
 public class TestRunner extends AbstractTestNGCucumberTests {
 

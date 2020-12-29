@@ -171,7 +171,6 @@ public class BrowserSteps {
                 navigateURL = EnvVariables.getEnvVariables().get("webURL");
         }
         Navigate.visit(navigateURL);
-
 //        driver.get(navigateURL);
 
 
