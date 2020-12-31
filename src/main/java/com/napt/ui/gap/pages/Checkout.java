@@ -5,6 +5,7 @@ import com.napt.ui.gap.entities.Address;
 
 public class Checkout {
 
+
     PDP pdp = new PDP();
 
     public void guestCheckout(Address add)throws Exception{

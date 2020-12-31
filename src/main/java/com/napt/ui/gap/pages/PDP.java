@@ -22,7 +22,6 @@ public class PDP {
         Clicks.clickIfPresent("search.openOfferDialogBtn");
         Clicks.clickIfPresent("search.closeOfferDialogBtn");
     }
-
     public void checkout(){
         Wait.secondsUntilElementPresentAndClick("product_page.checkoutBtn",5);
     }
