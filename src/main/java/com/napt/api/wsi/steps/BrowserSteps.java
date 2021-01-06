@@ -6,6 +6,7 @@ import com.napt.framework.ui.interactions.Navigate;
 import com.napt.framework.ui.interactions.Wait;
 import com.napt.framework.ui.runner.EnvVariables;
 
+import com.napt.framework.ui.runner.WebDriverManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,6 +16,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -23,17 +25,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class BrowserSteps {
+public class BrowserSteps{
     private static final Logger log = Logger.getLogger(BrowserSteps.class);
-//    PDP pdp = new PDP();
-//    Search search = new Search();
-//    Checkout chkout = new Checkout();
 
-    public BrowserSteps() throws MalformedURLException {
-    }
+
+
+
 
     @Given("^I am on the (home|category|product) page$")
     public void iAmOnTheGivenPage(String pageName) {
@@ -152,39 +155,47 @@ public class BrowserSteps {
     }
 
     @ Given("I am on the \"([^\"]*)\" home page$")
-    public void openhomepage(String HomePage){
-        String navigateURL;
-
-//        DesiredCapabilities handlSSLErr = DesiredCapabilities.chrome ();
-//        handlSSLErr.setCapability (CapabilityType.ACCEPT_SSL_CERTS, true);
-//        WebDriver driver = new ChromeDriver(handlSSLErr);
-//        System.setProperty("webdriver.chrome.driver", "/Users/ljavvaji/downloads/chromedriver");
+    public void openHomePage(String HomePage) throws URISyntaxException {
 //
-//        WebDriver driver = new ChromeDriver();
+//        String navigateURL;
+//        switch(HomePage) {
+//
+//            case "WS":
+//                navigateURL = EnvVariables.getEnvVariables().get("webURL");
+//
+//            default:
+//                navigateURL = EnvVariables.getEnvVariables().get("webURL");
+//        }
+//        Navigate.visit(navigateURL);
+//        ChromeOptions options=new ChromeOptions();
+//        System.setProperty("webdriver.chrome.driver", "/Users/ljavvaji/Downloads/cd87");
+//        options.setAcceptInsecureCerts(true);
+//        WebDriver driver=new ChromeDriver(options);
 
-        switch(HomePage) {
-
-            case "WS":
-                navigateURL = EnvVariables.getEnvVariables().get("webURL");
-
-            default:
-                navigateURL = EnvVariables.getEnvVariables().get("webURL");
-        }
-        Navigate.visit(navigateURL);
-//        driver.get(navigateURL);
+        String baseURL=EnvVariables.getEnvVariables().get("webURL");
+        String creds="pkqaenv:Ca8tWh33l";
+        URI tempUri=new URI(baseURL);
+       URI url=new URI(tempUri.getScheme(), creds.toString(), tempUri.getHost(), tempUri.getPort(), tempUri.getPath(), tempUri.getQuery(),
+                tempUri.getFragment());
+       WebDriverManager.getDriver().get(url.toString());
 
 
-        Clicks.clickIfPresent("home_page.popUp");
+
+
+//        Clicks.clickIfPresent("home_page.popUp");
+
     }
 
 
     @When("User clicks on apply now link in \"([^\"]*)\"$")
     public void clickLink(String PageLink){
+
         switch(PageLink) {
             case "Footer": {
                 Clicks.scrollToLazyLoadElement("home_page.FooterApplyNow");
 
                 Clicks.javascriptClick("home_page.FooterApplyNow");
+                //Element.findElement("home_page.FooterApplyNow").click();
             }
 
             case "VP_ApplyNow": {
