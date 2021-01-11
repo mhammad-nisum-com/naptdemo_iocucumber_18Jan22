@@ -1,4 +1,4 @@
 {
-"PIP_page_applynow": "xpath,//*[@class=\"cc-apply-now\"]//*[contains(text(),'Apply Now')]"
+"PIP_page_applynow": "xpath,//*[@class=\"rewards-messaging\"]//a[1]"
 
 }
