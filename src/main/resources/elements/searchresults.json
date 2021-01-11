@@ -1,0 +1,3 @@
+{
+  "btnAdd": "xpath, //div[@class='btn btn-default btn-add-card']"
+}

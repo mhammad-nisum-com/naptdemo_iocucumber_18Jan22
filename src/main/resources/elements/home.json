@@ -1,0 +1,8 @@
+{
+  "inputSearchBox": "id,skip-main-content",
+  "linkSignIn": "xpath,//span[@class='button__item menu-nav__profile-button-sign-in-up d-none d-lg-inline-block']",
+  "miSignIn": "id,sign-in-modal-link",
+  "popupCookieClose": "id,cookieConsentClose",
+  "btnDugOrDeliveryClose": "id,onboardingCloseButton"
+
+}

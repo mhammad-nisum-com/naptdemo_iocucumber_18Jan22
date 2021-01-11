@@ -1,4 +1,4 @@
-package com.napt.ui.gap.steps;
+package com.napt.ui.safeway.steps;
 
 import com.napt.framework.ui.runner.WebDriverManager;
 import com.napt.framework.ui.utils.StepUtils;

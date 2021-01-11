@@ -1,0 +1,31 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SafewayUI-SeleniumGrid-Chrome" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" singleton="false">
+    <option name="CUCUMBER_CORE_VERSION" value="4.5" />
+    <envs>
+      <env name="webURL" value="https://www.safeway.com" />
+      <env name="cap.browserName" value="chrome" />
+      <env name="testType" value="seleniumgrid" />
+      <env name="implicitWaitSeconds" value="3" />
+      <env name="experience" value="desktop" />
+      <env name="seleniumGridURL" value="http://localhost:4444/wd/hub" />
+      <env name="cap.platformName" value="mac" />
+    </envs>
+    <option name="FILE_PATH" value="$PROJECT_DIR$/features/SafewayUI.feature" />
+    <option name="GLUE" value="com.napt.ui.safeway.steps" />
+    <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+    <module name="naptdemo" />
+    <option name="NAME_FILTER" value="^To test search feature$" />
+    <shortenClasspath name="MANIFEST" />
+    <option name="SUGGESTED_NAME" value="Scenario: To test search feature" />
+    <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="io.cucumber.core.cli.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

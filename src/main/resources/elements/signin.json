@@ -1,0 +1,6 @@
+{
+
+  "inputUsername": "name,userId",
+  "inputPassword": "name,inputPassword",
+  "btnSignIn": "id,btnSignIn"
+}
