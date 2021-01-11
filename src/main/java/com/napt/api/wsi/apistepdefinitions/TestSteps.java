@@ -25,13 +25,21 @@ public class TestSteps {
 		case "base_url":
 			Globals.globalVariables.put(paramCategory[1],value);
 			break;
-			case "xml_headers":
-				Globals.xmlHeaders.put(paramCategory[1],value);
-				break;
+		case "xml_headers":
+			Globals.xmlHeaders.put(paramCategory[1],value);
+			break;
+		case "sessionheaders":
+			if (value.equals("sessionID")) {
+				Globals.sessionHeaders.put(paramCategory[1],Globals.sessionID.get("SessionID"));
+			}else{
+				Globals.sessionHeaders.put(paramCategory[1], value);
+			}
+			break;
 		}
-		
-		
+
 	}
+		
+
 	@When("^I make a \"([^\"]*)\" REST Call with URI \"([^\"]*)\" and store the response with Dictionary Key \"([^\"]*)\"$")
 	public void i_make_a_REST_Call_with_URI_and_store_the_response_with_Dictionary_Key(String requestType, String URI, String dictionaryKey) throws Throwable {
 			Response rs = ae.callAPI("get", Globals.headers, "", Globals.globalVariables.get("url").toString() + URI);
@@ -67,7 +75,11 @@ public class TestSteps {
 	
 	@When("^I read the JSON from file \"([^\"]*)\" into Dictionary Key \"([^\"]*)\"$")
 	public void i_read_the_JSON_from_file_into_Dictionary_Key(String jsonFilePath, String dictionaryKey) throws Throwable {
-		Globals.globalVariables.put(dictionaryKey, ae.jsonFileToString(jsonFilePath));
+		String cwd = System.getProperty("user.dir");
+		System.out.println("current directory "+cwd);
+		String jsonPath=cwd+jsonFilePath;
+		System.out.println("actual directory "+jsonPath);
+		Globals.globalVariables.put(dictionaryKey, ae.jsonFileToString(jsonPath));
 	}
 
 	@When("^I make a \"([^\"]*)\" REST Call with URL \"([^\"]*)\" and Body from Dictionary Key \"([^\"]*)\"$")
@@ -107,15 +119,23 @@ public class TestSteps {
 		System.out.println("actual uri "+uri);
 		String val= (String) Globals.globalVariables.get(dictionaryKey);
 		System.out.println(val);
-		Response rs = ae.callAPI(callType, Globals.xmlHeaders, Globals.globalVariables.get(dictionaryKey).toString(), Globals.globalVariables.get("url").toString() + uri );
-		System.out.println("return body value" +rs.asString());
-		Globals.globalVariables.put(dictionaryKey, rs);
+		if (uri.contains("PIIData")) {
+			Response rs = ae.callAPI(callType, Globals.xmlHeaders, Globals.globalVariables.get(dictionaryKey).toString(), Globals.globalVariables.get("url").toString() + uri);
+			Globals.globalVariables.put(dictionaryKey, rs);
+		}else{
+			Response rs = ae.callAPI(callType, Globals.sessionHeaders, Globals.globalVariables.get(dictionaryKey).toString(), Globals.globalVariables.get("url").toString() + uri);
+			Globals.globalVariables.put(dictionaryKey, rs);
+		}
+
 	}
 
 	@When("^I read the XML from file \"([^\"]*)\" into Dictionary Key \"([^\"]*)\"$")
 	public void i_read_the_XML_from_file_into_Dictionary_Key(String jsonFilePath, String dictionaryKey) throws Throwable {
-		Globals.globalVariables.put(dictionaryKey, ae.xmlFileToString(jsonFilePath));
-//		Globals.globalVariables.put(dictionaryKey, ae.generateStringFromResource(jsonFilePath));
+		String cwd = System.getProperty("user.dir");
+		System.out.println("current directory "+cwd);
+		String jsonPath=cwd+jsonFilePath;
+		System.out.println("actual directory "+jsonPath);
+		Globals.globalVariables.put(dictionaryKey, ae.xmlFileToString(jsonPath));
 	}
 
 	@Then("^I verify that the response body with the Return Code as \"([^\"]*)\" and Return Message as \"([^\"]*)\" with Dictionary Key \"([^\"]*)\"$")
@@ -128,5 +148,16 @@ public class TestSteps {
 		Assert.assertTrue("Actual Return Code is ", getReturnCode.toString().contentEquals(returnCode));
 		Assert.assertTrue("Actual Return Message is ", getReturnMessage.equals(returnMessage));
 
+	}
+	@When("^I read the JSON from file \"([^\"]*)\" into Dictionary Key \"([^\"]*)\" and replace the sessionID$")
+	public void i_read_the_JSON_from_file_into_Dictionary_Key_replaceSessionID(String jsonFilePath, String dictionaryKey) throws Throwable {
+		String cwd = System.getProperty("user.dir");
+		System.out.println("current directory "+cwd);
+		String jsonPath=cwd+jsonFilePath;
+		System.out.println("actual directory "+jsonPath);
+		String replaceSessionID=ae.jsonFileToString(jsonPath);
+		String actualJsonBody=replaceSessionID.replace("SessionID",Globals.sessionID.get("SessionID"));
+		System.out.println("actual json body  "+actualJsonBody);
+		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
 	}
 }

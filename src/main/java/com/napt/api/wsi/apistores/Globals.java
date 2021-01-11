@@ -7,4 +7,5 @@ public class Globals {
 	public static HashMap<String, String> headers = new HashMap<String,String>();
 	public static HashMap<String, String> sessionID = new HashMap<String,String>();
 	public static HashMap<String, String> xmlHeaders = new HashMap<String,String>();
+	public static HashMap<String, String> sessionHeaders = new HashMap<String,String>();
 }
