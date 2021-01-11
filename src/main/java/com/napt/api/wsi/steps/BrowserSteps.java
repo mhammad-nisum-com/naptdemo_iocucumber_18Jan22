@@ -20,6 +20,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.server.handler.SendKeys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -82,18 +83,19 @@ public class BrowserSteps{
 
     @Then("^I should be on the \"([^\"]*)\" page$")
     public void iShouldBeOnTheProductPage(String PageName){
-        switch (PageName){
-        case "VP":{
-            Wait.untilElementPresent("Homepage.VP_validate");
-            Assert.assertTrue(Element.elementPresent("Homepage.VP_validate"), "VP page is not loaded properly");
+        if(PageName.equalsIgnoreCase("VP")){
+            String VP_url=WebDriverManager.getCurrentUrl();
+            Assert.assertTrue(VP_url.contains("creditcard"),"Navigated to VP page properly");
+            log.info("VP url is navigated properly");
+            Wait.untilElementPresent("home_page.VP_validate");
+            Assert.assertTrue(Element.elementPresent("home_page.VP_validate"), "VP page is not loaded properly");
             log.info("Navigated to the Value Proposition page");
         }
-            case "SignIn_Create" :
-                {
-            Assert.assertTrue(Element.elementPresent("Homepage.VP_validate"), "VP page is not loaded properly");
-            log.info("Navigated to the Value Proposition page");
+        else if(PageName.equalsIgnoreCase("COF")){
+
         }
-    }}
+
+    }
 
     @And("^I should be able to select the size$")
     public void iShouldBeAbleToSelectTheSize(){
@@ -147,6 +149,7 @@ public class BrowserSteps{
         caps.setCapability("device", "iPhone 11");
         caps.setCapability("realMobile", "true");
         caps.setCapability("os_version", "14.0");
+        caps.setCapability (CapabilityType.ACCEPT_SSL_CERTS, true);
         //caps.setCapability("name", "BStack-[Java] Sample Test"); // test name
         //caps.setCapability("build", "BStack Build Number 1"); // CI/CD job or build name
         WebDriver driver = new RemoteWebDriver(new URL(url), caps);
@@ -179,6 +182,11 @@ public class BrowserSteps{
                 tempUri.getFragment());
        WebDriverManager.getDriver().get(url.toString());
 
+       WebDriverManager.getDriver().findElement(By.id("details-button")).click();
+        WebDriverManager.getDriver().findElement(By.id("proceed-link")).click();
+//       Clicks.javascriptClick("home_page.advanced_button");
+//      Clicks.javascriptClick("home_page.proceed_link");
+
 
 
 
@@ -189,27 +197,35 @@ public class BrowserSteps{
 
     @When("User clicks on apply now link in \"([^\"]*)\"$")
     public void clickLink(String PageLink){
+   if(PageLink.equalsIgnoreCase("Footer"))
+   {
 
-        switch(PageLink) {
-            case "Footer": {
-                Clicks.scrollToLazyLoadElement("home_page.FooterApplyNow");
+       Clicks.scrollToLazyLoadElement("home_page.FooterApplyNow");
 
-                Clicks.javascriptClick("home_page.FooterApplyNow");
-                //Element.findElement("home_page.FooterApplyNow").click();
-            }
+       Clicks.click("home_page.FooterApplyNow");
+   }
+   else if(PageLink.equalsIgnoreCase("VP_ApplyNow"))
+   {
+       Wait.untilElementPresent("home_page.VP_ApplyNow_Button");
+       Clicks.click("home_page.VP_ApplyNow_Button");
+   }
+   else if(PageLink.equalsIgnoreCase("PIP_page")){
+       WebElement search=Element.findElement("search.Search_textbox");
+       search.sendKeys("2010809");
 
-            case "VP_ApplyNow": {
-                Wait.untilElementPresent("home_page.VP_ApplyNow_Button");
-                Clicks.javascriptClick("home_page.VP_ApplyNow_Button");
+       Clicks.click("search.Search_image");
 
-            }
-            case "PIP_Page": {
+       String PIP_url=WebDriverManager.getCurrentUrl();
+       Assert.assertTrue(PIP_url.contains("search"),"Navigated to PIP page properly");
+       log.info("Navigated to PIP page properly");
+       Wait.untilElementPresent("product_page.PIP_page_applynow");
+       Clicks.javascriptClick("product_page.PIP_page_applynow");
 
-            }
+   }
 
 
 
-        }
+
 
 
 

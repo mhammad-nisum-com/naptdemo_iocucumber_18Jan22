@@ -1,11 +1,4 @@
 {
-  "url": "/browse/search.do",
-  "verify_page": "xpath, //div[@class='product-card__image-wrapper'][.//img[@class='product-card__image']]/a",
-  "homePageSearchBox": "xpath, //input[@aria-label='search box']||xpath, //input[@aria-label='search input']",
-  "homePageMagnifier": "xpath, (//button[@aria-label='Open search bar']//*[name()='g'])[last()]",
-  "page": "xpath, //html",
-  "searchResults": "xpath, //div[@class='product-card__image-wrapper'][.//img[@class='product-card__image']]/a",
-  "offerDialog": "xpath, //div[@data-focus-lock-disabled='false']",
-  "closeOfferDialogBtn": "xpath, //button[@aria-label='Close Promo Drawer']//div[@class='promoDrawer__handlebar__icon']",
-  "openOfferDialogBtn": "xpath, //div[@class='promoDrawer__handlebar__icon']"
+  "Search_textbox": "xpath,//*[@id='search-field']",
+  "Search_image": "id,btnSearch"
 }

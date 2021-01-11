@@ -5,6 +5,8 @@
   "FooterApplyNow": "xpath,//a[@class='creditCardApplyNow' and contains(text(),'Apply Now')]",
   "myAccount_link": "xpath,//a[@class=\"user-account-link\"]",
   "myAccount_ApplyNow": "xpath,//li[@class=\"cc-apply-now\"]",
-  "VP_validate": "xpath,//*[@class=\"cc-hero\"]",
-  "VP_ApplyNow_Button": "xpath,//*[@class=\"card-apply\"]"
+  "VP_validate": "xpath,//*[@id=\"cclanding\"]",
+  "VP_ApplyNow_Button": "xpath,(//*[@id=\"apply-buttons\"])[1]",
+  "advanced_button": "id,details-button",
+  "proceed_link": "id,proceed-link"
 }
