@@ -13,6 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -58,11 +59,15 @@ public class BrowserSteps{
     public void iShouldBeOnTheProductPage(String PageName){
         if(PageName.equalsIgnoreCase("VP")){
             String VP_url=WebDriverManager.getCurrentUrl();
-            Assert.assertTrue(VP_url.contains("creditcard"),"Navigated to VP page properly");
+            Assert.assertTrue(VP_url.contains("credit"),"Navigated to VP page properly");
             log.info("VP url is navigated properly");
-            Wait.untilElementPresent("home_page.VP_validate");
+            if (Element.elementPresent("home_page.VP_validate")){
             Assert.assertTrue(Element.elementPresent("home_page.VP_validate"), "VP page is not loaded properly");
-            log.info("Navigated to the Value Proposition page");
+            log.info("Navigated to the Value Proposition page");}
+            else if (Element.elementPresent("home_page.VP_WE_validate")){
+                Assert.assertTrue(Element.elementPresent("home_page.VP_WE_validate"), "VP page is not loaded properly");
+                log.info("Navigated to the Value Proposition page");
+            }
         }
         else if(PageName.equalsIgnoreCase("SignIn_Create")){
             boolean signin_Button_Visible=Element.findElement("Signin_create_account_page.signin_button").isDisplayed();
@@ -88,34 +93,6 @@ public class BrowserSteps{
         Element.findElement("product_page.add_to_bag_qty_menu").click();
         Element.findElement("product_page.add_to_bag_qty_4").click();
     }
-
-
-
-
-
-//    @When("I search for \"([^\"]*)\" on home page$")
-//    public void searchOnHomePage(String string){
-//        search.searchOnHome(string);
-//    }
-//
-//    @When("I select a random search result$")
-//    public void searchStringOnHomePage() throws Exception{
-//        search.selectRandomSearchResult();
-//    }
-//
-//    @When("I add item to bag$")
-//    public void addItemToBag()throws Exception{
-//        pdp.addToBag();
-//    }
-//
-//
-//    @When("^I checkout the bag items as guest with the following details$")
-//    public void checkout(List<String> data) throws Exception {
-//        System.out.println(data.get(0));
-//        Address add = new Address(data.get(0),data.get(1),data.get(2),data.get(3),data.get(4),data.get(5),data.get(6),data.get(7));
-//        chkout.guestCheckout(add);
-//    }
-
 
     public static void main(String[] args) throws Exception{
         //https://pradeepkhanna1:gx252qa5gfwkgC4ajSn5@@hub-cloud.browserstack.com/wd/hub
@@ -152,22 +129,30 @@ public class BrowserSteps{
 
 
     @When("User clicks on apply now link in \"([^\"]*)\"$")
-    public void clickLink(String PageLink){
+    public void clickLink(String PageLink) throws InterruptedException {
    if(PageLink.equalsIgnoreCase("Footer"))
    {
 
        Clicks.scrollToLazyLoadElement("home_page.FooterApplyNow");
-
+       JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
+       js.executeScript("window.scrollBy(0,5000)");
+       Thread.sleep(5000);
+       js.executeScript("window.scrollBy(0,5000)");
+//        WebDriverManager.getDriver().findElement(By.xpath("//div[@id='footer-content']/div[3]/ul//a[@title='Apply Now']")).click();
        Clicks.click("home_page.FooterApplyNow");
    }
    else if(PageLink.equalsIgnoreCase("VP_ApplyNow"))
    {
-       Wait.untilElementPresent("home_page.VP_ApplyNow_Button");
-       Clicks.click("home_page.VP_ApplyNow_Button");
+       if (Element.elementPresent("home_page.VP_ApplyNow_Button")) {
+//           Wait.untilElementPresent("home_page.VP_ApplyNow_Button");
+           Clicks.click("home_page.VP_ApplyNow_Button");
+       }else if (Element.elementPresent("home_page.VP_WE_ApplyNow_Button")){
+           Clicks.click("home_page.VP_WE_ApplyNow_Button");
+       }
    }
    else if(PageLink.equalsIgnoreCase("PIP_page")){
        WebElement search=Element.findElement("search.Search_textbox");
-       search.sendKeys("2010809");
+       search.sendKeys("8039131");
 
        Clicks.click("search.Search_image");
 
@@ -190,6 +175,36 @@ public class BrowserSteps{
 
            }}
 
+   }
+   else if(PageLink.equalsIgnoreCase("ShoppingCart_page")){
+       navigateToPIPPage();
+       if (Element.elementPresent("product_page.select_attribute")){
+           Clicks.click("product_page.select_attribute");
+       }
+       Clicks.click("product_page.add_quantity");
+       Clicks.click("product_page.addtocart");
+       Clicks.click("product_page.checkoutbutton");
+       Wait.untilElementPresent("shoppingCart_page.shopping_cart_page_applynow");
+       String shoppingCart_url=WebDriverManager.getCurrentUrl();
+       Assert.assertTrue(shoppingCart_url.contains("shoppingcart"),"Navigated to shopping cart page properly");
+       Clicks.click("shoppingCart_page.shopping_cart_page_applynow");
+       String baseURL=EnvVariables.getEnvVariables().get("webURL");
+       if (baseURL.contains("westelm"))
+       {
+           String parent=WebDriverManager.getDriver().getWindowHandle();
+
+           Set<String> s=WebDriverManager.getDriver().getWindowHandles();
+           // Now iterate using Iterator
+           Iterator<String> I1= s.iterator();
+
+           while(I1.hasNext())
+           {
+               String child_window=I1.next();
+               if(!parent.equals(child_window)) {
+                   WebDriverManager.getDriver().switchTo().window(child_window);
+               }}
+
+       }
    }else if(PageLink.equalsIgnoreCase("myAccount"))
    {
        Actions actions = new Actions(WebDriverManager.getDriver());
@@ -198,7 +213,9 @@ public class BrowserSteps{
        Clicks.click("my_account_page.myAccount_applynow");
     log.info("apply now under my account is clicked properly");
    }
+
     }
+
 
     @And("I signin with credentials")
     public void iSigninWithCredentials() {
@@ -232,5 +249,19 @@ public class BrowserSteps{
 
         WebDriverManager.getDriver().findElement(By.id("details-button")).click();
         WebDriverManager.getDriver().findElement(By.id("proceed-link")).click();
+    }
+
+    public void navigateToPIPPage()
+    {
+        WebElement search=Element.findElement("search.Search_textbox");
+        search.sendKeys("8039131");
+        Clicks.click("search.Search_image");
+        Wait.untilElementPresent("product_page.addtocart");
+        String PIP_url=WebDriverManager.getCurrentUrl();
+        Assert.assertTrue(PIP_url.contains("products"),"Navigated to PIP page properly");
+    }
+    public void navigateToShoppingCartPage()
+    {
+
     }
 }

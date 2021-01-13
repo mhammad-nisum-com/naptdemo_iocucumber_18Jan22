@@ -3,7 +3,7 @@ Feature: Verify whether user is able to navigate to VP page from Footer
 
 
 
-  @browse @checkout @regression
+  @browse @checkout @regression @test234
   Scenario Outline: Guest User Navigate to COF page when clicked on apply now in VP page after sign in
     Given I am on the home page
     When User clicks on apply now link in "<applyNowLocation>"
@@ -15,8 +15,8 @@ Feature: Verify whether user is able to navigate to VP page from Footer
     Examples:
       |applyNowLocation|
       |Footer|
-      |myAccount|
-      |PIP_page|
+#      |myAccount|
+#      |PIP_page|
 
 
   @browse @checkout @regression @WIP

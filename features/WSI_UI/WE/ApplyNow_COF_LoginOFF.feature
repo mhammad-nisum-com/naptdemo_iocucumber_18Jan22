@@ -1,7 +1,4 @@
-ApplyNow_COF_LoginOFF.feature
-ApplyNow_COF_LoginON.featureFeature: Verify whether user is able to navigate to VP page from Footer
-
-
+Feature: : Verify whether user is able to navigate to VP page from Footer
 
 
   @browse @checkout @regression
