@@ -1,4 +1,6 @@
 {
+  "url": "/shopping-bag",
+  "verify_page": "id,checkout-button",
   "back_to_bag": "xpath, //img[@class=\"css-8atqhb\"]",
   "profile_return_user": "xpath, //*[@id=\"signInContainer__returnUser\"]",
   "profile_guest_user": "xpath, //*[@id=\"signInContainer__guestUser\"]",

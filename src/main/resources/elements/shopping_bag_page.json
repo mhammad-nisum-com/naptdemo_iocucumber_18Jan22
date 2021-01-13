@@ -1,5 +1,6 @@
 {
-  "verify_page": "xpath, //*[@id=\"shopping-bag-page\"]/div[1]/section/div[2]/h1",
+  "url": "/shopping-bag",
+  "verify_page": "xpath, //*[@id='shopping-bag-page']//h1",
   "site_logo": "xpath, //img[@class='css-8atqhb']",
   "signin_link": "xpath, //*[@id=\"MyAccountContainer\"]/ul/li[1]/a",
   "search_bar": "xpath, //*[@id=\"search-form\"]/input",
