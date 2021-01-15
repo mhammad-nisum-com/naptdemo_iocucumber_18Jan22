@@ -5,6 +5,7 @@ import com.napt.framework.ui.interactions.Element;
 import com.napt.framework.ui.interactions.Navigate;
 import com.napt.framework.ui.interactions.Wait;
 import com.napt.framework.ui.runner.EnvVariables;
+import com.napt.framework.ui.runner.WebDriverManager;
 import com.napt.ui.gap.entities.*;
 import com.napt.ui.gap.pages.*;
 import io.cucumber.java.en.And;
@@ -12,6 +13,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -49,7 +52,12 @@ public class BrowseSteps {
                 navigateURL = EnvVariables.getEnvVariables().get("webURL");
         }
         Navigate.visit(navigateURL);
-        Clicks.clickIfPresent("home_page.popup");
+        try{
+            Clicks.clickIfPresent("home_page.popup");
+        }catch(Exception e){
+            WebDriverManager.getDriver().findElement(By.xpath("//html")).sendKeys(Keys.ESCAPE);
+        }
+
         Assert.assertTrue(Element.elementPresent("home_page.site_logo"), "Site is not loaded properly");
         log.info("Navigated to the website as a guest user");
 

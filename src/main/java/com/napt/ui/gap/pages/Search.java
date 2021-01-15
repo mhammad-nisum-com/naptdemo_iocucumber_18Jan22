@@ -40,7 +40,7 @@ public class Search {
         //closeOfferDialog();
         if(StepUtils.MEW()){
             Wait.secondsUntilElementToBeClickable("search.searchResults",10);
-            Clicks.scrollToLazyLoadElement("search.searchResults");
+            //Clicks.scrollToLazyLoadElement("search.searchResults");
             Clicks.clickRandomElement("search.searchResults", webElement -> webElement.isDisplayed());
             StepUtils.shouldBeOnPage("product_page");
         }else{

@@ -27,7 +27,8 @@ public class PDP {
         Clicks.clickIfPresent("search.openOfferDialogBtn");
         Clicks.clickIfPresent("search.closeOfferDialogBtn");
     }
-    public void checkout(){
+    public void checkout() throws Exception{
+        Thread.sleep(3000);
         Wait.secondsUntilElementPresentAndClick("product_page.checkoutBtn",5);
         StepUtils.shouldBeOnPage("shopping_bag_page");
     }

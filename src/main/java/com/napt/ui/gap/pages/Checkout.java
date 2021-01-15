@@ -26,7 +26,7 @@ public class Checkout {
         DropDowns.selectByValue("checkout_page.guestcheckoutState",add.getState());
         TextBoxes.typeTextbox("checkout_page.guestcheckoutZipCode",add.getZip());
         TextBoxes.typeTextbox("checkout_page.guestcheckoutPhone",add.getPhone());
-        Element.findElement("checkout_page.guestcheckoutContinueToPay");
+        //Element.findElement("checkout_page.guestcheckoutContinueToPay");
     }
 
 
