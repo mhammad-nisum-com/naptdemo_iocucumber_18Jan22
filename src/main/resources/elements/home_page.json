@@ -6,7 +6,7 @@
   "myAccount_link": "xpath,//a[@class=\"user-account-link\"]",
   "myAccount_ApplyNow": "xpath,//li[@class=\"cc-apply-now\"]",
   "VP_validate": "xpath,//*[@id=\"cclanding\"]",
-  "VP_ApplyNow_Button": "xpath,(//*[@id=\"apply-buttons\"])[1]",
+  "VP_ApplyNow_Button": "xpath,(//*[@id=\"apply-buttons\"])[1] || xpath,//area[@title='Reward yourself! Start saving when you open and use your Pottery Barn Credit Card. (No annual fee!*) Apply now']",
   "advanced_button": "id,details-button",
   "proceed_link": "id,proceed-link",
   "VP_WE_validate": "xpath,//img[@title='WECC_about_desktop_header']",

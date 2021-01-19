@@ -138,13 +138,11 @@ public class BrowserSteps{
        js.executeScript("window.scrollBy(0,5000)");
        Thread.sleep(5000);
        js.executeScript("window.scrollBy(0,5000)");
-//        WebDriverManager.getDriver().findElement(By.xpath("//div[@id='footer-content']/div[3]/ul//a[@title='Apply Now']")).click();
        Clicks.click("home_page.FooterApplyNow");
    }
    else if(PageLink.equalsIgnoreCase("VP_ApplyNow"))
    {
        if (Element.elementPresent("home_page.VP_ApplyNow_Button")) {
-//           Wait.untilElementPresent("home_page.VP_ApplyNow_Button");
            Clicks.click("home_page.VP_ApplyNow_Button");
        }else if (Element.elementPresent("home_page.VP_WE_ApplyNow_Button")){
            Clicks.click("home_page.VP_WE_ApplyNow_Button");
@@ -160,7 +158,6 @@ public class BrowserSteps{
        Assert.assertTrue(PIP_url.contains("products"),"Navigated to PIP page properly");
        log.info("Navigated to PIP page properly");
        Clicks.click("product_page.PIP_page_applynow");
-       //Wait.untilElementPresent("product_page.PIP_page_applynow");
        String parent=WebDriverManager.getDriver().getWindowHandle();
 
        Set<String> s=WebDriverManager.getDriver().getWindowHandles();
@@ -194,7 +191,6 @@ public class BrowserSteps{
            String parent=WebDriverManager.getDriver().getWindowHandle();
 
            Set<String> s=WebDriverManager.getDriver().getWindowHandles();
-           // Now iterate using Iterator
            Iterator<String> I1= s.iterator();
 
            while(I1.hasNext())

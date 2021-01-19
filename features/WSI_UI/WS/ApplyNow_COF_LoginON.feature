@@ -31,7 +31,7 @@ Feature: Verify whether user is able to navigate to VP page from Footer
     Examples:
       |applyNowLocation|
       |Footer|
-      |myAccount|
+      |myAccxount|
       |PIP_page|
 
 
