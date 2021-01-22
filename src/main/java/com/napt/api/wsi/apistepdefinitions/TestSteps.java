@@ -21,6 +21,9 @@ public class TestSteps {
 		switch(paramCategory[0]) {
 		case "headers":
 			Globals.headers.put(paramCategory[1],value);
+			if (value.contains("access_token")) {
+				Globals.headers.put(paramCategory[1],"Bearer "+Globals.access_token.get("access_token"));
+			}
 			break;
 		case "base_url":
 			Globals.globalVariables.put(paramCategory[1],value);
@@ -28,6 +31,9 @@ public class TestSteps {
 		case "xml_headers":
 			Globals.xmlHeaders.put(paramCategory[1],value);
 			break;
+			case "Authorization":
+            Globals.Authorization.put(paramCategory[1],value);
+				break;
 		case "sessionheaders":
 			if (value.equals("sessionID")) {
 				Globals.sessionHeaders.put(paramCategory[1],Globals.sessionID.get("SessionID"));
@@ -35,7 +41,9 @@ public class TestSteps {
 				Globals.sessionHeaders.put(paramCategory[1], value);
 			}
 			break;
+
 		}
+
 
 	}
 		
@@ -84,7 +92,7 @@ public class TestSteps {
 
 	@When("^I make a \"([^\"]*)\" REST Call with URL \"([^\"]*)\" and Body from Dictionary Key \"([^\"]*)\"$")
 	public void i_make_a_REST_Call_with_URL_and_Body_from_Dictionary_Key(String callType, String URI, String dictionaryKey) throws Throwable {
-		Response rs = ae.callAPI(callType, Globals.headers, Globals.globalVariables.get(dictionaryKey).toString(), Globals.globalVariables.get("url").toString() + URI );		
+		Response rs = ae.callAPI(callType, Globals.headers, Globals.globalVariables.get(dictionaryKey).toString(), Globals.globalVariables.get("url").toString() + URI );
 		Globals.globalVariables.put(dictionaryKey, rs);
 	}
 	
@@ -160,6 +168,7 @@ public class TestSteps {
 		System.out.println("actual json body  "+actualJsonBody);
 		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
 	}
+
 
 
 }

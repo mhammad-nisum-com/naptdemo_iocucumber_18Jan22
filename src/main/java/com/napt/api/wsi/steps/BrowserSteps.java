@@ -140,6 +140,16 @@ public class BrowserSteps{
        js.executeScript("window.scrollBy(0,5000)");
        Clicks.click("home_page.FooterApplyNow");
    }
+       else if(PageLink.equalsIgnoreCase("Footer_LearnMore"))
+        {
+
+            Clicks.scrollToLazyLoadElement("Footer.Footer_LearnMore");
+//            JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
+//            js.executeScript("window.scrollBy(0,5000)");
+//            Thread.sleep(5000);
+//            js.executeScript("window.scrollBy(0,5000)");
+            Clicks.javascriptClick("Footer.Footer_LearnMore");
+        }
    else if(PageLink.equalsIgnoreCase("VP_ApplyNow"))
    {
        if (Element.elementPresent("home_page.VP_ApplyNow_Button")) {

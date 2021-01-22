@@ -5,6 +5,7 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import gherkin.deps.com.google.gson.*;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -108,6 +109,12 @@ public class ApiEngine {
 		case "delete":
 			res = given().relaxedHTTPSValidation().headers(headers).when().headers(headers).body(body).delete(uri);
 			break;
+			case "auth":
+//				RequestSpecification request = given().relaxedHTTPSValidation().auth().basic("ecom_WS/QA", "WSecom123");
+				res=given().relaxedHTTPSValidation().auth().basic("ecom_WS","WSecom123").headers(headers).body(body).post(uri);
+
+				break;
+
 		}
 		
 		return res;

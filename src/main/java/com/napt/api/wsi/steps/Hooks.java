@@ -1,5 +1,6 @@
 package com.napt.api.wsi.steps;
 
+import com.napt.framework.ui.runner.EnvVariables;
 import com.napt.framework.ui.runner.WebDriverManager;
 import com.napt.framework.ui.utils.StepUtils;
 import io.cucumber.core.api.Scenario;
@@ -23,9 +24,11 @@ public class Hooks {
     @Before
     public void beforeScenario(Scenario sc) throws MalformedURLException {
         log.info("Scenario: " + sc.getName());
-        WebDriverManager.setDriver2();
-        if(!StepUtils.MEW()){
-            WebDriverManager.getDriver().manage().window().maximize();
+        if(!EnvVariables.getEnvVariables().get("testType").toString().toLowerCase().equalsIgnoreCase("API")) {
+            WebDriverManager.setDriver2();
+            if (!StepUtils.MEW()) {
+                WebDriverManager.getDriver().manage().window().maximize();
+            }
         }
     }
 
@@ -57,14 +60,15 @@ public class Hooks {
 
     @After
     public void afterScenario(Scenario sc) {
-        screenshotCapture(sc);
-        try {
-            WebDriverManager.destroyDriver();
-            log.info("Web driver quit successful");
-        } catch (WebDriverException e) {
-            log.warn("Driver could not be reset, please see debug log for more details");
-            log.debug(e.getMessage());
+        if (!EnvVariables.getEnvVariables().get("testType").toString().toLowerCase().equalsIgnoreCase("API")) {
+            screenshotCapture(sc);
+            try {
+                WebDriverManager.destroyDriver();
+                log.info("Web driver quit successful");
+            } catch (WebDriverException e) {
+                log.warn("Driver could not be reset, please see debug log for more details");
+                log.debug(e.getMessage());
+            }
         }
     }
-
 }
