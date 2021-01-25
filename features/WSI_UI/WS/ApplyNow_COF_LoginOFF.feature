@@ -14,7 +14,7 @@ Feature: Verify whether user is able to navigate to VP page from Footer
       |applyNowLocation|
       |Footer|
       |myAccount|
-      |PIP_page|
+      |PIP_page_WS|
 
 
   @browse @checkout @regression @WIP
@@ -30,7 +30,9 @@ Feature: Verify whether user is able to navigate to VP page from Footer
       |applyNowLocation|
       |Footer|
       |myAccount|
-      |PIP_page|
+      |PIP_page_WS|
+
+
 
 
 

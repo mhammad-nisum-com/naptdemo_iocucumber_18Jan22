@@ -1,9 +1,6 @@
 package com.napt.api.wsi.steps;
 
-import com.napt.framework.ui.interactions.Clicks;
-import com.napt.framework.ui.interactions.Element;
-import com.napt.framework.ui.interactions.Navigate;
-import com.napt.framework.ui.interactions.Wait;
+import com.napt.framework.ui.interactions.*;
 import com.napt.framework.ui.runner.EnvVariables;
 
 import com.napt.framework.ui.runner.WebDriverManager;
@@ -11,11 +8,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -78,6 +73,8 @@ public class BrowserSteps{
             String COF_url=WebDriverManager.getCurrentUrl();
             Assert.assertTrue(COF_url.contains("https://applynow-qa.capitalone.com/"),"Not navigated to COF page properly");
             log.info("Navigated properly to COF page");
+            Assert.assertTrue(COF_url.contains("cacheKey"),"Not able to see cache key");
+            log.info("Able to view cache key properly");
         }
 
     }
@@ -159,8 +156,35 @@ public class BrowserSteps{
        }
    }
    else if(PageLink.equalsIgnoreCase("PIP_page")){
+
        WebElement search=Element.findElement("search.Search_textbox");
        search.sendKeys("8039131");
+
+       Clicks.click("search.Search_image");
+
+       String PIP_url=WebDriverManager.getCurrentUrl();
+       Assert.assertTrue(PIP_url.contains("products"),"Navigated to PIP page properly");
+       log.info("Navigated to PIP page properly");
+       Clicks.click("product_page.PIP_page_applynow");
+       String parent=WebDriverManager.getDriver().getWindowHandle();
+
+       Set<String> s=WebDriverManager.getDriver().getWindowHandles();
+       // Now iterate using Iterator
+       Iterator<String> I1= s.iterator();
+
+       while(I1.hasNext())
+       {
+           String child_window=I1.next();
+           if(!parent.equals(child_window)) {
+               WebDriverManager.getDriver().switchTo().window(child_window);
+
+           }}
+
+   }
+   else if(PageLink.equalsIgnoreCase("PIP_page_WS")){
+
+       WebElement search=Element.findElement("search.Search_textbox");
+       search.sendKeys("8010809");
 
        Clicks.click("search.Search_image");
 
@@ -223,16 +247,6 @@ public class BrowserSteps{
     }
 
 
-    @And("I signin with credentials")
-    public void iSigninWithCredentials() {
-        Element.findElement("Signin_create_account_page.signin_email").sendKeys("ljavvaji@wsgc.com");
-        log.info("Email is entered properly");
-        Element.findElement("Signin_create_account_page.signin_password").sendKeys("test1234");
-        log.info("password is entered properly");
-        Clicks.click("Signin_create_account_page.signin_button");
-
-    }
-
     @Then("I click on {string} button under Myaccount")
     public void iClickOnButtonUnderMyaccount(String pagelink) {
         if(pagelink.equalsIgnoreCase("Signin")){
@@ -266,8 +280,55 @@ public class BrowserSteps{
         String PIP_url=WebDriverManager.getCurrentUrl();
         Assert.assertTrue(PIP_url.contains("products"),"Navigated to PIP page properly");
     }
-    public void navigateToShoppingCartPage()
-    {
+    @And("I {string} with credentials")
+    public void iWithCredentials(String Value) {
+        if(Value.equalsIgnoreCase("signin")){
+            Element.findElement("Signin_create_account_page.signin_email").sendKeys("ljavvaji@wsgc.com");
+            log.info("Email is entered properly");
+            Element.findElement("Signin_create_account_page.signin_password").sendKeys("test1234");
+            log.info("password is entered properly");
+            Clicks.click("Signin_create_account_page.signin_button");
+        }
+        else if(Value.equalsIgnoreCase("createAccount")){
+            String currentURL=WebDriverManager.getCurrentUrl();
+            if(currentURL.contains("pbteen")){
+                DropDowns.selectByIndex("Signin_create_account_page.CreateAccount_Month", Integer.parseInt("5"));
+                DropDowns.selectByIndex("Signin_create_account_page.CreateAccount_Day", Integer.parseInt("5"));
+                DropDowns.selectByIndex("Signin_create_account_page.CreateAccount_Year",Integer.parseInt("20"));
+            }
+            
+            WebElement FullName=Element.findElement("Signin_create_account_page.CreateAccount_FullName");
+            FullName.sendKeys("Test");
+            String generatedString = RandomStringUtils.randomAlphabetic(10);
+            System.out.println(generatedString);
+            String EmailValue=generatedString+"@gmail.com";
+            WebElement Email=Element.findElement("Signin_create_account_page.CreateAccout_Email");
+            Email.sendKeys(EmailValue);
+            WebElement ConfirmEmail=Element.findElement("Signin_create_account_page.CreateAccount_ConfirmEmail");
+            ConfirmEmail.sendKeys(EmailValue);
+            WebElement Password=Element.findElement("Signin_create_account_page.CreateAccount_Password");
+            Password.sendKeys("test1234");
+            WebElement ConfirmPassword=Element.findElement("Signin_create_account_page.CreateAccount_ConfirmPassword");
+            ConfirmPassword.sendKeys("test1234");
+            if(currentURL.contains("pbteen")){
+                Clicks.click("Signin_create_account_page.CreateAccount_SelectCheckbox");
+                DropDowns.selectByIndex("Signin_create_account_page.CreateAccout_SelectRelation",Integer.parseInt("2"));
 
+            }
+            WebDriverManager.getDriver().findElement(By.xpath("//form//button[contains(text(),'Create An Account')]")).click();
+        }
+    }
+
+    @Given("I navigate to the {string} url through browser")
+    public void iNavigateToTheUrlThroughBrowser(String URL) throws URISyntaxException {
+        String baseURL=EnvVariables.getEnvVariables().get("webURL")+URL;
+        String creds="pkqaenv:Ca8tWh33l";
+        URI tempUri=new URI(baseURL);
+        URI url=new URI(tempUri.getScheme(), creds.toString(), tempUri.getHost(), tempUri.getPort(), tempUri.getPath(), tempUri.getQuery(),
+                tempUri.getFragment());
+        WebDriverManager.getDriver().get(url.toString());
+
+        WebDriverManager.getDriver().findElement(By.id("details-button")).click();
+        WebDriverManager.getDriver().findElement(By.id("proceed-link")).click();
     }
 }

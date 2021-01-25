@@ -31,4 +31,19 @@ Feature: Verify whether user is able to navigate to VP page
 
 
 
+      @browse @checkout @regression @sign123  @584
+    Scenario Outline: Verify whether able to navigate properly to COF page after sign in or creating account
+      Given I navigate to the "/instant-credit-accept.html" url through browser
+      Then I should be on the "SignIn_Create" page
+      And  I "<SignIn_CreateAccount>" with credentials
+      Then I should be on the "COF" page
+      Examples:
+        | SignIn_CreateAccount  |
+        | signin          |
+        | createAccount |
+
+
+
+
+
 

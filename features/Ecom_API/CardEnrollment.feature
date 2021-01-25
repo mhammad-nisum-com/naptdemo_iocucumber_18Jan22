@@ -38,5 +38,8 @@ Feature: Card Enrollment feature
       |/src/main/resources/testData/CardEnrollment/Last4DigitsMissing_400Response.json|400|description|The last4Digits must not be empty|
       |/src/main/resources/testData/CardEnrollment/CardExpiryMissing_400Response.json|400|description|The cardExpiry must not be empty|
       |/src/main/resources/testData/CardEnrollment/CardTypeMissing_400Response.json|400|description|The cardType must not be empty|
+      |/src/main/resources/testData/CardEnrollment/AccountIdMissing_400Response.json|400|description|The accountId must not be empty|
+      |/src/main/resources/testData/CardEnrollment/PartnerNameMissing_400Response.json|400|description|The partnerName must not be empty|
+      |/src/main/resources/testData/CardEnrollment/EnrollmentTypeMissing_400Response.json|400|description|The enrollmentConcept must not be empty|
 
 

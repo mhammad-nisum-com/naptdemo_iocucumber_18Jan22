@@ -2,7 +2,7 @@
 {
   "verify_page": "id, nebula_div_btn",
   "popUp": "xpath,//a[@class=\"overlayCloseButton overlayCloseX\"]",
-  "FooterApplyNow": "xpath,//div[@id='footer-content']/div[3]/ul//a[text()='Apply Now']",
+  "FooterApplyNow": "xpath,//*[@id=\"footer-container\"]//ul[4]//li[5]//a[@class=\"creditCardApplyNow\"] || xpath,//div[@id='footer-content']/div[3]/ul//a[text()='Apply Now']",
   "myAccount_link": "xpath,//a[@class=\"user-account-link\"]",
   "myAccount_ApplyNow": "xpath,//li[@class=\"cc-apply-now\"]",
   "VP_validate": "xpath,//*[@id=\"cclanding\"]",
