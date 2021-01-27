@@ -59,7 +59,7 @@ public class Ecom_API_Steps {
         log.info("Able to retrieve response" + responseObject);
         if(responseObject.equalsIgnoreCase("status"))
         {
-            Actual_message=response_new.getJSONObject("content").getJSONObject("cardEnrollment").getString("status");
+            Actual_message=response_new.getJSONObject("cardEnrollment").getString("status");
         }
        else if(responseObject.equalsIgnoreCase("description"))
         {

@@ -73,8 +73,13 @@ public class BrowserSteps{
             String COF_url=WebDriverManager.getCurrentUrl();
             Assert.assertTrue(COF_url.contains("https://applynow-qa.capitalone.com/"),"Not navigated to COF page properly");
             log.info("Navigated properly to COF page");
-            Assert.assertTrue(COF_url.contains("cacheKey"),"Not able to see cache key");
+            Assert.assertTrue(COF_url.contains("orchestratorCacheKey"),"Not able to see cache key");
             log.info("Able to view cache key properly");
+            Assert.assertTrue(COF_url.contains("token=exp="),"Not able to see cache key");
+            log.info("Able to view Akamai token properly");
+            Assert.assertTrue(COF_url.contains("hmac"),"Not able to see cache key");
+            log.info("Able to view Akamai token properly");
+            log.info("Able to Navigate properly to COF page "+COF_url);
         }
 
     }
@@ -187,8 +192,9 @@ public class BrowserSteps{
        search.sendKeys("8010809");
 
        Clicks.click("search.Search_image");
-
+       Thread.sleep(5000);
        String PIP_url=WebDriverManager.getCurrentUrl();
+       Thread.sleep(5000);
        Assert.assertTrue(PIP_url.contains("products"),"Navigated to PIP page properly");
        log.info("Navigated to PIP page properly");
        Clicks.click("product_page.PIP_page_applynow");
