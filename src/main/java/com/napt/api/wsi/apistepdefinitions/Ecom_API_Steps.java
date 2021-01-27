@@ -67,7 +67,7 @@ public class Ecom_API_Steps {
 
         }
        System.out.println("+++++++++++"+Actual_message);
-       Assert.assertTrue("Actual response is validated",responseMessage.contains(Actual_message));
+       Assert.assertTrue("Actual response is validated",responseMessage.contains(Actual_message.trim()));
        log.info("Actual response is matching with Expected Response"+responseMessage);
 
     }
