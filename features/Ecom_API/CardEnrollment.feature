@@ -22,24 +22,24 @@ Feature: Card Enrollment feature
     Then I verify that the response code is "<StatusCode>" for the response with Dictionary Key "PostUsers" and get "<ResponseObject>" and "<responseMessage>"
     Examples:
       |testData_Path|StatusCode|ResponseObject|responseMessage|
-      |/src/main/resources/testData/CardEnrollment/SuccessRequest.json|200|status|success|
-      |/src/main/resources/testData/CardEnrollment/missingFirstName_400Response.json|400|description|The firstName must not be empty|
-      |/src/main/resources/testData/CardEnrollment/LastNameMissing_400Response.json|400|description|The lastName must not be empty|
-      |/src/main/resources/testData/CardEnrollment/PartnerRequestIDMissing_400Response.json|400|description|TThe partnerApplicationRequestId must not be empty|
-      |/src/main/resources/testData/CardEnrollment/InvalidEmail_400Response.json|400|description|must be a well-formed email address|
-      |/src/main/resources/testData/CardEnrollment/missingEmail_400Response.json|400|description|The emailAddress must not be empty|
-      |/src/main/resources/testData/CardEnrollment/PhoneNumberMissing_400Response.json|400|description|The phone must not be empty|
-      |/src/main/resources/testData/CardEnrollment/AddressLineOneMissing_400Response.json|400|description|The addressLineOne must not be empty|
-      |/src/main/resources/testData/CardEnrollment/CityMissing_400Response.json|400|description|The city must not be empty|
-      |/src/main/resources/testData/CardEnrollment/CountryCodeMissing_400Response.json|400|description|The countryCode must not be empty|
-      |/src/main/resources/testData/CardEnrollment/CountryMissing_400Response.json|400|description|The country must not be empty|
-      |/src/main/resources/testData/CardEnrollment/PostalCodeMissing_400Response.json|400|description|The postalCode must not be empty|
-      |/src/main/resources/testData/CardEnrollment/StateOrProvinceNameMissing_400Response.json|400|description|The stateOrProvinceName must not be empty|
-      |/src/main/resources/testData/CardEnrollment/Last4DigitsMissing_400Response.json|400|description|The last4Digits must not be empty|
-      |/src/main/resources/testData/CardEnrollment/CardExpiryMissing_400Response.json|400|description|The cardExpiry must not be empty|
-      |/src/main/resources/testData/CardEnrollment/CardTypeMissing_400Response.json|400|description|The cardType must not be empty|
-      |/src/main/resources/testData/CardEnrollment/AccountIdMissing_400Response.json|400|description|The accountId must not be empty|
-      |/src/main/resources/testData/CardEnrollment/PartnerNameMissing_400Response.json|400|description|The partnerName must not be empty|
-      |/src/main/resources/testData/CardEnrollment/EnrollmentTypeMissing_400Response.json|400|description|The enrollmentConcept must not be empty|
-
+#      |/src/main/resources/testData/CardEnrollment/SuccessRequest.json|200|status|success|
+      |/src/main/resources/testData/CardEnrollment/missingFirstName_400Response.json|400|errorMessage|Attribute is required but missing: firstName|
+      |/src/main/resources/testData/CardEnrollment/LastNameMissing_400Response.json|400|errorMessage|Attribute is required but missing: lastName|
+#      |/src/main/resources/testData/CardEnrollment/PartnerRequestIDMissing_400Response.json|400|errorMessage|TThe partnerApplicationRequestId must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/InvalidEmail_400Response.json|400|errorMessage|must be a well-formed email address|
+#      |/src/main/resources/testData/CardEnrollment/missingEmail_400Response.json|400|errorMessage|The emailAddress must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/PhoneNumberMissing_400Response.json|400|errorMessage|The phone must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/AddressLineOneMissing_400Response.json|400|errorMessage|The addressLineOne must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/CityMissing_400Response.json|400|errorMessage|The city must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/CountryCodeMissing_400Response.json|400|errorMessage|The countryCode must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/CountryMissing_400Response.json|400|errorMessage|The country must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/PostalCodeMissing_400Response.json|400|errorMessage|The postalCode must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/StateOrProvinceNameMissing_400Response.json|400|errorMessage|The stateOrProvinceName must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/Last4DigitsMissing_400Response.json|400|errorMessage|The last4Digits must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/CardExpiryMissing_400Response.json|400|errorMessage|The cardExpiry must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/CardTypeMissing_400Response.json|400|errorMessage|The cardType must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/AccountIdMissing_400Response.json|400|errorMessage|The accountId must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/PartnerNameMissing_400Response.json|400|errorMessage|The partnerName must not be empty|
+#      |/src/main/resources/testData/CardEnrollment/EnrollmentTypeMissing_400Response.json|400|errorMessage|The enrollmentConcept must not be empty|
+#
 

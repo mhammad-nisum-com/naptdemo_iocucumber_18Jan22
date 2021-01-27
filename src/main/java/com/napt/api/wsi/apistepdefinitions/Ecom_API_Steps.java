@@ -61,9 +61,9 @@ public class Ecom_API_Steps {
         {
             Actual_message=response_new.getJSONObject("cardEnrollment").getString("status");
         }
-       else if(responseObject.equalsIgnoreCase("description"))
+       else if(responseObject.equalsIgnoreCase("errorMessage"))
         {
-            Actual_message=response_new.getJSONObject("_embedded").getJSONArray("wsgc:errors").getJSONObject(0).getString("description");
+            Actual_message=response_new.getJSONObject("error").getString("errorMessage");
 
         }
        System.out.println("+++++++++++"+Actual_message);
