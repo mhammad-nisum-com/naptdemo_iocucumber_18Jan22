@@ -3,6 +3,7 @@ package com.napt.api.wsi.apistepdefinitions;
 import com.google.gson.JsonObject;
 import com.napt.api.wsi.apistores.ApiEngine;
 import com.napt.api.wsi.apistores.Globals;
+import com.napt.api.wsi.pojo.GetCardDetailsresponse.Example;
 import com.napt.api.wsi.steps.BrowserSteps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -56,7 +57,7 @@ public class Ecom_API_Steps {
         //JsonPath jsonPathEvaluator = rs.jsonPath();
         JSONObject response_new=new JSONObject(rs.getBody().asString());
         Assert.assertTrue("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode, String.valueOf(rs.getStatusCode()).equals(responseCode));
-        log.info("Able to retrieve response" + responseObject);
+        log.info("Able to retrieve response-----" + responseObject);
         if(responseObject.equalsIgnoreCase("status"))
         {
             Actual_message=response_new.getJSONObject("cardEnrollment").getString("status");
@@ -69,6 +70,17 @@ public class Ecom_API_Steps {
        System.out.println("+++++++++++"+Actual_message);
        Assert.assertTrue("Actual response is validated",responseMessage.contains(Actual_message.trim()));
        log.info("Actual response is matching with Expected Response"+responseMessage);
+
+    }
+
+    @Then("I verify that the response code is {string} for the response with Dictionary Key {string} for response")
+    public void iVerifyThatTheResponseCodeIsForTheResponseWithDictionaryKeyForResponse(String responseCode, String dictionaryKey) {
+        Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
+        System.out.println("return body value" +rs.asString());
+        Assert.assertTrue("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode,String.valueOf(rs.getStatusCode()).equals(responseCode));
+        Example emp=rs.as(Example.class);
+
+        System.out.println("+++++++++++"+emp.toString());
 
     }
 }

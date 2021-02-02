@@ -101,6 +101,10 @@ public class ApiEngine {
 		case "params":
 			res = given().relaxedHTTPSValidation().headers(headers).when().queryParam("partnerRequestId","abcd").get(new URI(uri)).then().extract().response();
 			break;
+			case "params_null":
+				res = given().relaxedHTTPSValidation().headers(headers).when().queryParam("partnerRequestId","").get(new URI(uri)).then().extract().response();
+				break;
+
 		case "post":
 			res = given().relaxedHTTPSValidation().when().headers(headers).body(body).post(uri);
 			break;
@@ -126,6 +130,7 @@ public class ApiEngine {
 		
 		return res;
 	}
+
 	
 	public void checkSchemaCompliance(String schemaFile, String jsonFile) {
 		
