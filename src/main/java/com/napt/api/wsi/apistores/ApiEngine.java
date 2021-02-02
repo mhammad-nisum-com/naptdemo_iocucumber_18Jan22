@@ -83,9 +83,13 @@ public class ApiEngine {
 		JsonArray jsonArray = elements.getAsJsonArray();
 		return jsonArray;
 	}
-	
-	
-	
+
+
+	public Response callAPIoAuthEncoded( HashMap<String, String> headers,HashMap<String, String> encodedParams, String body, String uri) throws URISyntaxException {
+		Response res = null;
+		res = given().relaxedHTTPSValidation().when().headers(headers).formParams(encodedParams).post(uri);
+		return res;
+	}
 	
 	public Response callAPI(String ApiType, HashMap<String, String> headers, String body, String uri) throws URISyntaxException {
 		Response res=null;
@@ -93,6 +97,9 @@ public class ApiEngine {
 		switch(ApiType.toLowerCase()){
 		case "get":
 			res = given().relaxedHTTPSValidation().headers(headers).when().get(new URI(uri)).then().extract().response();
+			break;
+		case "params":
+			res = given().relaxedHTTPSValidation().headers(headers).when().queryParam("partnerRequestId","abcd").get(new URI(uri)).then().extract().response();
 			break;
 		case "post":
 			res = given().relaxedHTTPSValidation().when().headers(headers).body(body).post(uri);

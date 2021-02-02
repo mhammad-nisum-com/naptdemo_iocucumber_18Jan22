@@ -10,4 +10,5 @@ public class Globals {
 	public static HashMap<String, String> sessionHeaders = new HashMap<String,String>();
 	public static HashMap<String, String> Authorization = new HashMap<String,String>();
 	public static HashMap<String, String> access_token = new HashMap<String,String>();
+	public static HashMap<String, String> oAuthEncoded = new HashMap<String,String>();
 }

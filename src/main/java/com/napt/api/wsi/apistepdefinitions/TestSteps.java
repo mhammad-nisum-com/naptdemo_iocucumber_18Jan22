@@ -41,6 +41,9 @@ public class TestSteps {
 				Globals.sessionHeaders.put(paramCategory[1], value);
 			}
 			break;
+		case "oauthEncoded":
+			Globals.oAuthEncoded.put(paramCategory[1],value);
+			break;
 
 		}
 
@@ -50,7 +53,7 @@ public class TestSteps {
 
 	@When("^I make a \"([^\"]*)\" REST Call with URI \"([^\"]*)\" and store the response with Dictionary Key \"([^\"]*)\"$")
 	public void i_make_a_REST_Call_with_URI_and_store_the_response_with_Dictionary_Key(String requestType, String URI, String dictionaryKey) throws Throwable {
-			Response rs = ae.callAPI("get", Globals.headers, "", Globals.globalVariables.get("url").toString() + URI);
+			Response rs = ae.callAPI(requestType, Globals.headers, "", Globals.globalVariables.get("url").toString() + URI);
 			Globals.globalVariables.put(dictionaryKey,rs);
 	}
 
@@ -168,7 +171,11 @@ public class TestSteps {
 		System.out.println("actual json body  "+actualJsonBody);
 		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
 	}
-
+	@When("^I make a \"([^\"]*)\" REST Call with URL \"([^\"]*)\" and Body from Dictionary Key \"([^\"]*)\" to get oauthEncoded$")
+	public void i_make_a_REST_Call_with_URL_and_Body_from_Dictionary_Key_oAuthEncoded(String callType, String URI, String dictionaryKey) throws Throwable {
+		Response rs = ae.callAPIoAuthEncoded( Globals.headers,Globals.oAuthEncoded, Globals.globalVariables.get(dictionaryKey).toString(), Globals.globalVariables.get("url").toString() + URI );
+		Globals.globalVariables.put(dictionaryKey, rs);
+	}
 
 
 }
