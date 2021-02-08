@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.junit.Assert;
 
+
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
@@ -79,8 +80,19 @@ public class Ecom_API_Steps {
         System.out.println("return body value" +rs.asString());
         Assert.assertTrue("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode,String.valueOf(rs.getStatusCode()).equals(responseCode));
         Example emp=rs.as(Example.class);
+        Assert.assertTrue(emp.getSystemContext().getEnvironmentIdentifier().equals("QA"));
+        log.info("environment identifier is getting displayed properly "+emp.getSystemContext().getEnvironmentIdentifier());
+        Assert.assertTrue(emp.getSystemContext().getSourceSystemIdentifier().equals("credit-card-orchestration-service-77688db79d-xnn6p"));
+        log.info("Source system identifier is getting displayed properly "+emp.getSystemContext().getSourceSystemIdentifier());
+        Assert.assertTrue(!emp.getSystemContext().getTransactionId().isEmpty());
+        log.info("Transaction id is not null. Value="+emp.getSystemContext().getTransactionId());
+        Assert.assertTrue(!emp.getSystemContext().getTransactionTime().isEmpty());
+        log.info("Transaction id is not null. Value="+emp.getSystemContext().getTransactionTime());
 
-        System.out.println("+++++++++++"+emp.toString());
+
+
+
+
 
     }
 }
