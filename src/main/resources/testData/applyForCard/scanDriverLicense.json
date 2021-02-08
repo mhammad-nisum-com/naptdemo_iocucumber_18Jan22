@@ -1,0 +1,7 @@
+{
+  "sessionId": "SessionID",
+  "driversLicense": "string",
+  "concept": "string",
+  "storeId": "string",
+  "userId": "string"
+}
