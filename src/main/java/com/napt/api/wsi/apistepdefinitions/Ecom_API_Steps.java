@@ -88,12 +88,42 @@ public class Ecom_API_Steps {
         log.info("Transaction id is not null. Value="+emp.getSystemContext().getTransactionId());
         Assert.assertTrue(!emp.getSystemContext().getTransactionTime().isEmpty());
         log.info("Transaction id is not null. Value="+emp.getSystemContext().getTransactionTime());
-
-
-
-
-
-
+        Assert.assertTrue(emp.getCardAccountDetails().getPartnerRequestId().equals(""));
+        log.info("Partner Request ID  "+emp.getCardAccountDetails().getPartnerRequestId());
+        Assert.assertTrue(emp.getCardAccountDetails().getFirstName().equals(""));
+        log.info("First Name  "+emp.getCardAccountDetails().getFirstName());
+        Assert.assertTrue(emp.getCardAccountDetails().getLastName().equals(""));
+        log.info("Last Name  "+emp.getCardAccountDetails().getLastName());
+        Assert.assertTrue(emp.getCardAccountDetails().getEmailAddress().equals(""));
+        log.info("Email Address  "+emp.getCardAccountDetails().getEmailAddress());
+        Assert.assertTrue(emp.getCardAccountDetails().getPhone().equals(""));
+        log.info("Phone  "+emp.getCardAccountDetails().getPhone());
+        Assert.assertTrue(emp.getCardAccountDetails().getAddress().getAddressLineOne().equals(""));
+        log.info("Address 1  "+emp.getCardAccountDetails().getAddress().getAddressLineOne());
+        Assert.assertTrue(emp.getCardAccountDetails().getAddress().getAddressType().equals(""));
+        log.info("Address Type  "+emp.getCardAccountDetails().getAddress().getAddressType());
+        Assert.assertTrue(emp.getCardAccountDetails().getAddress().getAddressType().equals(""));
+        log.info("Address Type  "+emp.getCardAccountDetails().getAddress().getAddressType());
+        Assert.assertTrue(emp.getCardAccountDetails().getAddress().getCity().equals(""));
+        log.info("City  "+emp.getCardAccountDetails().getAddress().getCity());
+        Assert.assertTrue(emp.getCardAccountDetails().getAddress().getCountryCode().equals(""));
+        log.info("Country Code"+emp.getCardAccountDetails().getAddress().getCountryCode());
+        Assert.assertTrue(emp.getCardAccountDetails().getAddress().getCountry().equals(""));
+        log.info("Country "+emp.getCardAccountDetails().getAddress().getCountry());
+        Assert.assertTrue(emp.getCardAccountDetails().getAddress().getPostalCode().equals(""));
+        log.info("Postal Code "+emp.getCardAccountDetails().getAddress().getPostalCode());
+        Assert.assertTrue(emp.getCardAccountDetails().getAddress().getState().equals(""));
+        log.info("State "+emp.getCardAccountDetails().getAddress().getState());
+        Assert.assertTrue(emp.getCreditCard().getAccountId().equals(""));
+        log.info("Credit Card Account ID "+emp.getCreditCard().getAccountId());
+        Assert.assertTrue(emp.getCreditCard().getLast4Digits().equals(""));
+        log.info("Credit Card last 4 digits "+emp.getCreditCard().getLast4Digits());
+        Assert.assertTrue(emp.getCreditCard().getCardExpiry().equals(""));
+        log.info("Credit Card expiry "+emp.getCreditCard().getCardExpiry());
+        Assert.assertTrue(emp.getCreditCard().getCardType().equals(""));
+        log.info("Credit Card Type "+emp.getCreditCard().getCardType());
+        Assert.assertTrue(emp.getCreditCard().getTokenKey().equals(""));
+        log.info("Credit Card Token Key "+emp.getCreditCard().getTokenKey());
     }
 }
 

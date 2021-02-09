@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
         "httpStatus",
         "systemContext",
-        "cardAccountDetails"
+        "cardAccountDetails",
+        "creditCard"
 })
 public class Example {
 
@@ -23,6 +24,8 @@ public class Example {
     private SystemContext systemContext;
     @JsonProperty("cardAccountDetails")
     private CardAccountDetails cardAccountDetails;
+    @JsonProperty("creditCard")
+    private CreditCard creditCard;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -55,7 +58,14 @@ public class Example {
     public void setCardAccountDetails(CardAccountDetails cardAccountDetails) {
         this.cardAccountDetails = cardAccountDetails;
     }
-
+    @JsonProperty("creditCard")
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+    @JsonProperty("creditCard")
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
+    }
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
