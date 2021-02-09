@@ -54,7 +54,7 @@ public class BrowserSteps{
     public void iShouldBeOnTheProductPage(String PageName){
         if(PageName.equalsIgnoreCase("VP")){
             String VP_url=WebDriverManager.getCurrentUrl();
-            Assert.assertTrue(VP_url.contains("credit"),"Navigated to VP page properly");
+            Assert.assertTrue(VP_url.contains("creditcard"),"Navigated to VP page properly");
             log.info("VP url is navigated properly");
             if (Element.elementPresent("home_page.VP_validate")){
             Assert.assertTrue(Element.elementPresent("home_page.VP_validate"), "VP page is not loaded properly");
@@ -64,6 +64,22 @@ public class BrowserSteps{
                 log.info("Navigated to the Value Proposition page");
             }
         }
+
+        else if(PageName.equalsIgnoreCase("VP_myAccount")) {
+            String VP_url=WebDriverManager.getCurrentUrl();
+            Assert.assertTrue(VP_url.contains("ccvalueprop"),"Navigated to VP page properly");
+            Assert.assertTrue(VP_url.contains("fromPageType=MyAccountMenu"),"Able to see form page properly");
+        }
+        else if(PageName.equalsIgnoreCase("VP_PIPage")) {
+            String VP_url=WebDriverManager.getCurrentUrl();
+            Assert.assertTrue(VP_url.contains("ccvalueprop"),"Navigated to VP page properly");
+            Assert.assertTrue(VP_url.contains("fromPageType=ProductPage"),"Able to see form page properly");
+        }
+        else if(PageName.equalsIgnoreCase("VP_Footer")) {
+            String VP_url=WebDriverManager.getCurrentUrl();
+            Assert.assertTrue(VP_url.contains("ccvalueprop"),"Navigated to VP page properly");
+            Assert.assertTrue(VP_url.contains("fromPageType=GlobalFooter"),"Able to see form page properly");
+        }
         else if(PageName.equalsIgnoreCase("SignIn_Create")){
             boolean signin_Button_Visible=Element.findElement("Signin_create_account_page.signin_button").isDisplayed();
             Assert.assertTrue(signin_Button_Visible,"Sign in button is not displayed");
@@ -71,16 +87,23 @@ public class BrowserSteps{
         }
         else if(PageName.equalsIgnoreCase("COF")){
             String COF_url=WebDriverManager.getCurrentUrl();
-            Assert.assertTrue(COF_url.contains("https://applynow-qa.capitalone.com/"),"Not navigated to COF page properly");
+            Assert.assertTrue(COF_url.contains("creditcard-cof.html"),"Not navigated to COF page properly");
             log.info("Navigated properly to COF page");
-            Assert.assertTrue(COF_url.contains("orchestratorCacheKey"),"Not able to see cache key");
-            log.info("Able to view cache key properly");
-            Assert.assertTrue(COF_url.contains("token=exp="),"Not able to see cache key");
-            log.info("Able to view Akamai token properly");
-            Assert.assertTrue(COF_url.contains("hmac"),"Not able to see cache key");
-            log.info("Able to view Akamai token properly");
+            Assert.assertTrue(COF_url.contains("marketingChannelCode"),"Not able to see cache key");
+            log.info("Able to view marketingChannelCode properly");
+            Assert.assertTrue(COF_url.contains("brandCode"),"Not able to see cache key");
+            log.info("Able to view brandCode properly");
+//            Assert.assertTrue(COF_url.contains("hmac"),"Not able to see cache key");
+//            log.info("Able to view Akamai token properly");
             log.info("Able to Navigate properly to COF page "+COF_url);
         }
+
+        else if(PageName.equalsIgnoreCase("homePage")) {
+            String home_URL=WebDriverManager.getCurrentUrl();
+            String envURL=EnvVariables.getEnvVariables().get("webURL")+"/";
+            Assert.assertTrue(home_URL.equals(envURL));
+        }
+
 
     }
 
@@ -146,10 +169,10 @@ public class BrowserSteps{
         {
 
             Clicks.scrollToLazyLoadElement("Footer.Footer_LearnMore");
-//            JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
-//            js.executeScript("window.scrollBy(0,5000)");
-//            Thread.sleep(5000);
-//            js.executeScript("window.scrollBy(0,5000)");
+            JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
+            js.executeScript("window.scrollBy(0,5000)");
+            Thread.sleep(5000);
+            js.executeScript("window.scrollBy(0,5000)");
             Clicks.javascriptClick("Footer.Footer_LearnMore");
         }
    else if(PageLink.equalsIgnoreCase("VP_ApplyNow"))
@@ -249,6 +272,12 @@ public class BrowserSteps{
        Clicks.click("my_account_page.myAccount_applynow");
     log.info("apply now under my account is clicked properly");
    }
+   else if(PageLink.equalsIgnoreCase("KeyRewards"))
+   {
+       Clicks.click("home_page.KeyRewards_Link");
+       Clicks.click("keyRewards.ApplyNow_keyRewards");
+
+   }
 
     }
 
@@ -336,5 +365,10 @@ public class BrowserSteps{
 
         WebDriverManager.getDriver().findElement(By.id("details-button")).click();
         WebDriverManager.getDriver().findElement(By.id("proceed-link")).click();
+    }
+
+    @And("I click on {string} button")
+    public void iClickOnButton(String arg0) {
+        Clicks.click("COF.returnWSI");
     }
 }

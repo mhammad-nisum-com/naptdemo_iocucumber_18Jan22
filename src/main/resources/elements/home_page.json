@@ -2,7 +2,7 @@
 {
   "verify_page": "id, nebula_div_btn",
   "popUp": "xpath,//a[@class=\"overlayCloseButton overlayCloseX\"]",
-  "FooterApplyNow": "xpath,//*[@id=\"footer-container\"]//ul[4]//li[5]//a[@class=\"creditCardApplyNow\"] || xpath,//div[@id='footer-content']/div[3]/ul//a[text()='Apply Now']",
+  "FooterApplyNow": "xpath,//*[@id=\"footer-container\"]//ul[4]//li[5]//a || xpath,//div[@id='footer-content']/div[3]/ul//a[text()='Apply Now']",
   "myAccount_link": "xpath,//a[@class=\"user-account-link\"]",
   "myAccount_ApplyNow": "xpath,//li[@class=\"cc-apply-now\"]",
   "VP_validate": "xpath,//*[@id=\"cclanding\"]",
@@ -11,5 +11,6 @@
   "proceed_link": "id,proceed-link",
   "VP_WE_validate": "xpath,//img[@title='WECC_about_desktop_header']",
   "VP_WE_ApplyNow_Button": "xpath,//a[text()='Apply For A Card']",
-  "scrollbtn": "xpath,//img[@class='section-jump-image']"
+  "scrollbtn": "xpath,//img[@class='section-jump-image']",
+  "KeyRewards_Link": "xpath,//*[@class=\"key-rewards-link\"]/a"
 }
