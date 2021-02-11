@@ -371,4 +371,6 @@ public class BrowserSteps{
     public void iClickOnButton(String arg0) {
         Clicks.click("COF.returnWSI");
     }
+
+
 }
