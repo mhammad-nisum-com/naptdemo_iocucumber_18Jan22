@@ -13,10 +13,10 @@ Feature: Verify whether user is able to navigate to VP page from Footer
     Then I should be on the "<returnPage>" page
     Examples:
       |applyNowLocation|VP_page|returnPage|
-#      |Footer|VP_Footer|homePage            |
-#      |myAccount|VP_myAccount|homePage         |
+     |Footer|VP_Footer|homePage            |
+     |myAccount|VP_myAccount|homePage         |
       |PIP_page_WS|VP_PIPage  |productPage      |
-#      |KeyRewards |VP_Rewards|homePage       |
+      |KeyRewards |VP_Rewards|homePage       |
 
 
   @browse @checkout @regression @WIP @CCRT-710 @CCRT-584 @ApplyNow_WS
