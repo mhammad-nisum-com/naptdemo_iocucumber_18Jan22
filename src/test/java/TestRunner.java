@@ -6,9 +6,9 @@ import io.cucumber.testng.CucumberOptions;
  */
 
 @CucumberOptions(
-        features = "features/Ecom_API",
-        glue = {"com.napt.api.wsi.apistepdefinitions"},
-        tags = {"@CardEnrollment"},
+        features = "features/WSI_UI/WS",
+        glue = {"com.napt.api.wsi.steps.BrowserSteps"},
+        tags = {"@ApplyNow_ON_WS"},
         plugin = {"pretty", "html:target/cucumber_target.html", "json:target/cucumber.json", "rerun:target/failed_scenarios.txt"})
 public class TestRunner extends AbstractTestNGCucumberTests {
 
