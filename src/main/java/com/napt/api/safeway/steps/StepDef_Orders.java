@@ -1,6 +1,9 @@
 package com.napt.api.safeway.steps;
 
 import com.google.common.io.Resources;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.napt.api.safeway.pojo.request.ldap.Request;
 import com.napt.framework.api.ApiEngine.ApiEngine;
 import com.napt.framework.api.ApiEngine.Globals;
@@ -27,7 +30,7 @@ public class StepDef_Orders {
     ApiEngine ae = new ApiEngine();
     String jsonLdapTokenRequestBody = null;
     ObjectMapper om = new ObjectMapper();
-    String ldaptoken = "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJ2Z3VuajAwIiwiZXhwIjoxNjEwMzg2NDY2LCJ1c2VyIjp7ImlkIjoiNWVkNTgzNDZhNWY4NzIwMDBmNzczZmI2IiwidXNlcklkIjoidmd1bmowMCIsImZpcnN0TmFtZSI6IlZhcnVuIiwibGFzdE5hbWUiOiJHdW5qYXBhbGx5IiwiYmFubmVycyI6WyJTYWZld2F5Il0sInNpdGVzIjpbIjE1NzQiLCIyOTQxIiwiMzEzMiIsIjI4NTYiLCIyNjAwIiwiMDAyMyIsIjEyMzQiLCIxMjI0IiwiMTIyMSIsIjAwNjgiLCIyOTk1IiwiMDYwMiIsIjA2MjEiLCI0NTk2IiwiMjk5NSIsIjA2MDIiLCIwNjIxIiwiNDU5NiJdLCJyb2xlcyI6WyJNRkMgTWFuYWdlciJdLCJwZXJtaXNzaW9ucyI6WyJVSV9PUkRFUl9FRElUIiwiVUlfT1JERVJfU0VBUkNIIl19fQ.w0nrNkFyBe4wto0Bh5-BGezWyd7dHlDxdL0Z_spLSNI";
+    String ldaptoken = "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX25hbWUiOiJ2Z3VuajAwIiwiZXhwIjoxNjEwNzU1ODAwLCJ1c2VyIjp7ImlkIjoiNWVkNTgzNDZhNWY4NzIwMDBmNzczZmI2IiwidXNlcklkIjoidmd1bmowMCIsImZpcnN0TmFtZSI6IlZhcnVuIiwibGFzdE5hbWUiOiJHdW5qYXBhbGx5IiwiYmFubmVycyI6WyJTYWZld2F5Il0sInNpdGVzIjpbIjE1NzQiLCIyOTQxIiwiMzEzMiIsIjI4NTYiLCIyNjAwIiwiMDAyMyIsIjEyMzQiLCIxMjI0IiwiMTIyMSIsIjAwNjgiLCIyOTk1IiwiMDYwMiIsIjA2MjEiLCI0NTk2IiwiMjk5NSIsIjA2MDIiLCIwNjIxIiwiNDU5NiJdLCJyb2xlcyI6WyJNRkMgTWFuYWdlciJdLCJwZXJtaXNzaW9ucyI6WyJVSV9PUkRFUl9FRElUIiwiVUlfT1JERVJfU0VBUkNIIl19fQ.Ie0CiOQRnR5vM2PdoeW56aY2gzvg7rxcuXDW5n7Fxj8";
     
     com.napt.api.safeway.pojo.response.searchactivities.Response[] resSearchActivities;
     com.napt.api.safeway.pojo.response.getactivity.Response resGetActivity;
@@ -40,7 +43,6 @@ public class StepDef_Orders {
 
     @Given("that I set the headers for {string}")
     public void setHeaders(String apiName){
-
         if(apiName.equals("ldapToken")){
             header_ldapToken.put("Authorization","Basic c2FmZXdheS1jbGllbnQ6c2FmZXdheS1zZWNyZXQ=");
             header_ldapToken.put("Content-Type","application/json");
@@ -69,10 +71,10 @@ public class StepDef_Orders {
         public void generateLdapToken() throws Throwable {
         Request reqLdap = new Request();
         reqLdap.setAppId("APS_APP");
-        reqLdap.setGrantType("grant_type");
+        reqLdap.setGrant_type("password");
         reqLdap.setPassword("Safeway45");
-        reqLdap.setUserId("vgunj00");
-            Response resLdap = ae.callAPI("POST",header_ldapToken,reqLdap,Globals.globalVariables.get("ldapApi").toString() + Globals.globalVariables.get("uriLdapToken").toString());
+        reqLdap.setUser_id("vgunj00");
+        Response resLdap = ae.callAPI("POST",header_ldapToken,reqLdap,Globals.globalVariables.get("ldapApi").toString() + Globals.globalVariables.get("uriLdapToken").toString());
             String jsonLdapTokenResponseBody = resLdap.getBody().asString();
             Globals.globalVariables.put("ldapToken",ae.searchJsonFileByJsonPath(jsonLdapTokenResponseBody,"$.access_token"));
 
@@ -80,7 +82,17 @@ public class StepDef_Orders {
 
     @When("I call the get search activities for storeId {string}")
     public void searchActivities(String storeId) throws Throwable {
-        Response resSearchActivities = ae.callAPI("get",header_searchActivites,"",Globals.globalVariables.get("activitiesApi").toString() + Globals.globalVariables.get("uriSearchActivities"));
+        HashMap<String,String> pathParams= new HashMap<String,String>();
+        //pathParams.put("activityId",activityId);
+
+        HashMap<String,String> queryStringParams = new HashMap<String,String>();
+        queryStringParams.put("open","true");
+        queryStringParams.put("userId","vgunj00");
+        queryStringParams.put("siteId",storeId);
+
+        HashMap<String,String> params = new HashMap<String,String>();
+
+        Response resSearchActivities = ae.callAPI("get",header_searchActivites,"",Globals.globalVariables.get("activitiesApi").toString() + Globals.globalVariables.get("uriSearchActivities"),pathParams,queryStringParams,params);
         String jsonSearchActivitiesResp = resSearchActivities.getBody().asString();
         this.resSearchActivities = om.readValue(jsonSearchActivitiesResp,com.napt.api.safeway.pojo.response.searchactivities.Response[].class);
     }
@@ -98,9 +110,17 @@ public class StepDef_Orders {
 
     }
 
-    @When("I pick up activity id {string}")
+    @When("I get details for activity id {string}")
     public void getActivity(String activityId) throws Throwable {
-        Response resGetActivity = ae.callAPI("get",header_getActivity,"",Globals.globalVariables.get("activitiesApi").toString() + Globals.globalVariables.get("uriGetActivity").toString());
+        HashMap<String,String> pathParams= new HashMap<String,String>();
+        pathParams.put("activityId",activityId);
+
+        HashMap<String,String> queryStringParams = new HashMap<String,String>();
+        queryStringParams.put("loadCA","true");
+        queryStringParams.put("loadIA","true");
+
+        HashMap<String,String> params = new HashMap<String,String>();
+        Response resGetActivity = ae.callAPI("get",header_getActivity,"",Globals.globalVariables.get("activitiesApi").toString() + Globals.globalVariables.get("uriGetActivity").toString(), pathParams, queryStringParams, params);
         String getActivityResponse = resGetActivity.getBody().asString();
         this.resGetActivity = om.readValue(getActivityResponse, com.napt.api.safeway.pojo.response.getactivity.Response.class);
     }

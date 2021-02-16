@@ -20,34 +20,33 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Request {
 
     @JsonProperty("app_id")
-    private String appId;
+    private String app_id;
     @JsonProperty("grant_type")
-    private String grantType;
+    private String grant_type;
     @JsonProperty("password")
     private String password;
     @JsonProperty("user_id")
-    private String userId;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private String user_id;
+
 
     @JsonProperty("app_id")
     public String getAppId() {
-        return appId;
+        return app_id;
     }
 
     @JsonProperty("app_id")
     public void setAppId(String appId) {
-        this.appId = appId;
+        this.app_id = appId;
     }
 
     @JsonProperty("grant_type")
-    public String getGrantType() {
-        return grantType;
+    public String getGrant_Type() {
+        return grant_type;
     }
 
     @JsonProperty("grant_type")
-    public void setGrantType(String grantType) {
-        this.grantType = grantType;
+    public void setGrant_type(String grantType) {
+        this.grant_type = grantType;
     }
 
     @JsonProperty("password")
@@ -61,23 +60,14 @@ public class Request {
     }
 
     @JsonProperty("user_id")
-    public String getUserId() {
-        return userId;
+    public String getUser_id() {
+        return user_id;
     }
 
     @JsonProperty("user_id")
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser_id(String userId) {
+        this.user_id = userId;
     }
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

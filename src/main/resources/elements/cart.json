@@ -1,0 +1,6 @@
+{
+  "linkCartOnTopRight": "xpath, //span[@id='abCartMini']/*[name()='svg']/*[name()='path']",
+  "linkCart": "xpath, //span[@class='cart-price-text']",
+  "buttonRemoveCartItem": "xpath, //button[@class='cart-product-remove']"
+
+}

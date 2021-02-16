@@ -2,5 +2,6 @@
 
   "inputUsername": "name,userId",
   "inputPassword": "name,inputPassword",
-  "btnSignIn": "id,btnSignIn"
+  "btnSignIn": "id,btnSignIn",
+  "btnCookieConsentClose": "id,cookieConsentClose"
 }

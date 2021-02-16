@@ -1,3 +1,4 @@
 {
-  "btnAdd": "xpath, //div[@class='btn btn-default btn-add-card']"
+  "btnAdd": "xpath, //div[@class='btn btn-default btn-add-card']",
+  "btnToTheTop": "xpath, //div[@class='back-to-top-background']"
 }
