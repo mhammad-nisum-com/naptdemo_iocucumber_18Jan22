@@ -36,7 +36,9 @@ Feature: Verify whether user is able to navigate to VP page
       Given I navigate to the "/instant-credit-accept.html" url through browser
       Then I should be on the "SignIn_Create" page
       And  I "<SignIn_CreateAccount>" with credentials
-      Then I should be on the "COF" page
+        Then I should be on the "COF" page
+        And I click on "returnWSI" button
+        Then I should be on the "homePage" page
       Examples:
         | SignIn_CreateAccount  |
         | signin          |
