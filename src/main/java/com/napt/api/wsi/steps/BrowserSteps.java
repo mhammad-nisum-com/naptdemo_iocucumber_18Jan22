@@ -220,6 +220,13 @@ public class BrowserSteps{
        Thread.sleep(5000);
        Assert.assertTrue(PIP_url.contains("products"),"Navigated to PIP page properly");
        log.info("Navigated to PIP page properly");
+       String baseURL=EnvVariables.getEnvVariables().get("webURL");
+       if (baseURL.contains("/m")) {
+           JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
+           js.executeScript("window.scrollBy(0,2000)");
+           Thread.sleep(5000);
+           js.executeScript("window.scrollBy(0,2000)");
+       }
        Clicks.click("product_page.PIP_page_applynow");
        String parent=WebDriverManager.getDriver().getWindowHandle();
 
@@ -316,12 +323,19 @@ public class BrowserSteps{
         Assert.assertTrue(PIP_url.contains("products"),"Navigated to PIP page properly");
     }
     @And("I {string} with credentials")
-    public void iWithCredentials(String Value) {
+    public void iWithCredentials(String Value) throws InterruptedException {
         if(Value.equalsIgnoreCase("signin")){
             Element.findElement("Signin_create_account_page.signin_email").sendKeys("ljavvaji@wsgc.com");
             log.info("Email is entered properly");
             Element.findElement("Signin_create_account_page.signin_password").sendKeys("test1234");
             log.info("password is entered properly");
+            String baseURL=EnvVariables.getEnvVariables().get("webURL");
+            if (baseURL.contains("/m")) {
+                JavascriptExecutor js = (JavascriptExecutor) WebDriverManager.getDriver();
+                js.executeScript("window.scrollBy(0,2000)");
+                Thread.sleep(5000);
+                js.executeScript("window.scrollBy(0,2000)");
+            }
             Clicks.click("Signin_create_account_page.signin_button");
         }
         else if(Value.equalsIgnoreCase("createAccount")){
@@ -372,5 +386,14 @@ public class BrowserSteps{
         Clicks.click("COF.returnWSI");
     }
 
-
+    @Then("I click on {string} button in MobileView")
+    public void iClickOnButtonInMobileView(String pagelink) throws InterruptedException {
+        if(pagelink.equalsIgnoreCase("Signin")){
+            Clicks.click("home_page.headerIcon_Mobile");
+            Thread.sleep(3000);
+            Clicks.click("home_page.signIn_Mobile");
+            Thread.sleep(3000);
+            log.info("sign in button is clicked properly");
+        }
+    }
 }

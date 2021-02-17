@@ -12,5 +12,7 @@
   "VP_WE_validate": "xpath,//img[@title='WECC_about_desktop_header']",
   "VP_WE_ApplyNow_Button": "xpath,//a[text()='Apply For A Card']",
   "scrollbtn": "xpath,//img[@class='section-jump-image']",
-  "KeyRewards_Link": "xpath,//*[@class=\"key-rewards-link\"]/a"
+  "KeyRewards_Link": "xpath,//*[@class=\"key-rewards-link\"]/a",
+  "headerIcon_Mobile": "xpath,//*[@class='header-icon open-shop']",
+  "signIn_Mobile": "xpath,//*[@class='shop-side-site-link '][1]//a"
 }
