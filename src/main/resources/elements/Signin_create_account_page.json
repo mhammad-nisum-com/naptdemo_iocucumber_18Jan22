@@ -1,8 +1,8 @@
 {
   "verify_page": "xpath, //h3[contains(text(),'Your personal information')]",
-  "signin_button": "id,btn-sign-in",
-  "signin_email": "id,login-email",
-  "signin_password": "id,login-password",
+  "signin_button": "id,btn-sign-in || xpath,//button[@value='Sign In']",
+  "signin_email": "id,login-email || id,email",
+  "signin_password": "id,login-password || id,signin-password",
   "CreateAccount_FullName": "id,fullName",
   "CreateAccout_Email": "id,email",
   "CreateAccount_ConfirmEmail": "id,confirmEmail",

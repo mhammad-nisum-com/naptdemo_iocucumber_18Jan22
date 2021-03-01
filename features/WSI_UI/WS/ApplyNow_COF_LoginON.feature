@@ -1,6 +1,6 @@
 Feature: Verify whether user is able to navigate to VP page from Footer
 
-  @browse @checkout @regression @test234
+  @browse @checkout @regression @test234 @ApplyNow_ON_WS
   Scenario Outline: Guest User Navigate to COF page when clicked on apply now in VP page after sign in
     Given I am on the home page
     When User clicks on apply now link in "<applyNowLocation>"
@@ -19,7 +19,7 @@ Feature: Verify whether user is able to navigate to VP page from Footer
       |KeyRewards |VP_Rewards|homePage       |
 
 
-  @browse @checkout @regression @WIP @CCRT-710 @CCRT-584 @ApplyNow_WS
+  @browse @checkout @regression @WIP @CCRT-710 @CCRT-584 @ApplyNow_ON_WS
   Scenario Outline: Signed User Navigate to COF page when clicked on apply now in VP page after sign in WS brand
     Given I am on the home page
     Then I click on "Signin" button under Myaccount
@@ -37,7 +37,7 @@ Feature: Verify whether user is able to navigate to VP page from Footer
       |PIP_page_WS|VP_PIPage  |productPage      |
       |KeyRewards |VP_Rewards|homePage       |
 
-  @browse @checkout @regression @WIP
+  @browse @checkout @regression @WIP @ApplyNow_ON_WS
   Scenario Outline: Verify whether user is navigated properly to COF page after creating account
     Given I am on the home page
     When User clicks on apply now link in "<applyNowLocation>"

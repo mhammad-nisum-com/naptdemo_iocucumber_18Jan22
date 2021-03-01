@@ -28,9 +28,15 @@ Feature: User can apply for card at the store once the Associate initiates it th
 
   Scenario: Disclosure Acknowledgement
     Given that param "headers.Content-Type" is set to value "application/json"
-    When I read the JSON from file "/src/main/resources/testData/accountLookUp_TestData/InitiateLookUp.json" into Dictionary Key "PostUsers"
-    When I make a "POST" REST Call with URL "/api/AccountLookup/InitiateLookup" and Body from Dictionary Key "PostUsers"
-    Then I verify that the response code is "200" for the response with Dictionary Key "PostUsers" and get sessionID
+    When I read the JSON from file "/src/main/resources/testData/accountLookUp_TestData/InitiateLookUp.json" into Dictionary Key "PostDisAck"
+    When I make a "POST" REST Call with URL "/api/AccountLookup/InitiateLookup" and Body from Dictionary Key "PostDisAck"
+    Then I verify that the response code is "200" for the response with Dictionary Key "PostDisAck" and get sessionID
+
+  Scenario: Scan Driver Licence
+    Given that param "headers.Content-Type" is set to value "application/json"
+    When I read the JSON from file "/src/main/resources/testData/applyForCard/scanDriverLicense.json" into Dictionary Key "PostScanUsers"
+    When I make a "POST" REST Call with URL "/api/AccountLookup/ScanDriverLicense" and Body from Dictionary Key "PostScanUsers"
+    Then I verify that the response code is "200" for the response with Dictionary Key "PostScanUsers" and get sessionID
 
   Scenario: Get Lookup Questions
     When I make a "GET" REST Call with URI "/api/AccountLookup/GetLookupQuestions" and store the response of sessionID with Dictionary Key "GetUsers"
