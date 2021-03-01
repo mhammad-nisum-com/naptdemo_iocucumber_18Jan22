@@ -1,0 +1,8 @@
+{
+  "addMatchingTokenRequest":{
+    "systemContext":{},
+    "tokenType":"PAN",
+    "tokenCreationTime":"2e2869c6-ad62-4ba7-af5a-8a4e8ea0da87",
+    "tokenId":"123123123123128"
+  }
+}
