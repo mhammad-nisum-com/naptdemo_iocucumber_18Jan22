@@ -1,26 +1,30 @@
 {
-  "loyaltyCard": {
-    "enrollmentDetails":{
+  "loyaltyCardEnrollment": {
+    "enrollmentDetails": {
       "enrollmentTime": "2017-07-28T12:00:00Z",
-      "concept": "WS", "channel": "ecommerce", "location": "checkout"
+      "concept": "WS",
+      "channel": "ecommerce",
+      "location": "checkout"
     },
     "cardDetail": {
-      "partnerIds": [{"partnerName": "COF",
-        "partnerAccountId":"{partnerAccountId}",
-        "active":true}],
+      "partnerIds": [
+        {
+          "partnerName": "COF",
+          "accountId": "{partnerAccountId}",
+          "active": true
+        }
+      ],
       "cardType": "PLCC",
       "cardDescription": "Williams Sonoma Reward Card",
       "cardAccountType": "PL",
-      "cardProgramCode": "671",
-      "accountState":"Active",
-      "openDate": "20181220"
+      "cardProgramCode": "671"
     },
     "primaryCardHolderDetails": {
-      "phone": "+19119119111",
-      "email": "aaaa_123@yahoo.com",
+      "phone": "+19119119001",
+      "email": "wsi_card_holr_test1@yahoo.com",
       "name": {
-        "firstName": "test",
-        "lastName": "check"
+        "firstName": "Joe",
+        "lastName": "Down"
       },
       "address": {
         "address1": "35 Main St",
