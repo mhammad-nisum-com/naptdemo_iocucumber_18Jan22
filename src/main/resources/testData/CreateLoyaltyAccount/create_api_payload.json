@@ -6,7 +6,7 @@
     },
     "cardDetail": {
       "partnerIds": [{"partnerName": "COF",
-        "partnerAccountId":"554434359",
+        "partnerAccountId":"{partnerAccountId}",
         "active":true}],
       "cardType": "PLCC",
       "cardDescription": "Williams Sonoma Reward Card",
