@@ -17,10 +17,24 @@ Feature: Card feature
   Scenario Outline: POST Create Loyalty Account Scenario
     Given that param "headers.Content-Type" is set to value with bearer token  "application/json"
     And that param "headers.Authorization" is set to value "access_token"
-    And I read the JSON from file "<testData_Path>" and replace partner id with random generated into Dictionary Key "PostUsers"
-    When I make a "POST" REST Call with URL "/loyalty/v1/loyaltyCards" with random generated partner id and Body from Dictionary Key "PostUsers"
-    Then I verify that the post response code value is "<StatusCode>" for the response with Dictionary Key "PostUsers" and get "<ResponseObject>" and "<responseMessage>"
+    And I read the JSON from file "<testData_Path>" and replace partner id with random generated into Dictionary Key "CREATE_ACCOUNT"
+    When I make a "POST" REST Call with URL "/loyalty/v1/loyaltyCards" with random generated partner id and Body from Dictionary Key "CREATE_ACCOUNT"
+    Then I verify that the post response code value is "<StatusCode>" for the response with Dictionary Key "CREATE_ACCOUNT" and get "<ResponseObject>" and "<responseMessage>"
     Examples:
-      | testData_Path                                               | StatusCode | ResponseObject | responseMessage             |
+      | testData_Path                                                             | StatusCode | ResponseObject | responseMessage             |
       | /src/main/resources/testData/CreateLoyaltyAccount/create_api_payload.json | 201        | status         | processed card successfully |
 
+
+  @get  @GetLoyaltyCardAccount
+  Scenario: Get loyalty card account by loyalty card id
+    Given that param "headers.Content-Type" is set to value with bearer token  "application/json"
+    And that param "headers.Authorization" is set to value "access_token"
+    When I make a "GET" REST Call with URL "/loyalty/v1/loyaltyCards" from Dictionary Key "GET_ACCOUNT"
+    Then I verify that the get response code value is "200" for the response with Dictionary Key "GET_ACCOUNT"
+
+  @get  @LookupLoyaltyCardAccount
+  Scenario: Lookup loyalty card account
+    Given that param "headers.Content-Type" is set to value with bearer token  "application/json"
+    And that param "headers.Authorization" is set to value "access_token"
+    When I make a "LOOKUP" REST Call with URL "/loyalty/v1/loyaltyCards" from Dictionary Key "LOOKUP_ACCOUNT"
+    Then I verify that the lookup response code value is "200" for the response with Dictionary Key "LOOKUP_ACCOUNT"
