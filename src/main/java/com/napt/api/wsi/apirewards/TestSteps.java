@@ -64,19 +64,33 @@ public class TestSteps extends ApiEngine {
     }
 
     /**
-     * Read the json from file and replace partner id with random generated into dictionary key.
+     * Read the json from given file and replace partner id with random generated into dictionary key.
      *
      * @param jsonFilePath  the json file path
      * @param dictionaryKey the dictionary key
      * @throws IOException the io exception
      */
-    @And("I read the JSON from file {string} and replace partner id with random generated into Dictionary Key {string}")
-    public void iReadTheJSONFromFileAndReplacePartnerIdWithRandomGeneratedIntoDictionaryKey(String jsonFilePath, String dictionaryKey) throws IOException {
+    @And("I read the JSON from given file {string} and replace partner id with random generated into Dictionary Key {string}")
+    public void iReadTheJSONFromGivenFileAndReplacePartnerIdWithRandomGeneratedIntoDictionaryKey(String jsonFilePath, String dictionaryKey) throws IOException {
         String cwd = System.getProperty("user.dir");
         String jsonPath = cwd + jsonFilePath;
         String partnerAccountId = randomGeneratedPartnerId();
         Globals.globalVariables.put(dictionaryKey, jsonFileToString(jsonPath).replace("{partnerAccountId}", partnerAccountId));
         Globals.globalVariables.put("partnerAccountId", partnerAccountId);
+    }
+
+    /**
+     * Read the json from given file into dictionary key.
+     *
+     * @param jsonFilePath  the json file path
+     * @param dictionaryKey the dictionary key
+     * @throws IOException the io exception
+     */
+    @And("I read the JSON from given file {string} into Dictionary Key {string}")
+    public void iReadTheJSONFromGivenFileIntoDictionaryKey(String jsonFilePath, String dictionaryKey) throws IOException {
+        String cwd = System.getProperty("user.dir");
+        String jsonPath = cwd + jsonFilePath;
+        Globals.globalVariables.put(dictionaryKey, jsonFileToString(jsonPath));
     }
 
     /**
@@ -93,20 +107,6 @@ public class TestSteps extends ApiEngine {
         Response rs = callAPI(callType, Globals.headers, Globals.globalVariables.get(dictionaryKey).toString(),
                               Globals.globalVariables.get("url").toString() + URI);
         Globals.globalVariables.put(dictionaryKey, rs);
-    }
-
-    /**
-     * Read the json from file into dictionary key.
-     *
-     * @param jsonFilePath  the json file path
-     * @param dictionaryKey the dictionary key
-     * @throws IOException the io exception
-     */
-    @When("^I read the JSON from file \"([^\"]*)\" into Dictionary Key \"([^\"]*)\"$")
-    public void i_read_the_JSON_from_file_into_Dictionary_Key(String jsonFilePath, String dictionaryKey) throws IOException {
-        String cwd = System.getProperty("user.dir");
-        String jsonPath = cwd + jsonFilePath;
-        Globals.globalVariables.put(dictionaryKey, jsonFileToString(jsonPath));
     }
 
     /**
