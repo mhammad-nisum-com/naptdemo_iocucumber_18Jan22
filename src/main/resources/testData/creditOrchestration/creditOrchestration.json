@@ -1,0 +1,51 @@
+{
+
+  "workflowRequest": {
+
+    "additionalAttributes": [
+
+      {
+
+        "attributeName": "barcode",
+
+        "attributeValue": "QAoeDUFOU0kgNjM2MDAxMDMwMTAyREwwMDQxMDI1OFpOMDI5OTAwNz BETERDQUIgICAKRENCRSAgICAgICAgIApEQ0RQUyAgICAKREJBMDUxNjIwMTkKRENTUk9EUk lHVUVaICAgICAgICAgICAgICAgIApEQ1RBTlksUyAgICAgICAgICAgICAgICAgICAgCkRCRD A1MTgyMDE2CkRCQjA1MTYxOTgyCkRCQzIKREFZQlJPCkRBVTUwNiAgIApEQUc0IEJMVUUgSk FZIERSICAgICAgICAgICAgCkRBSUJSRU5UV09PRCAgICAgICAgICAgCkRBSk5ZCkRBSzExNz E3MDAwMCAgCkRBUTQxODcxMzUxMQpEQ0ZQTktMTkJYVzIwCkRDR1VTQQ1aTlpOQVJPRFJJR1 VFWkBBTllAUyAgICAgClpOQi9ac2VwMCcrV3MuI3IhJTY9KFJqVShHR1xWZ1pmcE0laz4pSF ZLTzwN"
+
+      },
+
+      {
+
+        "attributeName": "deviceId",
+
+        "attributeValue": "deviceId-value"
+
+      },
+
+      {
+
+        "attributeName": "applicationRefId",
+
+        "attributeValue": "applicationRefId-value"
+
+      },
+
+      {
+
+        "attributeName": "location",
+
+        "attributeValue": "NY"
+
+      },
+
+      {
+
+        "attributeName": "originator",
+
+        "attributeValue": "POS"
+
+      }
+
+    ]
+
+  }
+
+}
