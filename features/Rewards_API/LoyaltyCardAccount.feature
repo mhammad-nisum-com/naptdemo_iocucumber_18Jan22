@@ -2,9 +2,9 @@
 Feature: Card feature
 
   Background:
-    Given that param "base_url.url" is set to value "http://localhost:8080"
+    Given that param "base_url.url" is set to value "https://loyalty-dev1-rk1v.wsgc.com"
 
-  @post @CCRT-504 @CardEnrollment
+  @post @AccessToken
   Scenario: POST initialization access token for api's
     Given that param "headers.Content-Type" is set to value with bearer token  "application/x-www-form-urlencoded"
     And that param "headers.Authorization" is set to value "Basic ZWNvbV9XUy9RQTpXU2Vjb20xMjM="
@@ -13,7 +13,7 @@ Feature: Card feature
     Then I verify that the response code is "200" for the response with Dictionary Key "PostUsers" and get oAuth
 
 
-  @post @CCRT-420 @CreateLoyaltyAccount
+  @post @CreateLoyaltyAccount
   Scenario Outline: POST Create Loyalty Account Scenario
     Given that param "headers.Content-Type" is set to value with bearer token  "application/json"
     And that param "headers.Authorization" is set to value "access_token"
@@ -38,3 +38,24 @@ Feature: Card feature
     And that param "headers.Authorization" is set to value "access_token"
     When I make a "LOOKUP" REST Call with URL "/loyalty/v1/loyaltyCards" from Dictionary Key "LOOKUP_ACCOUNT"
     Then I verify that the lookup response code value is "200" for the response with Dictionary Key "LOOKUP_ACCOUNT"
+
+
+  @get  @loyaltyAccountWithPartnerNameAndPartnerID
+    Scenario: Lookup PartnerName and PartnerID
+    Given that param "headers.Content-Type" is set to value with bearer token  "application/json"
+    And that param "headers.Authorization" is set to value "access_token"
+    When I make a "GetAccountWithPartner" Call with PartnerName and PartnerId from Dictionary Key "CREATE_ACCOUNT" and URL "/loyalty/v1/loyaltyCards/partner" from Dictionary Key "GET_ACCOUNT_BY_PARTNER"
+    Then I verify that the get response code value is "200" for the response with Dictionary Key "GET_ACCOUNT_BY_PARTNER" with "CREATE_ACCOUNT"
+
+  @post @CreateTokenLoyaltyAccount
+  Scenario Outline:
+    Given that param "headers.Content-Type" is set to value with bearer token  "application/json"
+    And that param "headers.Authorization" is set to value "access_token"
+    And I read the JSON from given file "<testData_Path>" and replace token id with random generated into Dictionary Key "CREATE_TOKEN"
+    When I make a "POSTTOKEN" Call with loyaltyId from Dictionary Key "CREATE_ACCOUNT" and Request Dictionary Key "CREATE_TOKEN" and URL "/loyalty/v1/loyaltyCards"
+    Then I verify the response with status code "<StatusCode>" for Dictionary Key "CREATE_TOKEN"
+
+    Examples:
+      | testData_Path                                                             | StatusCode |
+      | /src/main/resources/testData/CreateLoyaltyAccount/create_token_api_payload.json | 201   |
+

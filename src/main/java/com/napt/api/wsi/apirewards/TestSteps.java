@@ -4,8 +4,11 @@ import com.napt.api.wsi.apistores.ApiEngine;
 import com.napt.api.wsi.apistores.Globals;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import org.json.JSONObject;
+import org.junit.Assert;
 
 import java.io.IOException;
 import java.net.URI;
@@ -15,6 +18,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
+import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 
 /**
@@ -141,6 +145,12 @@ public class TestSteps extends ApiEngine {
         case "lookup":
             response = given().relaxedHTTPSValidation().headers(headers).when().queryParams(getQueryParams()).get(new URI(uri)).then().extract().response();
             break;
+        case "getaccountwithpartner":
+            response = given().relaxedHTTPSValidation().headers(headers).when().get(new URI(uri)) .then().extract().response();
+            break;
+        case "posttoken":
+            response = given().relaxedHTTPSValidation().when().headers(headers).body(body).post(uri);
+            break;
 
         }
         return response;
@@ -159,9 +169,72 @@ public class TestSteps extends ApiEngine {
         return queryParams;
     }
 
+
     private String randomGeneratedPartnerId() {
         Random r = new Random(System.currentTimeMillis());
         return String.valueOf(r.nextInt()).replace("-", "");
     }
 
+    @When("I make a {string} Call with PartnerName and PartnerId from Dictionary Key {string} and URL {string} from Dictionary Key {string}")
+    public void iMakeACallWithPartnerNameAndPartnerIdAndURLFromDictionaryKey(String callType,String dictionaryKeyForPost ,String uri, String dictionaryKeyForGet) throws URISyntaxException {
+
+        Response response = (Response) Globals.globalVariables.get(dictionaryKeyForPost);
+        JSONObject response_new = new JSONObject(response.getBody().asString());
+        JSONObject partnerId = response_new.getJSONObject("loyaltyCardCreateResponse").getJSONObject("loyaltyCardAccount").getJSONObject("cardDetails").getJSONArray("partnerIds").getJSONObject(0);
+
+        String partnerName = partnerId.getString("partnerName");
+        String partnerAccountId = partnerId.getString("accountId");
+
+        String uriWithPathParam = uri + "/" + partnerName + "/" + partnerAccountId;
+
+        Response rs = callAPIs(callType, Globals.headers, "",
+                               Globals.globalVariables.get("url").toString() + uriWithPathParam);
+        Globals.globalVariables.put(dictionaryKeyForGet, rs);
+    }
+
+    @Then("I verify that the get response code value is {string} for the response with Dictionary Key {string} with {string}")
+    public void iVerifyThatTheGetResponseCodeValueIsForTheResponseWithDictionaryKeyWith(String statuscode, String dictionaryKey1, String dictionaryKey) {
+        Response response = (Response) Globals.globalVariables.get(dictionaryKey);
+        Response response1 = (Response) Globals.globalVariables.get(dictionaryKey1);
+        JSONObject jsonResponse = new JSONObject(response.getBody().asString());
+        JSONObject jsonResponse1 = new JSONObject(response1.getBody().asString());
+        String loyaltyIdwithPartner  = jsonResponse1.getJSONObject("loyaltyCardGetResponse").getJSONObject("loyaltyCardAccount")
+                .getString("loyaltyCardId");
+        String loyaltyIdCreateAccount  = jsonResponse.getJSONObject("loyaltyCardCreateResponse").getJSONObject("loyaltyCardAccount")
+                .getString("loyaltyCardId");
+                  if (loyaltyIdCreateAccount.equals(loyaltyIdwithPartner)){
+                      return;
+                  }
+    }
+
+    @And("I read the JSON from given file {string} and replace token id with random generated into Dictionary Key {string}")
+    public void iReadTheJSONFromGivenFileAndReplaceTokenIdWithRandomGeneratedIntoDictionaryKey(String jsonFilePath, String dictionaryKey) throws IOException {
+        String cwd = System.getProperty("user.dir");
+        String jsonPath = cwd + jsonFilePath;
+        String tokenID = randomGeneratedPartnerId();
+        Globals.globalVariables.put(dictionaryKey, jsonFileToString(jsonPath).replace("{tokenId}", tokenID));
+        Globals.globalVariables.put("tokenId", tokenID);
+    }
+
+    @When("I make a {string} Call with loyaltyId from Dictionary Key {string} and Request Dictionary Key {string} and URL {string}")
+    public void iMakeACallWithLoyaltyIdFromDictionaryKeyAndRequestDictionaryKeyAndURL(String callType, String dictionaryKeyForPost, String dictionaryKeyForToken , String uri)
+            throws URISyntaxException {
+        Response response = (Response) Globals.globalVariables.get(dictionaryKeyForPost);
+        JSONObject response_new = new JSONObject(response.getBody().asString());
+        String loyaltyID = response_new.getJSONObject("loyaltyCardCreateResponse").getJSONObject("loyaltyCardAccount")
+                .getString("loyaltyCardId");
+        String uriWithToken = uri + "/"+ loyaltyID +"/tokens";
+        String tokenRequest = (String) Globals.globalVariables.get(dictionaryKeyForToken);
+
+        Response rs = callAPIs(callType, Globals.headers, tokenRequest,
+                               Globals.globalVariables.get("url").toString() + uriWithToken);
+        Globals.globalVariables.put(dictionaryKeyForToken, rs);
+    }
+
+    @Then("I verify the response with status code {string} for Dictionary Key {string}")
+    public void iVerifyTheResponseWithStatusCodeForDictionaryKey(String statusCode, String dictionaryKey) {
+        Response response = (Response) Globals.globalVariables.get(dictionaryKey);
+        Assert.assertEquals(Integer.parseInt(statusCode), response.getStatusCode());
+    }
 }
+

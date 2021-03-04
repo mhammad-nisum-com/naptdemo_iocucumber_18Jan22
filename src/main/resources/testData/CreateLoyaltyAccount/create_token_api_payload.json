@@ -1,0 +1,8 @@
+{
+  "addMatchingTokenRequest": {
+    "tokenType": "VCN",
+    "tokenId": "{tokenId}",
+    "partnerAccountId": "575347366",
+    "tokenSchema": "VFP_MATCH_QA"
+  }
+}
