@@ -47,7 +47,14 @@ Feature: User can apply for card at the store once the Associate initiates it th
     When I read the XML from file "<piiData_Path>" into Dictionary Key "PostPIIData"
     When I make a "POST" REST Call with URL "/api/AccountLookup/PIIData" and Body from Dictionary Key "PostPIIData" and replace the sessionID
     Then I verify that the response code is "200" for the response with Dictionary Key "PostPIIData"
-
     Examples:
       | piiData_Path                                      |
       | /src/main/java/resources/applyForCard/PIIData.xml |
+
+  Scenario: POST InitiateLookUp Scenario
+    Given that param "headers.Content-Type" is set to value "application/json"
+    When that param "headers.Authorization" is set to value "access_token"
+    When I make a "params" REST Call with URI "/creditcard-orchestration/v1/card-account-details" and store the response with Dictionary Key "GetUsers"
+    Then I verify that the response code is "200" for the response with Dictionary Key "GetUsers" for response
+
+
