@@ -177,7 +177,6 @@ public class TestSteps extends ApiEngine {
 
     @When("I make a {string} Call with PartnerName and PartnerId from Dictionary Key {string} and URL {string} from Dictionary Key {string}")
     public void iMakeACallWithPartnerNameAndPartnerIdAndURLFromDictionaryKey(String callType,String dictionaryKeyForPost ,String uri, String dictionaryKeyForGet) throws URISyntaxException {
-
         Response response = (Response) Globals.globalVariables.get(dictionaryKeyForPost);
         JSONObject response_new = new JSONObject(response.getBody().asString());
         JSONObject partnerId = response_new.getJSONObject("loyaltyCardCreateResponse").getJSONObject("loyaltyCardAccount").getJSONObject("cardDetails").getJSONArray("partnerIds").getJSONObject(0);
@@ -235,6 +234,36 @@ public class TestSteps extends ApiEngine {
     public void iVerifyTheResponseWithStatusCodeForDictionaryKey(String statusCode, String dictionaryKey) {
         Response response = (Response) Globals.globalVariables.get(dictionaryKey);
         Assert.assertEquals(Integer.parseInt(statusCode), response.getStatusCode());
+    }
+
+    @And("I read the JSON from given file {string} with same partnerId into Dictionary Key {string}")
+    public void iReadTheJSONFromGivenFileWithSamePartnerIdIntoDictionaryKey(String jsonFilePath, String dictionaryKey) throws IOException {
+        Response res = (Response) Globals.globalVariables.get(dictionaryKey);
+        String partnerId = (String) Globals.globalVariables.get("partnerAccountId");
+
+        JSONObject response = new JSONObject(res.getBody().asString());
+        String cwd = System.getProperty("user.dir");
+        String jsonPath = cwd + jsonFilePath;
+//        JSONObject partnerId = response.getJSONObject("loyaltyCardCreateResponse").
+//                getJSONObject("loyaltyCardAccount").getJSONObject("cardDetails").getJSONArray("partnerIds").getJSONObject(0);
+        Globals.globalVariables.put("CREATE_ACCOUNT_REQUEST", jsonFileToString(jsonPath).replace("{partnerAccountId}", partnerId));
+
+    }
+
+    @When("I make a {string} Call with URL {string} and Body from Dictionary Key {string}")
+    public void iMakeACallWithURLAndBodyFromDictionaryKey(String callType, String URI, String dictionaryKey) throws URISyntaxException {
+        Response rs = callAPI(callType, Globals.headers, Globals.globalVariables.get(dictionaryKey).toString(),
+                              Globals.globalVariables.get("url").toString() + URI);
+        Globals.globalVariables.put(dictionaryKey, rs);
+
+    }
+
+    @When("I make a {string} Call with URL {string} and Body from Dictionary Key {string} and Conflict Dictionary key is {string}")
+    public void iMakeACallWithURLAndBodyFromDictionaryKeyAndConflictDictionaryKeyIs(String callType, String URI, String dictionaryKey, String dictionaryKeyConflict)
+            throws URISyntaxException {
+        Response rs = callAPI(callType, Globals.headers, Globals.globalVariables.get(dictionaryKey).toString(),
+                              Globals.globalVariables.get("url").toString() + URI);
+        Globals.globalVariables.put(dictionaryKeyConflict, rs);
     }
 }
 

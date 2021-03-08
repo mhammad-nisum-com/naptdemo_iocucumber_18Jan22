@@ -1,0 +1,22 @@
+{
+  "loyaltyCardEnrollment": {
+    "enrollmentDetails": {
+      "enrollmentTime": "2017-07-28T12:00:00Z",
+      "concept": "WS",
+      "channel": "ecommerce",
+      "location": "checkout"
+    },
+    "cardDetail": {
+      "partnerIds": [
+
+      ],
+      "cardType": "PLCC",
+      "cardDescription": "Williams Sonoma Reward Card",
+      "cardAccountType": "PL",
+      "cardProgramCode": "671",
+      "accountState": "Active",
+      "openDate": "20181220"
+    }
+
+  }
+}
