@@ -55,3 +55,7 @@ Feature: Card Enrollment feature
       |/src/main/resources/testData/CardEnrollment/InvalidChannelType.json                      |400         |errorMessage   |Attribute is not in a valid format: channelType                 |
       |/src/main/resources/testData/CardEnrollment/InvalidEnrollmentConcept.json                |400         |errorMessage   |Attribute is not in a valid format: enrollmentConcept           |
 
+
+
+    Scenario: sample
+      Given I connect to DB

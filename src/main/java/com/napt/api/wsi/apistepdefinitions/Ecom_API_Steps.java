@@ -5,16 +5,24 @@ import com.napt.api.wsi.apistores.ApiEngine;
 import com.napt.api.wsi.apistores.Globals;
 import com.napt.api.wsi.pojo.GetCardDetailsresponse.Example;
 import com.napt.api.wsi.steps.BrowserSteps;
+import com.napt.framework.ui.runner.WebDriverManager;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import java.sql.DriverManager;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 
 
 import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
@@ -125,5 +133,56 @@ public class Ecom_API_Steps {
         Assert.assertTrue(emp.getCreditCard().getTokenKey().equals(""));
         log.info("Credit Card Token Key "+emp.getCreditCard().getTokenKey());
     }
-}
+    public void connectDB() throws SQLException, ClassNotFoundException {
+        Connection mysqlCon = null;
+        String dbUrl = "jdbc:oracle:thin:@//sccdbqark1p:3800/sccqa";
+
+        //Database Username
+        String username = "COS_EXT_USER";
+
+        //Database Password
+        String password = "wergr8t!m";
+
+        //Query to Execute
+        String query = "select * from COS_EXT_USER.card_enrollment_details where id='4';";
+
+        //Load mysql jdbc driver
+
+        //Class.forName("com.mysql.jdbc.Driver");
+
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            mysqlCon = DriverManager.getConnection("jdbc:oracle:thin:@//sccdbqark1p:3800/sccqa", "COS_EXT_USER", "wergr8t!m");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+
+
+        //Create Connection to DB
+        Connection con = DriverManager.getConnection(dbUrl,username, password);
+
+        //Create Statement Object
+        Statement stmt = con.createStatement();
+
+         //Execute the SQL Query. Store results in ResultSet
+        ResultSet rs= stmt.executeQuery(query);
+
+         //While Loop to iterate through all data and print results
+        while (rs.next()){
+            String myName = rs.getString(1);
+            String myAge = rs.getString(2);
+            System. out.println(myName+"  "+myAge);
+        }
+        // closing DB Connection
+        con.close();
+    }
+    @Given("I connect to DB")
+    public void iConnectToDB() throws SQLException, ClassNotFoundException {
+     connectDB();
+
+    }
+    }
+
 
