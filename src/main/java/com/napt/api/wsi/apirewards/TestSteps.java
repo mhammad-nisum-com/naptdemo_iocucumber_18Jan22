@@ -179,7 +179,7 @@ public class TestSteps extends ApiEngine {
     public void iMakeACallWithPartnerNameAndPartnerIdAndURLFromDictionaryKey(String callType,String dictionaryKeyForPost ,String uri, String dictionaryKeyForGet) throws URISyntaxException {
         Response response = (Response) Globals.globalVariables.get(dictionaryKeyForPost);
         JSONObject response_new = new JSONObject(response.getBody().asString());
-        JSONObject partnerId = response_new.getJSONObject("loyaltyCardCreateResponse").getJSONObject("loyaltyCardAccount").getJSONObject("cardDetails").getJSONArray("partnerIds").getJSONObject(0);
+        JSONObject partnerId = response_new.getJSONObject("loyaltyCardAccount").getJSONObject("cardDetails").getJSONArray("partnerIds").getJSONObject(0);
 
         String partnerName = partnerId.getString("partnerName");
         String partnerAccountId = partnerId.getString("accountId");
@@ -197,9 +197,9 @@ public class TestSteps extends ApiEngine {
         Response response1 = (Response) Globals.globalVariables.get(dictionaryKey1);
         JSONObject jsonResponse = new JSONObject(response.getBody().asString());
         JSONObject jsonResponse1 = new JSONObject(response1.getBody().asString());
-        String loyaltyIdwithPartner  = jsonResponse1.getJSONObject("loyaltyCardGetResponse").getJSONObject("loyaltyCardAccount")
+        String loyaltyIdwithPartner  = jsonResponse1.getJSONObject("loyaltyCardAccount")
                 .getString("loyaltyCardId");
-        String loyaltyIdCreateAccount  = jsonResponse.getJSONObject("loyaltyCardCreateResponse").getJSONObject("loyaltyCardAccount")
+        String loyaltyIdCreateAccount  = jsonResponse.getJSONObject("loyaltyCardAccount")
                 .getString("loyaltyCardId");
                   if (loyaltyIdCreateAccount.equals(loyaltyIdwithPartner)){
                       return;
@@ -220,7 +220,7 @@ public class TestSteps extends ApiEngine {
             throws URISyntaxException {
         Response response = (Response) Globals.globalVariables.get(dictionaryKeyForPost);
         JSONObject response_new = new JSONObject(response.getBody().asString());
-        String loyaltyID = response_new.getJSONObject("loyaltyCardCreateResponse").getJSONObject("loyaltyCardAccount")
+        String loyaltyID = response_new.getJSONObject("loyaltyCardAccount")
                 .getString("loyaltyCardId");
         String uriWithToken = uri + "/"+ loyaltyID +"/tokens";
         String tokenRequest = (String) Globals.globalVariables.get(dictionaryKeyForToken);
@@ -244,9 +244,7 @@ public class TestSteps extends ApiEngine {
         JSONObject response = new JSONObject(res.getBody().asString());
         String cwd = System.getProperty("user.dir");
         String jsonPath = cwd + jsonFilePath;
-//        JSONObject partnerId = response.getJSONObject("loyaltyCardCreateResponse").
-//                getJSONObject("loyaltyCardAccount").getJSONObject("cardDetails").getJSONArray("partnerIds").getJSONObject(0);
-        Globals.globalVariables.put("CREATE_ACCOUNT_REQUEST", jsonFileToString(jsonPath).replace("{partnerAccountId}", partnerId));
+      Globals.globalVariables.put("CREATE_ACCOUNT_REQUEST", jsonFileToString(jsonPath).replace("{partnerAccountId}", partnerId));
 
     }
 

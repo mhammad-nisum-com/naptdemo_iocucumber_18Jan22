@@ -7,11 +7,6 @@
     "transactionTime": "2020-10-20T09:34:49.181Z",
     "testingMode": false
   },
-  "enrollmentDetails": {
-    "enrollmentTime": "2017-01-11T12:00:00.000+00:00",
-    "concept": "PB",
-    "channel": "ecommerce"
-  },
   "accountState": {
     "statusCode": "Active",
     "statusInfo": "Confirmed",

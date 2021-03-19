@@ -3,7 +3,7 @@ Feature: Card feature
 
   Background:
     Given that param "base_url.url" is set to value "https://loyalty-dev1-rk1v.wsgc.com"
-
+    #Given that param "base_url.url" is set to value "http://localhost:8080"
   @post @AccessToken
   Scenario: POST initialization access token for api's
     Given that param "headers.Content-Type" is set to value with bearer token  "application/x-www-form-urlencoded"
@@ -24,9 +24,9 @@ Feature: Card feature
     Examples:
       | testData_Path                                                             | StatusCode | ResponseObject | responseMessage             |
       | /src/main/resources/testData/CreateLoyaltyAccount/create_api_payload.json | 201        | status         | processed card successfully |
-      | /src/main/resources/testData/CreateLoyaltyAccount/enrollment_detail_object_missing.json| 400 | error    |     error response          |
+      | /src/main/resources/testData/CreateLoyaltyAccount/enrollment_details_object_missing.json| 201 | status    |     Create Sucessfully          |
       | /src/main/resources/testData/CreateLoyaltyAccount/card_details_object_missing.json| 400 | error         |     error response          |
-      | /src/main/resources/testData/CreateLoyaltyAccount/primary_card_holder_details_object_missing.json| 400  | error    |  error response  |
+      | /src/main/resources/testData/CreateLoyaltyAccount/card_holder_details_array_missing.json| 400  | error    |  error response  |
       |/src/main/resources/testData/CreateLoyaltyAccount/account_Id_details_Value_missing.json  | 400 | error   |     error response          |
       | /src/main/resources/testData/CreateLoyaltyAccount/emptyFile.json          |   500    | Server error     | internal server error       |
   @post @ConflictCreateAccount

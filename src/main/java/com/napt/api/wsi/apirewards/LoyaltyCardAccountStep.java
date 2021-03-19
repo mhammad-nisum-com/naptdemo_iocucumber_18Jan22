@@ -36,7 +36,7 @@ public class LoyaltyCardAccountStep extends ApiEngine {
         JSONObject jsonObject = new JSONObject(response.getBody().asString());
          Assert.assertEquals(Integer.parseInt(statusCode), response.getStatusCode());
         if( statusCode.equals("201") || statusCode.equals("200")) {
-            jsonObject = jsonObject.getJSONObject("loyaltyCardCreateResponse").getJSONObject("loyaltyCardAccount");
+            jsonObject = jsonObject.getJSONObject("loyaltyCardAccount");
             LOGGER.debug("Get jsonObject:{} from response", jsonObject);
             Globals.globalVariables.put("LOYALTY_CARD_ID", jsonObject.getString("loyaltyCardId"));
             JSONObject accountState = jsonObject.getJSONObject("accountState");
@@ -67,12 +67,11 @@ public class LoyaltyCardAccountStep extends ApiEngine {
             Assert.assertNotNull(accountState.getBoolean("canLogin"));
             Assert.assertNotNull(accountState.getBoolean("canEarn"));
             Assert.assertNotNull(accountState.getBoolean("canIssueCertificates"));
-            Assert.assertNotNull(accountState.getBoolean("canRedeem"));
             Assert.assertNotNull(accountState.getBoolean("canLogin"));
             Assert.assertEquals("COF", cardDetails.getJSONArray("partnerIds").getJSONObject(0).getString("partnerName"));
             Assert.assertEquals(partnerAccountId.toString(), cardDetails.getJSONArray("partnerIds").getJSONObject(0).getString("accountId"));
             Assert.assertTrue(cardDetails.getJSONArray("partnerIds").getJSONObject(0).getBoolean("active"));
-            Assert.assertEquals("PRIMARY", cardHolders.getJSONObject(0).getString("cardHoldertype"));
+            Assert.assertEquals("PRIMARY", cardHolders.getJSONObject(0).getString("cardHolderType"));
             Assert.assertNotNull(memberDetails.getString("birthday"));
             Assert.assertNotNull(email);
             Assert.assertNotNull(phone);
@@ -90,12 +89,12 @@ public class LoyaltyCardAccountStep extends ApiEngine {
             Assert.assertNotNull(earningSummary);
         }
       else if (statusCode.equals("409")) {
-            String errorResponse = jsonObject.getJSONObject("loyaltyCardCreateResponse").getJSONObject("error").getString("errorMessage");
+            String errorResponse = jsonObject.getJSONObject("error").getString("errorMessage");
             System.out.println("Error" + errorResponse);
         }
 
       else if (statusCode.equals("400")) {
-            String errorResponse = jsonObject.getJSONObject("loyaltyCardCreateResponse").getJSONObject("error").getString("errorMessage");
+            String errorResponse = jsonObject.getJSONObject("error").getString("errorMessage");
             System.out.println("Error" + errorResponse);
         }
       else {
@@ -122,7 +121,7 @@ public class LoyaltyCardAccountStep extends ApiEngine {
     public void iVerifyThatTheGetResponseCodeValueIsForTheResponseWithDictionaryKey(String statusCode, String dictionaryKey) {
         Response response = (Response) Globals.globalVariables.get(dictionaryKey);
         JSONObject jsonObject = new JSONObject(response.getBody().asString());
-        jsonObject = jsonObject.getJSONObject("loyaltyCardGetResponse").getJSONObject("loyaltyCardAccount");
+        jsonObject = jsonObject.getJSONObject("loyaltyCardAccount");
         LOGGER.debug("Get jsonObject:{} from response", jsonObject);
         JSONObject accountState = jsonObject.getJSONObject("accountState");
         LOGGER.debug("Get accountState:{} from response", accountState);
@@ -143,12 +142,12 @@ public class LoyaltyCardAccountStep extends ApiEngine {
         Assert.assertNotNull(accountState.getBoolean("canLogin"));
         Assert.assertNotNull(accountState.getBoolean("canEarn"));
         Assert.assertNotNull(accountState.getBoolean("canIssueCertificates"));
-        Assert.assertNotNull(accountState.getBoolean("canRedeem"));
+        //Assert.assertNotNull(accountState.getBoolean("canRedeem"));
         Assert.assertNotNull(accountState.getBoolean("canLogin"));
         Assert.assertEquals("COF", cardDetails.getJSONArray("partnerIds").getJSONObject(0).getString("partnerName"));
         //Assert.assertEquals(partnerAccountId.toString(), cardDetails.getJSONArray("partnerIds").getJSONObject(0).getString("accountId"));
         Assert.assertTrue(cardDetails.getJSONArray("partnerIds").getJSONObject(0).getBoolean("active"));
-        Assert.assertEquals("PRIMARY", cardHolders.getJSONObject(0).getString("cardHoldertype"));
+        Assert.assertEquals("PRIMARY", cardHolders.getJSONObject(0).getString("cardHolderType"));
         Assert.assertNotNull(memberDetails.getString("birthday"));
         Assert.assertNotNull(memberDetails.getString("email"));
         Assert.assertNotNull(memberDetails.getString("phone"));
@@ -179,7 +178,7 @@ public class LoyaltyCardAccountStep extends ApiEngine {
     public void iVerifyThatTheLookupResponseCodeValueIsForTheResponseWithDictionaryKey(String statusCode, String dictionaryKey) {
         Response response = (Response) Globals.globalVariables.get(dictionaryKey);
         JSONObject jsonResponse = new JSONObject(response.getBody().asString());
-        JSONArray jsonArray = jsonResponse.getJSONObject("loyaltyCardLookupResponse").getJSONArray("loyaltyCardAccountCollection");
+        JSONArray jsonArray = jsonResponse.getJSONArray("loyaltyCards");
         for (Object o : jsonArray) {
             if (o instanceof JSONObject) {
                 JSONObject jsonObject = (JSONObject) o;
@@ -201,12 +200,11 @@ public class LoyaltyCardAccountStep extends ApiEngine {
                 Assert.assertNotNull(accountState.getBoolean("canLogin"));
                 Assert.assertNotNull(accountState.getBoolean("canEarn"));
                 Assert.assertNotNull(accountState.getBoolean("canIssueCertificates"));
-                Assert.assertNotNull(accountState.getBoolean("canRedeem"));
                 Assert.assertNotNull(accountState.getBoolean("canLogin"));
                 Assert.assertEquals("COF", cardDetails.getJSONArray("partnerIds").getJSONObject(0).getString("partnerName"));
                 Assert.assertNotNull(cardDetails.getJSONArray("partnerIds").getJSONObject(0).getString("accountId"));
                 Assert.assertTrue(cardDetails.getJSONArray("partnerIds").getJSONObject(0).getBoolean("active"));
-                Assert.assertEquals("PRIMARY", cardHolders.getJSONObject(0).getString("cardHoldertype"));
+                Assert.assertEquals("PRIMARY", cardHolders.getJSONObject(0).getString("cardHolderType"));
                 Assert.assertNotNull(memberDetails.getString("birthday"));
                 Assert.assertNotNull(memberDetails.getString("email"));
                 Assert.assertNotNull(memberDetails.getString("phone"));

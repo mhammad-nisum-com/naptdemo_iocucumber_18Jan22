@@ -1,0 +1,38 @@
+{
+  "enrollmentDetails": {
+    "enrollmentTime": "2017-01-11T12:00:00.000+00:00",
+    "concept": "PB",
+    "channel": "ecommerce"
+  },
+  "accountState": {
+    "statusCode": "Active",
+    "statusInfo": "Confirmed",
+    "canLogin": true,
+    "canEarn": true,
+    "canIssueCertificates": true,
+    "openTime": "2020-10-17T05:00:00Z",
+    "lastActivityTime": "2020-10-17T10:10:49Z",
+    "linkedAccounts" : [
+      {
+        "accountType": "loyaltyAccount",
+        "accountId": "323ad894-fcca-495f-985d-6658c8f4ed6a"
+      }
+    ]
+  },
+  "cardDetails": {
+    "partnerIds": [
+      {
+        "partnerName": "COF",
+        "accountId": "01234567",
+        "active": true
+      }
+    ],
+    "cardType": "PLCC",
+    "cardDescription": "Williams Sonoma Reward Card",
+    "cardAccountType": "PL",
+    "cardProgramCode": "671",
+    "cardNumber": "1234",
+    "Retail":"1234"
+
+  }
+}

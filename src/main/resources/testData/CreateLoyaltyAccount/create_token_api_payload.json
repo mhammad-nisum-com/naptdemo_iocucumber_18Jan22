@@ -1,8 +1,16 @@
 {
-  "addMatchingTokenRequest": {
-    "tokenType": "VCN",
-    "tokenId": "{tokenId}",
-    "partnerAccountId": "575347366",
-    "tokenSchema": "VFP_MATCH_QA"
+  "systemContext": {
+    "environmentIdentifier": "prdrk",
+    "regionIdentifier": "west",
+    "sourceSystemIdentifier": "pb-prd-rk1.wsgc.com",
+    "transactionId": "2020-10-20T09:34:49.181Z",
+    "transactionTime": "2020-10-20T09:34:49.181Z",
+    "testingMode": false
+  },
+  "action": "CREATE",
+  "matchingToken": {
+    "hashScheme": "VFP_MATCH",
+    "cardType": "virtual",
+    "hashValue": "{tokenId}"
   }
 }
