@@ -2,8 +2,8 @@
 Feature: Card feature
 
   Background:
-    Given that param "base_url.url" is set to value "https://loyalty-dev1-rk1v.wsgc.com"
-    #Given that param "base_url.url" is set to value "http://localhost:8080"
+    #Given that param "base_url.url" is set to value "https://loyalty-dev1-rk1v.wsgc.com"
+    Given that param "base_url.url" is set to value "http://localhost:8080"
   @post @AccessToken
   Scenario: POST initialization access token for api's
     Given that param "headers.Content-Type" is set to value with bearer token  "application/x-www-form-urlencoded"
@@ -73,3 +73,11 @@ Feature: Card feature
       | testData_Path                                                             | StatusCode |
       | /src/main/resources/testData/CreateLoyaltyAccount/create_token_api_payload.json | 201   |
       | /src/main/resources/testData/CreateLoyaltyAccount/emptyFile.json          |   500    |
+
+  @get @GetTokenwithLoyaltyCardId
+    Scenario:Get Token with LoyaltyCardId
+    Given that param "headers.Content-Type" is set to value with bearer token  "application/json"
+    And that param "headers.Authorization" is set to value "access_token"
+    When I make a "GET_TOKEN" Call with loyaltyId from Dictionary Key "CREATE_ACCOUNT" and "/loyalty/v1/loyaltyCards"
+    Then I verify the response with status code "200" for Dictionary Key "GET_TOKEN"
+

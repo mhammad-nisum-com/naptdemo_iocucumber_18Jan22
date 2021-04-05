@@ -151,6 +151,14 @@ public class TestSteps extends ApiEngine {
         case "posttoken":
             response = given().relaxedHTTPSValidation().when().headers(headers).body(body).post(uri);
             break;
+        case "get_token":
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            response = given().relaxedHTTPSValidation().when().headers(headers).get(new URI(uri)).then().extract().response();
+            break;
 
         }
         return response;
@@ -262,6 +270,21 @@ public class TestSteps extends ApiEngine {
         Response rs = callAPI(callType, Globals.headers, Globals.globalVariables.get(dictionaryKey).toString(),
                               Globals.globalVariables.get("url").toString() + URI);
         Globals.globalVariables.put(dictionaryKeyConflict, rs);
+    }
+
+    @When("I make a {string} Call with loyaltyId from Dictionary Key {string} and {string}")
+    public void iMakeACallWithLoyaltyIdFromDictionaryKeyAnd(String callType, String dictionaryKeyForPost, String uri) throws URISyntaxException {
+        Response response = (Response) Globals.globalVariables.get(dictionaryKeyForPost);
+        JSONObject response_new = new JSONObject(response.getBody().asString());
+        String loyaltyID = response_new.getJSONObject("loyaltyCardAccount")
+                .getString("loyaltyCardId");
+        String uriWithToken = uri + "/"+ loyaltyID +"/tokens";
+
+        Response rs = callAPIs(callType, Globals.headers, "",
+                               Globals.globalVariables.get("url").toString() + uriWithToken);
+        Globals.globalVariables.put(callType, rs);
+
+
     }
 }
 

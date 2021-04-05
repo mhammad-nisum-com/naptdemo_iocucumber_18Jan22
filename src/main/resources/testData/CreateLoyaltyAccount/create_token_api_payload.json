@@ -8,9 +8,11 @@
     "testingMode": false
   },
   "action": "CREATE",
-  "matchingToken": {
-    "hashScheme": "VFP_MATCH",
-    "cardType": "virtual",
-    "hashValue": "{tokenId}"
-  }
+  "matchingTokens": [
+    {
+      "hashScheme": "VFP_MATCH_AA",
+      "hashValue": "{tokenId}",
+      "cardType": "VCN_Permanent"
+    }
+  ]
 }
