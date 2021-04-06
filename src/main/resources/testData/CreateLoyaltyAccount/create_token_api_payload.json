@@ -12,7 +12,7 @@
     {
       "hashScheme": "VFP_MATCH_AA",
       "hashValue": "{tokenId}",
-      "cardType": "VCN_Permanent"
+      "cardType": "VCN-Permanent"
     }
   ]
 }

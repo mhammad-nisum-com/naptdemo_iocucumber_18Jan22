@@ -160,7 +160,12 @@ public class TestSteps extends ApiEngine {
             response = given().relaxedHTTPSValidation().when().headers(headers).get(new URI(uri)).then().extract().response();
             break;
 
+        case "token_type":
+            response = given().relaxedHTTPSValidation().when().headers(headers).get(new URI(uri)).then().extract().response();
+            break;
+
         }
+
         return response;
     }
 
@@ -284,6 +289,21 @@ public class TestSteps extends ApiEngine {
                                Globals.globalVariables.get("url").toString() + uriWithToken);
         Globals.globalVariables.put(callType, rs);
 
+
+    }
+
+    @When("I make a {string} Call with tokenType and tokenId from Dictionary Key {string} and {string}")
+    public void iMakeACallWithTokenTypeAndTokenIdFromDictionaryKeyAnd(String callType, String dictiniorykeyforToken, String uri) throws URISyntaxException {
+        Response response = (Response) Globals.globalVariables.get(dictiniorykeyforToken);
+     JSONObject response_new = new JSONObject(response.getBody().asString());
+        JSONObject matchingToken = response_new.getJSONArray("matchingTokens").getJSONObject(0);
+            String hashScheme = matchingToken.getString("hashScheme");
+            String hashValue = matchingToken.getString("hashValue");
+            String uriToken = uri + hashScheme + "/"+hashValue;
+
+            Response rs = callAPIs(callType,Globals.headers,"",
+                                   Globals.globalVariables.get("url").toString()+uriToken);
+            Globals.globalVariables.put(dictiniorykeyforToken,rs);
 
     }
 }
