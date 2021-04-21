@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TRANSACTION>
+    <FUNCTION_TYPE>DEVICE</FUNCTION_TYPE>
+    <COMMAND>CREDIT_APP</COMMAND>
+    <PROMPT1>enter mobile phone number</PROMPT1>
+    <PROMPT1_DATA>9150000901</PROMPT1_DATA>
+</TRANSACTION>
