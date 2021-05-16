@@ -2,11 +2,10 @@ package com.napt.api.wsi.apistepdefinitions;
 
 import com.napt.api.wsi.apistores.ApiEngine;
 import com.napt.api.wsi.apistores.Globals;
-import io.cucumber.java.en.And;
+import gherkin.deps.com.google.gson.JsonArray;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import gherkin.deps.com.google.gson.JsonArray;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
@@ -14,7 +13,7 @@ import org.junit.Assert;
 public class TestSteps {
 	ApiEngine ae = new ApiEngine();
 	@Given("^that param \"([^\"]*)\" is set to value \"([^\"]*)\"$")
-	public void that_param_is_set_to_value(String dictionaryKey, String value) throws Throwable {
+	public void that_param_is_set_to_value(String dictionaryKey, String value) {
 		
 		String[] paramCategory = dictionaryKey.split("\\.");
 		
@@ -58,30 +57,30 @@ public class TestSteps {
 	}
 
 	@Then("^I verify that the response code is \"([^\"]*)\" for the response with Dictionary Key \"([^\"]*)\"$")
-	public void i_verify_that_the_response_code_is_for_the_response_with_Dictionary_Key(String responseCode, String dictionaryKey) throws Throwable {
+	public void i_verify_that_the_response_code_is_for_the_response_with_Dictionary_Key(String responseCode, String dictionaryKey) {
 		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
-		System.out.println("return body value" +rs.asString());
-		Assert.assertTrue("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode,String.valueOf(rs.getStatusCode()).equals(responseCode));
+		System.out.println("return body value \n" +rs.asString());
+		Assert.assertEquals("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode, String.valueOf(rs.getStatusCode()), responseCode);
 
 	}
 
 	@Then("^I verify that the json path \"([^\"]*)\" for node \"([^\"]*)\"  value is \"([^\"]*)\" for the response with Dictionary Key \"([^\"]*)\"$")
-	public void i_verify_that_the_json_path_for_node_value_is_for_the_response_with_Dictionary_Key(String jsonPath, String nodeName, String valueOfNode, String dictionaryKey) throws Throwable {
+	public void i_verify_that_the_json_path_for_node_value_is_for_the_response_with_Dictionary_Key(String jsonPath, String valueOfNode, String dictionaryKey) throws Throwable {
 		valueOfNode = valueOfNode.replace(";qt;", "\"");
 		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
 		System.out.println(ae.searchJsonStringByJsonPath(rs.asString(), jsonPath));
 		System.out.println(valueOfNode);
-		
-		
-		Assert.assertTrue("Json Path node not found",ae.searchJsonStringByJsonPath(rs.asString(), jsonPath).equals(valueOfNode));
+
+
+		Assert.assertEquals("Json Path node not found", ae.searchJsonStringByJsonPath(rs.asString(), jsonPath), valueOfNode);
 	}
 
 
 	@Then("^I verify that the json path \"([^\"]*)\" for node array \"([^\"]*)\" contains \"([^\"]*)\" number of nodes for the response with Dictionary Key \"([^\"]*)\"$")
-	public void i_verify_that_the_json_path_for_node_array_contains_number_of_nodes_for_the_response_with_Dictionary_Key(String jsonPath, String nodeArrayName, String numberOfNodes, String dictionaryKey) throws Throwable {
+	public void i_verify_that_the_json_path_for_node_array_contains_number_of_nodes_for_the_response_with_Dictionary_Key(String jsonPath, String numberOfNodes, String dictionaryKey) throws Throwable {
 		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
 		JsonArray ja = ae.jsonStringtoJsonArray(rs.asString(), jsonPath);
-		Assert.assertTrue("Number of of elements is " + ja.size()  +" vs Expected Value of " + numberOfNodes , Integer.parseInt(numberOfNodes)==ja.size());		
+		Assert.assertEquals("Number of of elements is " + ja.size() + " vs Expected Value of " + numberOfNodes, Integer.parseInt(numberOfNodes), ja.size());
 	}
 	
 	@When("^I read the JSON from file \"([^\"]*)\" into Dictionary Key \"([^\"]*)\"$")
@@ -106,14 +105,14 @@ public class TestSteps {
 		
 	}
 	@Then("^I verify that the response code is \"([^\"]*)\" for the response with Dictionary Key \"([^\"]*)\" and get sessionID$")
-	public void i_verify_that_the_response_code_is_for_the_response_with_Dictionary_Key_getSessionID(String responseCode, String dictionaryKey) throws Throwable {
+	public void i_verify_that_the_response_code_is_for_the_response_with_Dictionary_Key_getSessionID(String responseCode, String dictionaryKey) {
 		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
 		System.out.println("return body value" +rs.asString());
 		JsonPath jsonPathEvaluator = rs.jsonPath();
 		String getSessionID = jsonPathEvaluator.get("sessionID");
 		System.out.println("Session ID "+getSessionID);
 		Globals.sessionID.put("SessionID",getSessionID);
-		Assert.assertTrue("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode,String.valueOf(rs.getStatusCode()).equals(responseCode));
+		Assert.assertEquals("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode, String.valueOf(rs.getStatusCode()), responseCode);
 
 	}
 	@When("^I make a \"([^\"]*)\" REST Call with URI \"([^\"]*)\" and store the response of sessionID with Dictionary Key \"([^\"]*)\"$")
@@ -150,14 +149,14 @@ public class TestSteps {
 	}
 
 	@Then("^I verify that the response body with the Return Code as \"([^\"]*)\" and Return Message as \"([^\"]*)\" with Dictionary Key \"([^\"]*)\"$")
-	public void iVerifyThatTheResponseBodyWithTheReturnCodeAsAndReturnMessageAsWithDictionaryKey(String returnCode, String returnMessage, String dictionaryKey) throws Throwable {
+	public void iVerifyThatTheResponseBodyWithTheReturnCodeAsAndReturnMessageAsWithDictionaryKey(String returnCode, String returnMessage, String dictionaryKey) {
 		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
 		System.out.println("return body value" +rs.asString());
 		JsonPath jsonPathEvaluator = rs.jsonPath();
 		Integer getReturnCode = jsonPathEvaluator.get("returnCode");
 		String getReturnMessage = jsonPathEvaluator.get("returnMessage");
 		Assert.assertTrue("Actual Return Code is ", getReturnCode.toString().contentEquals(returnCode));
-		Assert.assertTrue("Actual Return Message is ", getReturnMessage.equals(returnMessage));
+		Assert.assertEquals("Actual Return Message is ", getReturnMessage, returnMessage);
 
 	}
 	@When("^I read the JSON from file \"([^\"]*)\" into Dictionary Key \"([^\"]*)\" and replace the sessionID$")
@@ -177,6 +176,26 @@ public class TestSteps {
 		Globals.globalVariables.put(dictionaryKey, rs);
 	}
 
+	@When("^I read the JSON from file \"([^\"]*)\" with StoreID \"([^\"]*)\" into Dictionary Key \"([^\"]*)\"$")
+	public void i_read_the_JSON_from_file_into_Dictionary_Key_StoreId(String jsonFilePath, String storeID,String dictionaryKey) throws Throwable {
+		String cwd = System.getProperty("user.dir");
+		System.out.println("current directory "+cwd);
+		String jsonPath=cwd+jsonFilePath;
+		System.out.println("actual directory "+jsonPath);
+		String replaceStoreID=ae.jsonFileToString(jsonPath);
+		String actualJsonBody=replaceStoreID.replace("StoreID",storeID);
+		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
 
+	}
 
+	@When("^I read the XML from file \"([^\"]*)\" with SSN \"([^\"]*)\" into Dictionary Key \"([^\"]*)\"$")
+	public void i_read_the_XML_from_file_into_Dictionary_Key_SSN(String jsonFilePath, String ssn,String dictionaryKey) throws Throwable {
+		String cwd = System.getProperty("user.dir");
+		System.out.println("current directory "+cwd);
+		String jsonPath=cwd+jsonFilePath;
+		System.out.println("actual directory "+jsonPath);
+		String replaceSSN=ae.xmlFileToString(jsonPath);
+		String actualJsonBody=replaceSSN.replace("SSN",ssn);
+		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+	}
 }

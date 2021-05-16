@@ -6,10 +6,10 @@ import io.cucumber.testng.CucumberOptions;
  */
 
 @CucumberOptions(
-        features = "features/WSI_UI/WS",
-        glue = {"com.napt.api.wsi.steps"},
-        tags = {"@ApplyNow_ON_WS"},
-        plugin = {"pretty", "html:target/cucumber_target.html", "json:target/cucumber.json", "rerun:target/failed_scenarios.txt"})
+        features = "features/Stores_API",
+        glue = {"com.napt.api.wsi.apistepdefinitions"},
+        tags = {"@accountlookupService"},
+        plugin = {"pretty", "html:target/cucumber_target.html", "json:target/cucumber.json", "junit:target/cucumber.xml","rerun:target/failed_scenarios.txt"})
 public class TestRunner extends AbstractTestNGCucumberTests {
 
 }
