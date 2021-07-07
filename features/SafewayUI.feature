@@ -7,3 +7,20 @@ Feature: To test the Safeway Website
     When I search for "Milk" on the home page
     And I select a random search result
     And I clear the cart
+
+  @Test
+  Scenario: To test search feature 2
+    Given that I open the home page of safeway website
+    And I signin to the website
+    When I search for "Milk" on the home page
+    And I select a random search result
+    And I clear the cart
+    
+  @Test2 @Test
+  Scenario: To test search feature 3
+    Given that I open the home page of safeway website
+    And I signin to the website
+    When I search for "Milk" on the home page
+    And I select a random search result
+    And I clear the cart
+       
