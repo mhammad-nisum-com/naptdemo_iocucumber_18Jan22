@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<n1:CreditCardReturnRequest xmlns:n1="http://services.wsgc.com/2014/Payment"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            version="1.0.0"
+                            xsi:schemaLocation="http://services.wsgc.com/2014/Payment credit-return.xsd">
+    <SystemContext>
+        <EnvironmentIdentifier>qa3</EnvironmentIdentifier>
+        <RegionIdentifier>USA</RegionIdentifier>
+        <SourceSystemIdentifier>EPS-Automation-EI</SourceSystemIdentifier>
+        <TransactionId>TID_RETURN_AMEX_TC_SUCCESS_XML1</TransactionId>
+        <TransactionTime>currentDateT09:30:47.0Z</TransactionTime>
+    </SystemContext>
+    <PaymentContext>
+        <Concept>concept</Concept>
+        <Channel>ECOM</Channel>
+        <Store>
+            <RegisterId>store</RegisterId>
+            <RegisterTransactionId>Store2</RegisterTransactionId>
+        </Store>
+    </PaymentContext>
+    <OrderContext omsOrderId="orderID">
+        <OrderTime>currentDateT21:03:18.254-08:00</OrderTime>
+    </OrderContext>
+    <ConsumerTransactionId>orderID@1621557468806</ConsumerTransactionId>
+    <Tender>
+        <Type>
+            <Code>CREDIT_CARD</Code>
+            <SubCode>subCode</SubCode>
+        </Type>
+        <Token expiration="authExpDateT00:00:00-07:00" isTemporary="false"
+               scheme="VFP_PAYMENT_QA3"
+               scope="TRANSACTION">token</Token>
+    </Tender>
+    <CardMetadata>
+        <CardHolderName>
+            <FullName>fullName</FullName>
+        </CardHolderName>
+        <CardExpiration>
+            <Year>year</Year>
+            <Month>month</Month>
+        </CardExpiration>
+    </CardMetadata>
+    <CurrencyCode>USD</CurrencyCode>
+    <ReturnAmount>authAmt</ReturnAmount>
+</n1:CreditCardReturnRequest>

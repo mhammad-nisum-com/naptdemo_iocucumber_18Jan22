@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:CreditCardAuthorizationRequest xmlns:ns2="http://services.wsgc.com/2014/Payment" version="1.0.0">
+    <SystemContext>
+        <EnvironmentIdentifier>qa3</EnvironmentIdentifier>
+        <RegionIdentifier>WEST</RegionIdentifier>
+        <SourceSystemIdentifier>pt1rgs</SourceSystemIdentifier>
+        <TransactionId>pt1rgs-7ac5c165284643ee90194a15cadde2ff</TransactionId>
+        <TransactionTime>currentDateT17:37:48.803-08:00</TransactionTime>
+        <TestingMode>false</TestingMode>
+    </SystemContext>
+    <PaymentContext>
+        <Concept>concept</Concept>
+        <Channel>ECOM</Channel>
+    </PaymentContext>
+    <OrderContext omsOrderId="orderID">
+        <OrderTime>currentDateT17:37:48.803-08:00</OrderTime>
+    </OrderContext>
+    <ConsumerTransactionId>orderID@1621557468806</ConsumerTransactionId>
+    <Tender>
+        <Type>
+            <Code>CREDIT_CARD</Code>
+            <SubCode>subCode</SubCode>
+        </Type>
+        <Token scheme="VFP_PAYMENT_QA3" isTemporary="false"
+               expiration="authExpDateT00:00:00-07:00">token</Token>
+    </Tender>
+    <CardMetadata>
+        <CardHolderName>
+            <FullName>fullName</FullName>
+        </CardHolderName>
+        <CardExpiration>
+            <Year>year</Year>
+            <Month>month</Month>
+        </CardExpiration>
+    </CardMetadata>
+    <IsCardNotPresent>false</IsCardNotPresent>
+
+    <BillingAddress>
+        <FullName>fullName</FullName>
+        <Address>
+            <AddressLine>address</AddressLine>
+            <AddressLine/>
+            <City>city</City>
+            <StateProvince>state</StateProvince>
+            <PostalCode>postalCode</PostalCode>
+        </Address>
+    </BillingAddress>
+    <CurrencyCode>USD</CurrencyCode>
+    <AuthorizationAmount>authAmt</AuthorizationAmount>
+    <Purpose>SALEOFGOODS</Purpose>
+</ns2:CreditCardAuthorizationRequest>

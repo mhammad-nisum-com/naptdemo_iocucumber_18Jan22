@@ -1,0 +1,43 @@
+<n1:CreditCardPostAuthorizationRequest xmlns:n1="http://services.wsgc.com/2014/Payment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0.0" xsi:schemaLocation="http://services.wsgc.com/2014/Payment credit-post-authorization.xsd">
+    <SystemContext>
+        <EnvironmentIdentifier>qa3</EnvironmentIdentifier>
+        <RegionIdentifier>USA</RegionIdentifier>
+        <SourceSystemIdentifier>EPS-Automation-EI</SourceSystemIdentifier>
+        <TransactionId>POSTAUTH_TC_1_RUN1</TransactionId>
+        <TransactionTime>currentDateT09:30:47.0Z</TransactionTime>
+    </SystemContext>
+    <PaymentContext>
+        <Concept>concept</Concept>
+        <Channel>ECOM</Channel>
+    </PaymentContext>
+    <OrderContext omsOrderId="orderID">
+        <OrderTime>currentDateT21:03:18.254-08:00</OrderTime>
+    </OrderContext>
+    <ConsumerTransactionId>orderID@1621557468806</ConsumerTransactionId>
+    <Tender>
+        <Type>
+            <Code>CREDIT_CARD</Code>
+            <SubCode>subCode</SubCode>
+        </Type>
+        <AccountNumber>accountNumber</AccountNumber>
+    </Tender>
+    <CardMetadata>
+        <CardHolderName>
+            <FullName>fullName</FullName>
+        </CardHolderName>
+        <CardExpiration>
+            <Year>year</Year>
+            <Month>month</Month>
+        </CardExpiration>
+    </CardMetadata>
+    <Authorization>
+        <Code>authCode</Code>
+        <Expiration>authExpDateT20:59:59-07:00</Expiration>
+        <CurrencyCode>USD</CurrencyCode>
+        <Amount>authAmt</Amount>
+        <Metadata type="VFP_CTROUTD">metadata1</Metadata>
+        <Metadata type="CHS_AUTH_CODE">metadata2</Metadata>
+    </Authorization>
+    <CurrencyCode>USD</CurrencyCode>
+    <CaptureAmount>authAmt</CaptureAmount>
+</n1:CreditCardPostAuthorizationRequest>

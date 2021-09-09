@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:TokenizationRequest xmlns:ns2="http://services.wsgc.com/2014/Payment" version="1.0.0">
+    <SystemContext>
+        <EnvironmentIdentifier>qa3</EnvironmentIdentifier>
+        <RegionIdentifier>WEST</RegionIdentifier>
+        <SourceSystemIdentifier>ws1qa</SourceSystemIdentifier>
+        <TransactionId>ws1uat-b317dfc5cd5c4c4cb7db06213d333624</TransactionId>
+        <TransactionTime>currentDateT15:37:24.038-07:00</TransactionTime>
+        <TestingMode>false</TestingMode>
+    </SystemContext>
+    <PaymentContext>
+        <Concept>concept</Concept>
+        <Channel>ECOM</Channel>
+    </PaymentContext>
+    <OrderContext omsOrderId="orderID">
+        <OrderTime>currentDateT08:37:24.037-07:00</OrderTime>
+    </OrderContext>
+    <Tender>
+        <Type>
+            <Code>CREDIT_CARD</Code>
+            <SubCode>subCode</SubCode>
+        </Type>
+        <AccountNumber>accountNumber</AccountNumber>
+    </Tender>
+    <CardMetadata>
+        <CardHolderName>
+            <FullName>fullName</FullName>
+        </CardHolderName>
+        <CardExpiration>
+            <Year>year</Year>
+            <Month>month</Month>
+        </CardExpiration>
+    </CardMetadata>
+</ns2:TokenizationRequest>

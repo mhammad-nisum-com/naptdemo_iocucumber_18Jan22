@@ -7,8 +7,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.path.json.JsonPath;
+import io.restassured.path.xml.XmlPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 
 public class TestSteps {
 	ApiEngine ae = new ApiEngine();
@@ -197,5 +203,163 @@ public class TestSteps {
 		String replaceSSN=ae.xmlFileToString(jsonPath);
 		String actualJsonBody=replaceSSN.replace("SSN",ssn);
 		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+	}
+
+	@When("^I read the XML from file (.*?) with input values into Dictionary Key \"([^\"]*)\"$")
+	public void i_read_the_XML_from_file_into_Dictionary_Key_input_values(String jsonFilePath,String dictionaryKey, Map<String, String> values) throws Throwable {
+		getCurrentDate();
+		getAuthExpDate();
+		values.get("Link By");
+		String cwd = System.getProperty("user.dir");
+		System.out.println("current directory "+cwd);
+		String jsonPath=cwd+jsonFilePath;
+		System.out.println("actual directory "+jsonPath);
+		String replaceValues=ae.xmlFileToString(jsonPath);
+		String concept=replaceValues.replace("concept",values.get("concept"));
+		String orderID=concept.replace("orderID",values.get("orderID"));
+		String subCode=orderID.replace("subCode",values.get("subCode"));
+		String accountNumber=subCode.replace("accountNumber",values.get("accountNumber"));
+		String fullName=accountNumber.replace("fullName",values.get("fullName"));
+		String year=fullName.replace("year",values.get("year"));
+		String currentDate=year.replace("currentDate",Globals.currentDate.get("currentDate"));
+		String actualJsonBody=currentDate.replace("month",values.get("month"));
+		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+
+
+	}
+
+	@Then("^I verify that the response code is \"([^\"]*)\" for the response with Dictionary Key \"([^\"]*)\" and get Token$")
+	public void i_verify_that_the_response_code_is_for_the_response_with_Dictionary_Key_getToken(String responseCode, String dictionaryKey) {
+		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
+		System.out.println("return body value" +rs.asString());
+		XmlPath responebody = new XmlPath(rs.asString());
+		String responsecode = responebody.getString("ns0:TokenizationResponse.Tender.Token.text()");
+		System.out.println("Token"+responsecode);
+		Globals.token.put("Token",responsecode);
+		Assert.assertEquals("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode, String.valueOf(rs.getStatusCode()), responseCode);
+
+	}
+
+	@When("^I make a \"([^\"]*)\" REST Call with URL \"([^\"]*)\" and Body from Dictionary Key \"([^\"]*)\" for xml$")
+	public void i_make_a_REST_Call_with_URL_and_Body_from_Dictionary_Key_forXml(String callType, String URI, String dictionaryKey) throws Throwable {
+		Response rs = ae.callAPI(callType, Globals.xmlHeaders, Globals.globalVariables.get(dictionaryKey).toString(), Globals.globalVariables.get("url").toString() + URI);
+		Globals.globalVariables.put(dictionaryKey, rs);
+	}
+
+	@When("^I read the XML from file (.*?) with input values into Dictionary Key \"([^\"]*)\" for Auth$")
+	public void i_read_the_XML_from_file_into_Dictionary_Key_input_values_auth(String jsonFilePath,String dictionaryKey, Map<String, String> values) throws Throwable {
+		String cwd = System.getProperty("user.dir");
+		System.out.println("current directory "+cwd);
+		String jsonPath=cwd+jsonFilePath;
+		System.out.println("actual directory "+jsonPath);
+		String replaceValues=ae.xmlFileToString(jsonPath);
+		String concept=replaceValues.replace("concept",values.get("concept"));
+		String orderID=concept.replace("orderID",values.get("orderID"));
+		String subCode=orderID.replace("subCode",values.get("subCode"));
+		String accountNumber=subCode.replace("accountNumber",values.get("accountNumber"));
+		String fullName=accountNumber.replace("fullName",values.get("fullName"));
+		String year=fullName.replace("year",values.get("year"));
+		String address=year.replace("address",values.get("address"));
+		String city=address.replace("city",values.get("city"));
+		String state=city.replace("state",values.get("state"));
+		String month=state.replace("month",values.get("month"));
+		String postalCode=month.replace("postalCode",values.get("postalCode"));
+		String currentDate=postalCode.replace("currentDate",Globals.currentDate.get("currentDate"));
+		String authExpDate=currentDate.replace("authExpDate",Globals.futureDate.get("futureDate"));
+		String token=authExpDate.replace("token",Globals.token.get("Token"));
+		String actualJsonBody=token.replace("authAmt",values.get("authAmt"));
+		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+	}
+	@When("^I read the XML from file (.*?) with input values into Dictionary Key \"([^\"]*)\" for capture")
+	public void i_read_the_XML_from_file_into_Dictionary_Key_input_values_capture(String jsonFilePath,String dictionaryKey, Map<String, String> values) throws Throwable {
+		String cwd = System.getProperty("user.dir");
+		System.out.println("current directory "+cwd);
+		String jsonPath=cwd+jsonFilePath;
+		System.out.println("actual directory "+jsonPath);
+		String replaceValues=ae.xmlFileToString(jsonPath);
+		String concept=replaceValues.replace("concept",values.get("concept"));
+		String orderID=concept.replace("orderID",values.get("orderID"));
+		String subCode=orderID.replace("subCode",values.get("subCode"));
+		String token=subCode.replace("token",Globals.token.get("Token"));
+		String currentDate=token.replace("currentDate",Globals.currentDate.get("currentDate"));
+		String authExpDate=currentDate.replace("authExpDate",Globals.futureDate.get("futureDate"));
+		String metadata1=authExpDate.replace("metadata1",Globals.metadata1.get("metadata1"));
+		String metadata2=metadata1.replace("metadata2",Globals.metadata2.get("metadata2"));
+		String actualJsonBody=metadata2.replace("authAmt",values.get("authAmt"));
+		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+	}
+
+	@Then("^I verify that the response code is \"([^\"]*)\" for the response with Dictionary Key \"([^\"]*)\" and get Auth Code and its MetaData")
+	public void i_verify_that_the_response_code_is_for_the_response_with_Dictionary_Key_getAuthCode(String responseCode, String dictionaryKey) {
+		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
+		System.out.println("return body value" +rs.asString());
+		XmlPath responebody = new XmlPath(rs.asString());
+		String authCode = responebody.getString("ns0:CreditCardAuthorizationResponse.Authorization.Code.text()");
+		String metadata1 = responebody.getString("ns0:CreditCardAuthorizationResponse.Authorization.Metadata[0].text()");
+		String metadata2 = responebody.getString("ns0:CreditCardAuthorizationResponse.Authorization.Metadata[1].text()");
+//		String metadata3 = responebody.getString("ns0:CreditCardAuthorizationResponse.Authorization.Metadata[3].text()");
+//		String metadata4 = responebody.getString("ns0:CreditCardAuthorizationResponse.Authorization.Metadata[4].text()");
+//		String metadata5 = responebody.getString("ns0:CreditCardAuthorizationResponse.Authorization.Metadata[5].text()");
+		System.out.println("AuthCode"+authCode);
+		System.out.println("metadata1"+metadata1);
+		System.out.println("metadata2"+metadata2);
+		Globals.authCode.put("authCode",authCode);
+		Globals.metadata1.put("metadata1",metadata1);
+		Globals.metadata2.put("metadata2",metadata2);
+//		Globals.metadata3.put("metadata3",metadata3);
+//		Globals.metadata4.put("metadata4",metadata4);
+//		Globals.metadata5.put("metadata5",metadata5);
+		Assert.assertEquals("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode, String.valueOf(rs.getStatusCode()), responseCode);
+
+	}
+
+	@When("^I read the XML from file (.*?) with input values into Dictionary Key \"([^\"]*)\" for postAuth")
+	public void i_read_the_XML_from_file_into_Dictionary_Key_input_values_postAuth(String jsonFilePath,String dictionaryKey, Map<String, String> values) throws Throwable {
+		String cwd = System.getProperty("user.dir");
+		System.out.println("current directory "+cwd);
+		String jsonPath=cwd+jsonFilePath;
+		System.out.println("actual directory "+jsonPath);
+		String replaceValues=ae.xmlFileToString(jsonPath);
+		String concept=replaceValues.replace("concept",values.get("concept"));
+		String orderID=concept.replace("orderID",values.get("orderID"));
+		String subCode=orderID.replace("subCode",values.get("subCode"));
+		String accountNumber=subCode.replace("accountNumber",values.get("accountNumber"));
+		String fullName=accountNumber.replace("fullName",values.get("fullName"));
+		String year=fullName.replace("year",values.get("year"));
+		String month=year.replace("month",values.get("month"));
+		String currentDate=month.replace("currentDate",Globals.currentDate.get("currentDate"));
+		String authExpDate=currentDate.replace("authExpDate",Globals.futureDate.get("futureDate"));
+		String authCode=authExpDate.replace("authCode",Globals.authCode.get("authCode"));
+		String metadata1=authCode.replace("metadata1",Globals.metadata1.get("metadata1"));
+		String metadata2=metadata1.replace("metadata2",Globals.metadata2.get("metadata2"));
+		String actualJsonBody=metadata2.replace("authAmt",values.get("authAmt"));
+		if (dictionaryKey.equalsIgnoreCase("Return"))
+		{
+			String token=metadata2.replace("token",Globals.token.get("Token"));
+			String actualJsonBody1=token.replace("authAmt",values.get("authAmt"));
+			Globals.globalVariables.put(dictionaryKey, actualJsonBody1);
+		}
+		else {
+			Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+		}
+	}
+
+	public void getCurrentDate()
+	{
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String getCurrDate=formatter.format(date);
+		Globals.currentDate.put("currentDate",getCurrDate);
+		System.out.println("Current Date "+formatter.format(date));
+	}
+	public void getAuthExpDate()
+	{
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_YEAR, 7);
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		Date futureDateTime = calendar.getTime();
+		String getfutureDateTime=formatter.format(futureDateTime);
+		Globals.futureDate.put("futureDate",getfutureDateTime);
+		System.out.println("Furture Date "+formatter.format(futureDateTime));
 	}
 }
