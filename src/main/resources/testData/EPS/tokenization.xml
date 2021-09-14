@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns2:TokenizationRequest xmlns:ns2="http://services.wsgc.com/2014/Payment" version="1.0.0">
     <SystemContext>
-        <EnvironmentIdentifier>qa3</EnvironmentIdentifier>
+        <EnvironmentIdentifier>environmentIdentifier</EnvironmentIdentifier>
         <RegionIdentifier>WEST</RegionIdentifier>
         <SourceSystemIdentifier>ws1qa</SourceSystemIdentifier>
         <TransactionId>ws1uat-b317dfc5cd5c4c4cb7db06213d333624</TransactionId>

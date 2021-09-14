@@ -4,7 +4,7 @@
                             version="1.0.0"
                             xsi:schemaLocation="http://services.wsgc.com/2014/Payment credit-return.xsd">
     <SystemContext>
-        <EnvironmentIdentifier>qa3</EnvironmentIdentifier>
+        <EnvironmentIdentifier>environmentIdentifier</EnvironmentIdentifier>
         <RegionIdentifier>USA</RegionIdentifier>
         <SourceSystemIdentifier>EPS-Automation-EI</SourceSystemIdentifier>
         <TransactionId>TID_RETURN_AMEX_TC_SUCCESS_XML1</TransactionId>
@@ -28,7 +28,7 @@
             <SubCode>subCode</SubCode>
         </Type>
         <Token expiration="authExpDateT00:00:00-07:00" isTemporary="false"
-               scheme="VFP_PAYMENT_QA3"
+               scheme="VFP_PAYMENT_environment"
                scope="TRANSACTION">token</Token>
     </Tender>
     <CardMetadata>

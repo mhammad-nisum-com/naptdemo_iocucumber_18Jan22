@@ -2,7 +2,7 @@
 Feature: AccountLookUp
 
   Background:
-    Given that param "base_url.url" is set to value "https://tibintdevsac5p:19092/paymentservice/v1"
+    Given that param "base_url.url" is set to value "https://tibinttstsac5p:19092/paymentservice/v1"
 
   @EPS_Automation
   Scenario Outline: Tokenization Authorization Capture PostAuthorization Returns
@@ -16,6 +16,7 @@ Feature: AccountLookUp
       | fullName      | <fullName>      |
       | year          | <year>          |
       | month         | <month>         |
+      | environment   | <environment>   |
     When I make a "POST" REST Call with URL "/tokenization" and Body from Dictionary Key "Tokenization" for xml
     Then I verify that the response code is "200" for the response with Dictionary Key "Tokenization" and get Token
 #*****************  Authorization *****************
@@ -33,6 +34,7 @@ Feature: AccountLookUp
       | state         | <state>         |
       | postalCode    | <postalCode>    |
       | authAmt       | <authAmt>       |
+      | environment   | <environment>   |
     When I make a "POST" REST Call with URL "/cc/authorization" and Body from Dictionary Key "Authorization" for xml
     Then I verify that the response code is "200" for the response with Dictionary Key "Authorization" and get Auth Code and its MetaData
 ##*****************   Capture  *****************
@@ -42,6 +44,7 @@ Feature: AccountLookUp
       | orderID       | <orderID>       |
       | subCode       | <subCode>       |
       | authAmt       | <authAmt>       |
+      | environment   | <environment>   |
     When I make a "POST" REST Call with URL "/cc/capture" and Body from Dictionary Key "Capture" for xml
     Then I verify that the response code is "200" for the response with Dictionary Key "Capture"
 ##*****************   PostAuthorization *****************
@@ -55,6 +58,7 @@ Feature: AccountLookUp
       | fullName      | <fullName>      |
       | year          | <year>          |
       | month         | <month>         |
+      | environment   | <environment>   |
     When I make a "POST" REST Call with URL "/cc/postauthorization" and Body from Dictionary Key "PostAuthorization" for xml
     Then I verify that the response code is "200" for the response with Dictionary Key "PostAuthorization"
       ##*****************   Return *****************
@@ -68,16 +72,17 @@ Feature: AccountLookUp
       | fullName      | <fullName>      |
       | year          | <year>          |
       | month         | <month>         |
+      | environment   | <environment>   |
     When I make a "POST" REST Call with URL "/cc/return" and Body from Dictionary Key "Return" for xml
     Then I verify that the response code is "200" for the response with Dictionary Key "Return"
 
     Examples:
-      | concept | orderID      | subCode     | accountNumber    | fullName            | year | month | address              | city             | state | postalCode | authAmt |
-      | WS      | 912292954069 | VISA/WSI/KR | 4688371306578143 | RIVA LESLIE         | 2025 | 12    | 1237 BALLINTON DR    | MELBOURNE        | FL    | 32940      | 37.63   |
-      | WS      | 912292924069 | VISA/WSI/WS | 4688371069112353 | NILDA	BRANDENBURG   | 2025 | 11    | 1555 DUSTY CANYON ST | HENDERSON        | NV    | 89052      | 50.63   |
-      | WS      | 912293924069 | VISA/WSI/PB | 4688371173084597 | ARCELIA CLARKE      | 2025 | 11    | 156 WINDSOR WAY      | MOSCOW           | PA    | 18444      | 60.63   |
-      | WS      | 912294924069 | VISA/WSI/WE | 4688371237074253 | DELORES DAY         | 2025 | 12    | 1426 CITY ST         | UTICA            | NY    | 13502      | 70.63   |
-      | WE      | 912295954069 | PLCC/WSI/KR | 6004301800448008 | PERCY PAINTER       | 2026 | 01    | 1216 N 14TH ST       | EAST SAINT LOUIS | IL    | 62205      | 80.63   |
-      | WE      | 912296924069 | PLCC/WSI/PB | 6004301277585696 | ADRIENNE FILBY      | 2025 | 10    | 1005 W 23RD ST       | LOS ANGELES      | CA    | 90007      | 50.63   |
-      | WE      | 912297924069 | PLCC/WSI/WE | 6004301156258746 | DEANDRA LACON       | 2026 | 01    | 172 HEMLOCK ST       | MANCHESTER       | NH    | 03104      | 60.63   |
-      | WE      | 912298924069 | PLCC/WSI/WS | 6004301066753026 | FREDERIC KETTLEWELL | 2025 | 10    | 12753 YORK DR        | BATON ROUGE      | LA    | 70818      | 70.63   |
+      | environment | concept | orderID      | subCode     | accountNumber    | fullName            | year | month | address              | city             | state | postalCode | authAmt |
+      | QA2         | WS      | 912292965069 | VISA/WSI/KR | 4688371306578143 | RIVA LESLIE         | 2025 | 12    | 1237 BALLINTON DR    | MELBOURNE        | FL    | 32940      | 47.63   |
+      | QA2         | WS      | 912292965070 | VISA/WSI/WS | 4688371069112353 | NILDA	BRANDENBURG | 2025 | 11    | 1555 DUSTY CANYON ST | HENDERSON        | NV    | 89052      | 60.12   |
+      | QA2         | WS      | 912292965071 | VISA/WSI/PB | 4688371173084597 | ARCELIA CLARKE      | 2025 | 11    | 156 WINDSOR WAY      | MOSCOW           | PA    | 18444      | 70.23   |
+      | QA2         | WS      | 912292965072 | VISA/WSI/WE | 4688371237074253 | DELORES DAY         | 2025 | 12    | 1426 CITY ST         | UTICA            | NY    | 13502      | 80.34   |
+      | QA2         | WE      | 912292965073 | PLCC/WSI/KR | 6004301800448008 | PERCY PAINTER       | 2026 | 01    | 1216 N 14TH ST       | EAST SAINT LOUIS | IL    | 62205      | 79.45   |
+      | QA2         | WE      | 912292965074 | PLCC/WSI/PB | 6004301277585696 | ADRIENNE FILBY      | 2025 | 10    | 1005 W 23RD ST       | LOS ANGELES      | CA    | 90007      | 50.44   |
+      | QA2         | WE      | 912292965075 | PLCC/WSI/WE | 6004301156258746 | DEANDRA LACON       | 2026 | 01    | 172 HEMLOCK ST       | MANCHESTER       | NH    | 03104      | 60.76   |
+      | QA2         | WE      | 912292965076 | PLCC/WSI/WS | 6004301066753026 | FREDERIC KETTLEWELL | 2025 | 10    | 12753 YORK DR        | BATON ROUGE      | LA    | 70818      | 70.78   |

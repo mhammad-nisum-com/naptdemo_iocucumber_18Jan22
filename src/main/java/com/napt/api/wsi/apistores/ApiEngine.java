@@ -168,7 +168,7 @@ public class ApiEngine {
 		}
 		String xml2String = sb.toString();
 		System.out.println("XML to String using BufferedReader : ");
-		System.out.println(xml2String);
+//		System.out.println(xml2String);
 		bufReader.close();
 		return xml2String;
 	}

@@ -1,6 +1,6 @@
 <n1:CreditCardPostAuthorizationRequest xmlns:n1="http://services.wsgc.com/2014/Payment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0.0" xsi:schemaLocation="http://services.wsgc.com/2014/Payment credit-post-authorization.xsd">
     <SystemContext>
-        <EnvironmentIdentifier>qa3</EnvironmentIdentifier>
+        <EnvironmentIdentifier>environmentIdentifier</EnvironmentIdentifier>
         <RegionIdentifier>USA</RegionIdentifier>
         <SourceSystemIdentifier>EPS-Automation-EI</SourceSystemIdentifier>
         <TransactionId>POSTAUTH_TC_1_RUN1</TransactionId>

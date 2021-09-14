@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns2:CreditCardAuthorizationRequest xmlns:ns2="http://services.wsgc.com/2014/Payment" version="1.0.0">
     <SystemContext>
-        <EnvironmentIdentifier>qa3</EnvironmentIdentifier>
+        <EnvironmentIdentifier>envIdentifier</EnvironmentIdentifier>
         <RegionIdentifier>WEST</RegionIdentifier>
         <SourceSystemIdentifier>pt1rgs</SourceSystemIdentifier>
         <TransactionId>pt1rgs-7ac5c165284643ee90194a15cadde2ff</TransactionId>
@@ -21,7 +21,7 @@
             <Code>CREDIT_CARD</Code>
             <SubCode>subCode</SubCode>
         </Type>
-        <Token scheme="VFP_PAYMENT_QA3" isTemporary="false"
+        <Token scheme="VFP_PAYMENT_environment" isTemporary="false"
                expiration="authExpDateT00:00:00-07:00">token</Token>
     </Tender>
     <CardMetadata>

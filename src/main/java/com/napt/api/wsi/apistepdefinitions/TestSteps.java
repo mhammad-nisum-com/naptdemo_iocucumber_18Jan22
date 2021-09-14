@@ -65,7 +65,7 @@ public class TestSteps {
 	@Then("^I verify that the response code is \"([^\"]*)\" for the response with Dictionary Key \"([^\"]*)\"$")
 	public void i_verify_that_the_response_code_is_for_the_response_with_Dictionary_Key(String responseCode, String dictionaryKey) {
 		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
-		System.out.println("return body value \n" +rs.asString());
+		System.out.println("response value" +rs.asString());
 		Assert.assertEquals("Actual Response Code is " + rs.getStatusCode() + " vs Expected Response Code" + responseCode, String.valueOf(rs.getStatusCode()), responseCode);
 
 	}
@@ -221,9 +221,12 @@ public class TestSteps {
 		String accountNumber=subCode.replace("accountNumber",values.get("accountNumber"));
 		String fullName=accountNumber.replace("fullName",values.get("fullName"));
 		String year=fullName.replace("year",values.get("year"));
-		String currentDate=year.replace("currentDate",Globals.currentDate.get("currentDate"));
+		String envId=values.get("environment").toLowerCase();
+		String envIdentifier=year.replace("environmentIdentifier",envId);
+		String currentDate=envIdentifier.replace("currentDate",Globals.currentDate.get("currentDate"));
 		String actualJsonBody=currentDate.replace("month",values.get("month"));
 		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+		System.out.println("Request body "+actualJsonBody);
 
 
 	}
@@ -231,7 +234,7 @@ public class TestSteps {
 	@Then("^I verify that the response code is \"([^\"]*)\" for the response with Dictionary Key \"([^\"]*)\" and get Token$")
 	public void i_verify_that_the_response_code_is_for_the_response_with_Dictionary_Key_getToken(String responseCode, String dictionaryKey) {
 		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
-		System.out.println("return body value" +rs.asString());
+		System.out.println("response value" +rs.asString());
 		XmlPath responebody = new XmlPath(rs.asString());
 		String responsecode = responebody.getString("ns0:TokenizationResponse.Tender.Token.text()");
 		System.out.println("Token"+responsecode);
@@ -267,8 +270,12 @@ public class TestSteps {
 		String currentDate=postalCode.replace("currentDate",Globals.currentDate.get("currentDate"));
 		String authExpDate=currentDate.replace("authExpDate",Globals.futureDate.get("futureDate"));
 		String token=authExpDate.replace("token",Globals.token.get("Token"));
-		String actualJsonBody=token.replace("authAmt",values.get("authAmt"));
+		String env=token.replace("environment",values.get("environment"));
+		String envId=values.get("environment").toLowerCase();
+		String envIdentifier=env.replace("envIdentifier",envId);
+		String actualJsonBody=envIdentifier.replace("authAmt",values.get("authAmt"));
 		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+		System.out.println("Request body "+actualJsonBody);
 	}
 	@When("^I read the XML from file (.*?) with input values into Dictionary Key \"([^\"]*)\" for capture")
 	public void i_read_the_XML_from_file_into_Dictionary_Key_input_values_capture(String jsonFilePath,String dictionaryKey, Map<String, String> values) throws Throwable {
@@ -285,14 +292,18 @@ public class TestSteps {
 		String authExpDate=currentDate.replace("authExpDate",Globals.futureDate.get("futureDate"));
 		String metadata1=authExpDate.replace("metadata1",Globals.metadata1.get("metadata1"));
 		String metadata2=metadata1.replace("metadata2",Globals.metadata2.get("metadata2"));
-		String actualJsonBody=metadata2.replace("authAmt",values.get("authAmt"));
+		String env=metadata2.replace("environment",values.get("environment"));
+		String envId=values.get("environment").toLowerCase();
+		String envIdentifier=env.replace("envIdentifier",envId);
+		String actualJsonBody=envIdentifier.replace("authAmt",values.get("authAmt"));
 		Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+		System.out.println("Request body "+actualJsonBody);
 	}
 
 	@Then("^I verify that the response code is \"([^\"]*)\" for the response with Dictionary Key \"([^\"]*)\" and get Auth Code and its MetaData")
 	public void i_verify_that_the_response_code_is_for_the_response_with_Dictionary_Key_getAuthCode(String responseCode, String dictionaryKey) {
 		Response rs = (Response) Globals.globalVariables.get(dictionaryKey);
-		System.out.println("return body value" +rs.asString());
+		System.out.println("response value" +rs.asString());
 		XmlPath responebody = new XmlPath(rs.asString());
 		String authCode = responebody.getString("ns0:CreditCardAuthorizationResponse.Authorization.Code.text()");
 		String metadata1 = responebody.getString("ns0:CreditCardAuthorizationResponse.Authorization.Metadata[0].text()");
@@ -332,15 +343,21 @@ public class TestSteps {
 		String authCode=authExpDate.replace("authCode",Globals.authCode.get("authCode"));
 		String metadata1=authCode.replace("metadata1",Globals.metadata1.get("metadata1"));
 		String metadata2=metadata1.replace("metadata2",Globals.metadata2.get("metadata2"));
-		String actualJsonBody=metadata2.replace("authAmt",values.get("authAmt"));
+		String env=metadata2.replace("environment",values.get("environment"));
+		String actualJsonBody=env.replace("authAmt",values.get("authAmt"));
 		if (dictionaryKey.equalsIgnoreCase("Return"))
 		{
-			String token=metadata2.replace("token",Globals.token.get("Token"));
+			String env1=metadata2.replace("environment",values.get("environment"));
+			String envId1=values.get("environment").toLowerCase();
+			String envIdentifier1=env1.replace("envIdentifier",envId1);
+			String token=envIdentifier1.replace("token",Globals.token.get("Token"));
 			String actualJsonBody1=token.replace("authAmt",values.get("authAmt"));
 			Globals.globalVariables.put(dictionaryKey, actualJsonBody1);
+			System.out.println("Request body "+actualJsonBody1);
 		}
 		else {
 			Globals.globalVariables.put(dictionaryKey, actualJsonBody);
+			System.out.println("Request body "+actualJsonBody);
 		}
 	}
 

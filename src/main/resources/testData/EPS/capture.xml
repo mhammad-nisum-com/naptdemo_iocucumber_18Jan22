@@ -5,7 +5,7 @@
                                     xsi:schemaLocation="http://services.wsgc.com/2014/Payment credit-capture.xsd">
 
     <SystemContext>
-        <EnvironmentIdentifier>qa3</EnvironmentIdentifier>
+        <EnvironmentIdentifier>environmentIdentifier</EnvironmentIdentifier>
         <RegionIdentifier>USA</RegionIdentifier>
         <SourceSystemIdentifier>ECOM-HOSTNAME</SourceSystemIdentifier>
         <TransactionId>TID_AMEX_TC_CAPTURED</TransactionId>
@@ -24,7 +24,7 @@
             <Code>CREDIT_CARD</Code>
             <SubCode>subCode</SubCode>
         </Type>
-        <Token scheme="VFP_PAYMENT_QA3" isTemporary="false"
+        <Token scheme="VFP_PAYMENT_environment" isTemporary="false"
                expiration="authExpDateT00:00:00-07:00">token</Token>
     </Tender>
     <Authorization>
