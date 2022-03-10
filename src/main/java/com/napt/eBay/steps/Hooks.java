@@ -1,4 +1,4 @@
-package com.napt.api.wsi.steps;
+package com.napt.eBay.steps;
 
 import com.napt.framework.ui.runner.EnvVariables;
 import com.napt.framework.ui.runner.WebDriverManager;
@@ -9,10 +9,10 @@ import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import java.net.MalformedURLException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Hooks Class
@@ -29,6 +29,7 @@ public class Hooks {
             if (!StepUtils.MEW()) {
                 WebDriverManager.getDriver().manage().window().maximize();
             }
+            WebDriverManager.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         }
     }
 

@@ -32,7 +32,7 @@
                             <groupId>com.napt.api</groupId>
                             <artifactId>API_Framework</artifactId>
                             <version>1.0</version>
-                            <file>libs/API_Framework.jar</file>
+                            <file>/Users/mparekh/.m2/repository/com/napt/api/API_Framework/1.0/API_Framework-1.0.jar</file>
                         </configuration>
                     </execution>
                     <execution>
@@ -45,7 +45,7 @@
                             <groupId>com.napt.kibana</groupId>
                             <artifactId>Kibana</artifactId>
                             <version>1.0</version>
-                            <file>libs/Kibana.jar</file>
+                            <file>/Users/mparekh/.m2/repository/com/napt/Kibana/Kibana/1.0/Kibana-1.0.jar</file>
                         </configuration>
                     </execution>
                     <execution>
@@ -58,7 +58,7 @@
                             <groupId>com.napt.ui</groupId>
                             <artifactId>UI_Framework</artifactId>
                             <version>1.0</version>
-                            <file>libs/UI_Framework.jar</file>
+                            <file>/Users/mparekh/.m2/repository/com/napt/ui/UI_Framework/1.0/UI_Framework-1.0.jar</file>
                         </configuration>
                     </execution>
                 </executions>
@@ -75,7 +75,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>target/classes/com/napt/ui/gap</outputDirectory>
+                            <outputDirectory>target/classes/com/napt/ui/safeway</outputDirectory>
                             <encoding>UTF-8</encoding>
                             <resources>
                                 <resource>
@@ -89,80 +89,82 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.0.0</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>Credit Card RePlatform Reports</projectName>
-                            <outputDirectory>${project.build.directory}</outputDirectory>
-                            <inputDirectory>${project.build.directory}</inputDirectory>
-                            <jsonFiles>
-                                <param>**/cucumber*.json</param>
-                            </jsonFiles>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>4.4.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>7.4.1</version>
         </dependency>
-    <dependency>
-        <groupId>io.cucumber</groupId>
-        <artifactId>cucumber-testng</artifactId>
-        <version>4.8.0</version>
-    </dependency>
-    <dependency>
-        <groupId>io.cucumber</groupId>
-        <artifactId>cucumber-java</artifactId>
-        <version>4.8.0</version>
-    </dependency>
         <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>3.141.59</version>
-    </dependency>
-
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>7.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>4.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>4.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20171018</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-
-    <dependency>
-        <groupId>com.napt.api</groupId>
-        <artifactId>API_Framework</artifactId>
-        <version>1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>com.napt.Kibana</groupId>
-        <artifactId>Kibana</artifactId>
-        <version>1.0</version>
-    </dependency>
-    <dependency>
-        <groupId>com.napt.ui</groupId>
-        <artifactId>UI_Framework</artifactId>
-        <version>1.0</version>
-    </dependency>
         <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20201115</version>
+            <groupId>com.napt.api</groupId>
+            <artifactId>API_Framework</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.napt.Kibana</groupId>
+            <artifactId>Kibana</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.napt.ui</groupId>
+            <artifactId>UI_Framework</artifactId>
+            <version>1.0</version>
         </dependency>
 
-    </dependencies>
+</dependencies>
+    <dependencyManagement>
+<dependencies>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.12.1</version>
+    </dependency>
+</dependencies>
+    </dependencyManagement>
 </project>
