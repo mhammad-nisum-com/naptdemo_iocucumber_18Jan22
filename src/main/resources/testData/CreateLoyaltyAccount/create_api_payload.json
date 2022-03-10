@@ -1,0 +1,81 @@
+{
+  "systemContext": {
+    "environmentIdentifier": "prdrk",
+    "regionIdentifier": "west",
+    "sourceSystemIdentifier": "loyrck-vccn001.wsgc.com",
+    "transactionId": "2020-10-20T09:34:49.181Z",
+    "transactionTime": "2020-10-20T09:34:49.181Z",
+    "testingMode": false
+  },
+  "enrollmentDetails": {
+    "enrollmentTime": "2017-01-11T12:00:00.000+00:00",
+    "concept": "PB",
+    "channel": "ecommerce"
+  },
+  "accountState": {
+    "statusCode": "Active",
+    "statusInfo": "Confirmed",
+    "canLogin": true,
+    "canEarn": true,
+    "canIssueCertificates": true,
+    "openTime": "2020-10-17T05:00:00Z",
+    "lastActivityTime": "2020-10-17T10:10:49Z"
+  },
+  "cardDetails": {
+    "partnerIds": [
+      {
+        "partnerName": "COF",
+        "accountId": "{partnerAccountId}",
+        "active": true
+      }
+    ],
+    "cardType": "PLCC",
+    "cardDescription": "Williams Sonoma Reward Card",
+    "cardAccountType": "PL",
+    "cardProgramCode": "671",
+    "cardNumber": "1234",
+    "cardHolders": [
+      {
+        "cardHolderType": "PRIMARY",
+        "memberDetails": {
+          "phone": "+19229119222",
+          "email": "wsi_cardAccount@gmail.com",
+          "name": {
+            "firstName": "John",
+            "lastName": "smith"
+          },
+          "address": {
+            "address1": "35 Main St",
+            "address2": "Apt 1 ",
+            "city": "New York",
+            "stateProvince": "NY",
+            "postalCode": "10004",
+            "country": "USA"
+          },
+          "birthday": "--01-01"
+        }
+      },
+      {
+        "cardHolderType": "AUTHORIZED_BUYER",
+        "memberDetails": {
+          "phone": "+19229119222",
+          "email": "wsi_cardAccount1@gmail.com",
+          "name": {
+            "firstName": "John",
+            "lastName": "Smith"
+          },
+          "address": {
+            "address1": "35 Main St",
+            "address2": "Apt 1 ",
+            "city": "New York",
+            "stateProvince": "NY",
+            "postalCode": "10004",
+            "country": "USA"
+          },
+          "birthday": "--10-10"
+        }
+      }
+    ]
+  }
+}
+

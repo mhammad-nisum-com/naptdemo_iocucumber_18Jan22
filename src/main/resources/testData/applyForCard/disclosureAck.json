@@ -1,0 +1,12 @@
+{
+  "sessionId": "SessionID",
+  "actionData": {
+    "layoutId": "string",
+    "field": [
+      {
+        "fieldId": "Do you want to confirm the form",
+        "value": "yes"
+      }
+    ]
+  }
+}

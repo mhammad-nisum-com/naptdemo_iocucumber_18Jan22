@@ -1,9 +1,6 @@
 {
   "verify_page": "xpath, //span[@class='navigation_page'] || xpath, //h1[@class='page-heading']",
-  "my_account_heading": "xpath, //h1[@class='page-heading']",
-  "oh_details_link": "xpath, //span[contains(text(),'Order history and details')]",
-  "my_credit_slips_link": "xpath, //span[contains(text(),'My credit slips')]",
-  "my_addresses_link": "xpath, //span[contains(text(),'My addresses')]",
-  "my_personal_information_link": "xpath, //span[contains(text(),'My personal information')]",
-  "my_wishlists_link": "xpath, //span[contains(text(),'My wishlists')]"
+  "myAccount_menu": "xpath,//*[@class=\"user-account-link\"] || xpath,//li[@id='my-account-link']/a",
+  "myAccount_applynow": "xpath,//*[contains(@class,'nav-myaccount')]//div//ul//li[@class=\"cc-apply-now\"]",
+  "myAccount_signin": "xpath,//*[@class=\"nav-columns nav-myaccount equalizeHeights hoverFadeTarget\"]//div//ul//li[@class=\"sign-in\"] || xpath,//li[@class='sign-in c-header-dropdown-menu__item']/a || xpath,//a[@class='btn-sign-in']"
 }
