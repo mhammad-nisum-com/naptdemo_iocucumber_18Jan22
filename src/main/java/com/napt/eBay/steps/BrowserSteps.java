@@ -22,7 +22,8 @@ public class BrowserSteps{
     WebDriverWait wait = new WebDriverWait(driver, 30);
     @Given("^that I navigate to eBay home$")
     public void iNavigateToeBayHome() throws IOException, ParseException {
-        driver.get(System.getenv("WebURL"));
+        //driver.get(System.getenv("WebURL"));
+        driver.get("https://www.ebay.com");
         Assert.assertTrue(Element.findElement("ebayhome.eBayLogo")!=null);
     }
 
