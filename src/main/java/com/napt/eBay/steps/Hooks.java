@@ -62,8 +62,8 @@ public class Hooks {
     @After
     public void afterScenario(Scenario sc) {
         if (!EnvVariables.getEnvVariables().get("testType").toString().toLowerCase().equalsIgnoreCase("API")) {
-            screenshotCapture(sc);
             try {
+                screenshotCapture(sc);
                 WebDriverManager.destroyDriver();
                 log.info("Web driver quit successful");
             } catch (WebDriverException e) {
