@@ -12,7 +12,6 @@ And I verify that the json path "$.data[?(@.email=='michael.lawson@reqres.in')].
 And I verify that the json path "$.data..email" for node array "data >> node" contains "6" number of nodes for the response with Dictionary Key "GetUsers"
 And I add the value at json path "$.data[?(@.email=='michael.lawson@reqres.in')].email" from response with Dictionary Key "GetUsers" and store it in Dictionary Key "email"
 
-
 @post @api
 Scenario: POST Scenario
 When I read the JSON from file "src/main/resources/testData/postreqres.json" into Dictionary Key "PostUsers"
