@@ -27,8 +27,3 @@ Scenario: eBay add to cart feature test with invalid input
 Given that I navigate to eBay home
 When I search for "asdfasdfsdf"
 Then I get the search results
-When I select an item
-Then I see the item details page and add item to cart
-Then I view the cart
-
-    

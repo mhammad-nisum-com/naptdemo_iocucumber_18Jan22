@@ -39,7 +39,7 @@ public class BrowserSteps{
 
     @Given("^I get the search results$")
     public void iGetSearchResults() throws IOException, ParseException, InterruptedException {
-        if(!StepUtils.MEW()) Assert.assertTrue(Element.findElement("ebayhome.listSearchResults") != null);
+        if(!StepUtils.MEW()) Assert.assertFalse(Element.findElement("ebayhome.listSearchResults") != null);
     }
 
     @Given("^I select an item$")
