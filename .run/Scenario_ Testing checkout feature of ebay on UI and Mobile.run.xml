@@ -12,7 +12,7 @@
       <env name="experience" value="desktop" />
     </envs>
     <option name="FILE_PATH" value="$PROJECT_DIR$/features/ebay/ebayUIAndMobile.feature" />
-    <option name="GLUE" value="com.napt.framework.api.Report com.napt.eBay.steps" />
+    <option name="GLUE" value="com.napt.framework.api.Report com.napt.ebay.steps" />
     <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
     <module name="naptdemo" />
     <option name="NAME_FILTER" value="^Testing checkout feature of ebay on UI and Mobile$" />

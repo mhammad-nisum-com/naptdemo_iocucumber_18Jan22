@@ -1,8 +1,9 @@
-package com.napt.eBay.steps;
+package com.nisum.ebay.steps;
 
 
 import com.napt.framework.ui.interactions.Element;
 import com.napt.framework.ui.interactions.Navigate;
+import com.napt.framework.ui.runner.EnvVariables;
 import com.napt.framework.ui.runner.WebDriverManager;
 import com.napt.framework.ui.utils.StepUtils;
 import io.cucumber.java.en.Given;
@@ -19,10 +20,12 @@ import java.util.Set;
 public class BrowserSteps{
     private static final Logger log = Logger.getLogger(BrowserSteps.class);
     WebDriver driver = WebDriverManager.getDriver();
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    Integer shortWaitSeconds = Integer.parseInt(EnvVariables.getEnvVariables().get("explicitShortWait")!=null?EnvVariables.getEnvVariables().get("explicitShortWait"):"10");
+    Integer longWaitSeconds = Integer.parseInt(EnvVariables.getEnvVariables().get("explicitLongWait")!=null?EnvVariables.getEnvVariables().get("explicitLongWait"):"30");
+    WebDriverWait waitShort = new WebDriverWait(driver, shortWaitSeconds);
+    WebDriverWait waitLong = new WebDriverWait(driver, longWaitSeconds);
     @Given("^that I navigate to eBay home$")
     public void iNavigateToeBayHome() throws IOException, ParseException {
-        //driver.get(System.getenv("WebURL"));
         driver.get("https://www.ebay.com");
         Assert.assertTrue(Element.findElement("ebayhome.eBayLogo")!=null);
     }
@@ -43,12 +46,10 @@ public class BrowserSteps{
     public void iSelectRandomItem() throws IOException, ParseException, InterruptedException {
         if(StepUtils.MEW()){
             Navigate.scrollPage(0,500);
-
-            Element.getRandomElement("ebayhome.listSearchResults").click();
+            waitShort.until(ExpectedConditions.visibilityOf(Element.getRandomElement("ebayhome.listSearchResults"))).click();
         }else{
             Thread.sleep(2000);
-            Element.getRandomElement("ebayhome.listSearchResults").click();
-
+            waitShort.until(ExpectedConditions.visibilityOf(Element.getRandomElement("ebayhome.listSearchResults"))).click();
         }
     }
 
@@ -56,7 +57,7 @@ public class BrowserSteps{
     @Given("^I see the item details page and add item to cart$")
     public void iSeeItemDetailsPage() throws IOException, ParseException, InterruptedException {
         if (StepUtils.MEW()) {
-            wait.until(ExpectedConditions.presenceOfElementLocated(Element.element("ebayItemDetails.itemName")));
+            waitShort.until(ExpectedConditions.presenceOfElementLocated(Element.element("ebayItemDetails.itemName")));
             itemDescription = Element.findElement("ebayItemDetails.itemName").getText();
         } else {
             Set<String> windowHandles = driver.getWindowHandles();
@@ -80,7 +81,7 @@ public class BrowserSteps{
         @Given("^I view the cart$")
         public void iViewCart() throws IOException, ParseException, InterruptedException {
             Element.findElement("ebayhome.buttonCart").click();
-            wait.until(ExpectedConditions.presenceOfElementLocated(Element.element("ebaycart.itemInCart")));
+            waitShort.until(ExpectedConditions.presenceOfElementLocated(Element.element("ebaycart.itemInCart")));
             Assert.assertTrue(Element.findElement("ebaycart.itemInCart").getText().toLowerCase().substring(1,30).equalsIgnoreCase(itemDescription.toLowerCase().substring(1,30)));
         }
     }
