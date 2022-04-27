@@ -26,4 +26,4 @@ Then I view the cart
 Scenario: eBay add to cart feature test with invalid input
 Given that I navigate to eBay home
 When I search for "asdfasdfsdf"
-Then I get the search results
+Then I should not see search results
