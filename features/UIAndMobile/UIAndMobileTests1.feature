@@ -1,4 +1,4 @@
-Feature: To test checkout feature of eBay on Mobile and UI
+Feature: FEATURE1 To test checkout feature of Sample Site on Mobile and UI
 
     @DemoSite
     Scenario Outline: FEATURE1 Verify checkout flow of SauceDemo Site
