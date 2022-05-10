@@ -1,4 +1,4 @@
-package com.nisum.ebay.steps;
+package com.nisum;
 
 import com.napt.framework.ui.runner.EnvVariables;
 import com.napt.framework.ui.runner.WebDriverManager;
@@ -40,7 +40,7 @@ public class Hooks {
      * @throws ClassCastException, WebDriverException
      */
     private void screenshotCapture(Scenario sc) {
-        if (sc.isFailed()) {
+        if (sc.isFailed() && !EnvVariables.getEnvVariables().get("testType").toString().toLowerCase().equalsIgnoreCase("API")) {
             log.info("sc is Failed: " + sc.isFailed());
             if (WebDriverManager.getDriver() instanceof TakesScreenshot) {
                 TakesScreenshot takeScreenshot = (TakesScreenshot) WebDriverManager.getDriver();
