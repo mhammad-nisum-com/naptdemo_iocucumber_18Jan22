@@ -4,26 +4,35 @@ import com.napt.framework.ui.interactions.Element;
 import com.napt.framework.ui.runner.EnvVariables;
 import com.napt.framework.ui.runner.WebDriverManager;
 import com.napt.framework.ui.utils.StepUtils;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Set;
 
 public class DemoSite {
 
-    WebDriver driver = WebDriverManager.getDriver();
-    Integer shortWaitSeconds = Integer.parseInt(EnvVariables.getEnvVariables().get("explicitShortWait")!=null?EnvVariables.getEnvVariables().get("explicitShortWait"):"10");
-    Integer longWaitSeconds = Integer.parseInt(EnvVariables.getEnvVariables().get("explicitLongWait")!=null?EnvVariables.getEnvVariables().get("explicitLongWait"):"30");
-
+    WebDriver       driver              = WebDriverManager.getDriver();
+    Integer         shortWaitSeconds    = Integer.parseInt(EnvVariables.getEnvVariables().get("explicitShortWait")!=null?EnvVariables.getEnvVariables().get("explicitShortWait"):"10");
+    Integer         longWaitSeconds     = Integer.parseInt(EnvVariables.getEnvVariables().get("explicitLongWait")!=null?EnvVariables.getEnvVariables().get("explicitLongWait"):"30");
+    AppiumDriver    appiumDriver        = (AppiumDriver<MobileElement>) driver;
 
     WebDriverWait shortWait = new WebDriverWait(driver,shortWaitSeconds);
     WebDriverWait longWait = new WebDriverWait(driver,longWaitSeconds);
@@ -106,10 +115,16 @@ public class DemoSite {
 
 
     @When("I login as {string}")
-    public void iLoginToSauceDemo(String user){
-        Element.findElement("saucehome.textBox_userId").sendKeys(user);
-        Element.findElement("saucehome.textBox_password").sendKeys("secret_sauce");
-        Element.findElement("saucehome.button_login").click();
+    public void iLoginToSauceDemo(String user) throws InterruptedException {
+        Thread.sleep(2000);
+        List<MobileElement> elements = appiumDriver.findElements(By.xpath("//*"));
+        for(WebElement e: elements){
+            System.out.println(e.getAttribute("id"));
+        }
+        appiumDriver.findElement(By.xpath("//*[@id='user-name']")).sendKeys(user);
+        appiumDriver.findElement(By.xpath("//*[@id='password']")).sendKeys("secret_sauce");
+        appiumDriver.findElement(By.xpath("//*[@id='login-button']")).click();
+
     }
 
     @Then("I verify that I have logged in successfully")
@@ -209,6 +224,40 @@ public class DemoSite {
     public void iVerifyOrderPlacedSuccessfully(){
         Assert.assertTrue(StepUtils.onPage("checkoutcomplete"));
         Assert.assertTrue(Element.findElement("checkoutcomplete.thankyou").isDisplayed());
+    }
+
+    @When("I switch to the {string} context")
+    public void iswitchContext(String contextName){
+        Set<String> contexts = appiumDriver.getContextHandles();
+        for(String s:contexts){
+            System.out.println(s);
+        }
+        System.out.println("Setting context to " + contextName);
+        appiumDriver.context(contextName);
+    }
+
+    @When("I type the url {string}")
+    public void iTypeURL(String webURL){
+        By bySearchBar = By.id("com.android.chrome:id/search_box_text");
+        WebElement weSearchBar = driver.findElement(bySearchBar);
+        weSearchBar.click();
+
+        By byURLBar = By.id("com.android.chrome:id/url_bar");
+        WebElement weURLBar = driver.findElement(byURLBar);
+        weURLBar.sendKeys(webURL);
+        ((AndroidDriver)driver).pressKey(new KeyEvent().withKey(AndroidKey.ENTER));
+    }
+
+    @When("I click {string} button of browser")
+    public void iclickButton(String browserAction){
+        if(browserAction.equalsIgnoreCase("back")){
+            ((AndroidDriver)appiumDriver).pressKey(new KeyEvent(AndroidKey.BACK));
+        }
+
+        By byMenuButton = By.id("com.android.chrome:id/menu_button");
+        WebElement weMenuButton = driver.findElement(byMenuButton);
+
+
     }
 
 }
