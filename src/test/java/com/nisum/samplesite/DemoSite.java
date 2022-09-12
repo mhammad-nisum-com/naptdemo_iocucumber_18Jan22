@@ -24,7 +24,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
 import java.util.Set;
 
 public class DemoSite {
@@ -32,7 +31,20 @@ public class DemoSite {
     WebDriver       driver              = WebDriverManager.getDriver();
     Integer         shortWaitSeconds    = Integer.parseInt(EnvVariables.getEnvVariables().get("explicitShortWait")!=null?EnvVariables.getEnvVariables().get("explicitShortWait"):"10");
     Integer         longWaitSeconds     = Integer.parseInt(EnvVariables.getEnvVariables().get("explicitLongWait")!=null?EnvVariables.getEnvVariables().get("explicitLongWait"):"30");
-    AppiumDriver    appiumDriver        = (AppiumDriver<MobileElement>) driver;
+
+    AppiumDriver    appiumDriver;
+    String testType;
+    public DemoSite(){
+        testType = System.getenv("testType");
+        if(testType.equalsIgnoreCase("mobileAppInstalled")){
+            appiumDriver = (AppiumDriver<MobileElement>) driver;
+        }else{
+            appiumDriver = null;
+        }
+
+    }
+
+
 
     WebDriverWait shortWait = new WebDriverWait(driver,shortWaitSeconds);
     WebDriverWait longWait = new WebDriverWait(driver,longWaitSeconds);
@@ -117,14 +129,15 @@ public class DemoSite {
     @When("I login as {string}")
     public void iLoginToSauceDemo(String user) throws InterruptedException {
         Thread.sleep(2000);
-        List<MobileElement> elements = appiumDriver.findElements(By.xpath("//*"));
-        for(WebElement e: elements){
-            System.out.println(e.getAttribute("id"));
+        if(testType.equalsIgnoreCase("mobileAppInstalled")) {
+            appiumDriver.findElement(By.xpath("//*[@id='user-name']")).sendKeys(user);
+            appiumDriver.findElement(By.xpath("//*[@id='password']")).sendKeys("secret_sauce");
+            appiumDriver.findElement(By.xpath("//*[@id='login-button']")).click();
+        }else{
+            Element.findElement("saucehome.textBox_userId").sendKeys(user);
+            Element.findElement("saucehome.textBox_password").sendKeys("secret_sauce");
+            Element.findElement("saucehome.button_login").click();
         }
-        appiumDriver.findElement(By.xpath("//*[@id='user-name']")).sendKeys(user);
-        appiumDriver.findElement(By.xpath("//*[@id='password']")).sendKeys("secret_sauce");
-        appiumDriver.findElement(By.xpath("//*[@id='login-button']")).click();
-
     }
 
     @Then("I verify that I have logged in successfully")
