@@ -35,7 +35,8 @@ public class DemoSite {
     AppiumDriver    appiumDriver;
     String testType;
     public DemoSite(){
-        testType = System.getenv("testType");
+        testType = EnvVariables.getEnvVariables().get("testType");
+
         System.out.println("TestType: " + testType);
         if(testType.equalsIgnoreCase("mobileAppInstalled")){
             appiumDriver = (AppiumDriver<MobileElement>) driver;
