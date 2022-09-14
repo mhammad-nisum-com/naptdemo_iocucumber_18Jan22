@@ -36,6 +36,7 @@ public class DemoSite {
     String testType;
     public DemoSite(){
         testType = System.getenv("testType");
+        System.out.println("TestType: " + testType);
         if(testType.equalsIgnoreCase("mobileAppInstalled")){
             appiumDriver = (AppiumDriver<MobileElement>) driver;
         }else{
