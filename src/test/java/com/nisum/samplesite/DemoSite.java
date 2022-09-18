@@ -275,4 +275,21 @@ public class DemoSite {
 
     }
 
+    @When("I click on the Menu and select {string} >> {string}")
+    public void iSelectMenuItem(String itemType, String menuItem) throws InterruptedException {
+        Thread.sleep(2000);
+        appiumDriver.findElement(Element.element("appChromeHome.menuButton")).click();
+
+        if(itemType.equalsIgnoreCase("MenuIcon")){
+            appiumDriver.findElement(Element.paramElement("appChromeMenu.menuIcon",menuItem)).click();
+        }else if(itemType.equalsIgnoreCase("MenuItem")){
+            appiumDriver.findElement(Element.paramElement("appChromeMenu.menuItem",menuItem)).click();
+        }
+    }
+
+    @Then("I validate that the website is bookmarked")
+    public void iValidateWebsiteIsBookmarked(){
+        Assert.assertTrue(EnvVariables.getEnvVariables().get("WebURL").toLowerCase().equals("https://" + appiumDriver.findElement(Element.element("appChromeMenu.bookmark")).getText()));
+    }
+
 }
