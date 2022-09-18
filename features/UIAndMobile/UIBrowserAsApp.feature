@@ -1,6 +1,6 @@
 Feature: Testing Browser As A Hybrid App.
 
-  @Ignore
+
   Scenario: Demonstrating mobile app capabilities of NAPT
     When I switch to the "NATIVE_APP" context
     When I type the url "https://www.saucedemo.com"

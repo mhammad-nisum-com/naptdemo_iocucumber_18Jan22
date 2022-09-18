@@ -290,6 +290,7 @@ public class DemoSite {
     @Then("I validate that the website is bookmarked")
     public void iValidateWebsiteIsBookmarked(){
         Assert.assertTrue(EnvVariables.getEnvVariables().get("WebURL").toLowerCase().equals("https://" + appiumDriver.findElement(Element.element("appChromeMenu.bookmark")).getText()));
+        appiumDriver.quit();
     }
 
 }
