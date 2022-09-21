@@ -1,7 +1,7 @@
 Feature: Testing Browser As A Hybrid App.
 
 
-  Scenario: Demonstrating mobile app capabilities of NAPT
+  Scenario: Verify browser back feature of Chrome Browser
     When I switch to the "NATIVE_APP" context
     When I type the url "https://www.saucedemo.com"
     When I switch to the "WEBVIEW_chrome" context

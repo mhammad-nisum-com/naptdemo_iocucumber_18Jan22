@@ -21,7 +21,7 @@ Feature: FEATURE1 To test checkout feature of Sample Site on Mobile and UI
       | Sauce Labs Backpack |  |
   #| Sauce Labs Fleece Jacket |  |
 
-  @DemoSite
+
   Scenario: FEATURE1 Verify incorrect selection of item
     Given that I navigate SauceDemo Home
       Then I verify that I have landed correctly on the page
