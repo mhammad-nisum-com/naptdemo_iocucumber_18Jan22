@@ -21,11 +21,11 @@ Feature: FEATURE2 To test checkout feature of Sample Site on Mobile and UI
       | Sauce Labs Backpack |  |
   #| Sauce Labs Fleece Jacket |  |
 
-
-  Scenario: FEATURE2 Verify incorrect selection of item
-    Given that I navigate SauceDemo Home
-      Then I verify that I have landed correctly on the page
-    When I login as "standard_user"
-      Then I verify that I have logged in successfully
-    When I select a non-existent item "Sauce"
-      Then I am not navigated to Item Details Page
+#
+#  Scenario: FEATURE2 Verify incorrect selection of item
+#    Given that I navigate SauceDemo Home
+#      Then I verify that I have landed correctly on the page
+#    When I login as "standard_user"
+#      Then I verify that I have logged in successfully
+#    When I select a non-existent item "Sauce"
+#      Then I am not navigated to Item Details Page
