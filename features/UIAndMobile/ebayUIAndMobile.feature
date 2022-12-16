@@ -2,7 +2,7 @@ Feature: To test checkout feature of eBay on Mobile and UI
 
 
 
-@AddToCart @Smoke @Regression
+@AddToCart @Smoke @Regression @DemoSite
 Scenario: Testing Add to Cart feature of ebay on UI and Mobile
 Given that I navigate to eBay home
 When I search for "iPhone 13"
