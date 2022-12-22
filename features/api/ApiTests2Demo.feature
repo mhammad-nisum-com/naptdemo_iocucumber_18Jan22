@@ -20,7 +20,7 @@
 
   @put @api
   Scenario: PUT Scenario 2
-  Given that param "headers.contentType" is set to value "application/json"
+  Given that param "headers.contentType" is set to value "application/xml"
   Given that param "base_url.url" is set to value "https://reqres.in"
   When I read the JSON from file "src/main/resources/testData/postreqres.json" into Dictionary Key "PutUsers"
   When I make a "PUT" REST Call with URL "/api/users/2" and Body from Dictionary Key "PutUsers"
