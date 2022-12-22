@@ -183,9 +183,9 @@ public class DemoSite {
         if(StepUtils.MEW() && !StepUtils.iOS()){
             swipeScreen(Direction.DOWN);
             swipeScreen(Direction.DOWN);
-            Element.findElement("sauceItemDetailPage.buttonAddToCart").click();
+            Element.findElement("sauceItemDetailPage.btnAddToCart").click();
         }else{
-            Element.findElement("sauceItemDetailPage.buttonAddToCart").click();
+            Element.findElement("sauceItemDetailPage.btnAddToCart").click();
         }
 
     }
@@ -198,7 +198,7 @@ public class DemoSite {
             Element.findElement("header.buttonViewCart").click();
         }else {
             Element.findElement("header.buttonViewCart").click();
-            Assert.assertTrue(Element.findElement(Element.paramElement("viewcart.itemInCart", itemName)).isDisplayed());
+            Assert.assertTrue(Element.findElement(Element.paramElement("viewcart.cartItem", itemName)).isDisplayed());
         }
     }
 

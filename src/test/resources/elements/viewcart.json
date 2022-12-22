@@ -1,4 +1,5 @@
 {
   "itemInCart": "xpath,//div[@class='inventory_item_name'][text()='Sauce Labs Backpack']",
+  "cartItem": "xpath,//div[@class='inventory_item_name'][text()]",
   "buttonCheckout": "id,checkout"
 }

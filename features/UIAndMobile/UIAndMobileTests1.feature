@@ -19,6 +19,7 @@ Feature: FEATURE1 To test checkout feature of Sample Site on Mobile and UI
     Examples:
       | ItemName            |  |
       | Sauce Labs Backpack |  |
+      | Sauce Labs Bolt T-Shirt | |
 
 #  @DemoSite
 #  Scenario: FEATURE1 Verify incorrect selection of item
