@@ -24,7 +24,7 @@
   Given that param "base_url.url" is set to value "https://reqres.in"
   When I read the JSON from file "src/main/resources/testData/postreqres.json" into Dictionary Key "PutUsers"
   When I make a "PUT" REST Call with URL "/api/users/2" and Body from Dictionary Key "PutUsers"
-  Then I verify that the response code is "200" for the response with Dictionary Key "PutUsers"
+  Then I verify that the response code is "201" for the response with Dictionary Key "PutUsers"
 
   @api
   Scenario: DELETE Scenario 1
