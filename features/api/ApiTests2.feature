@@ -1,7 +1,7 @@
   Feature: Test feature
 
   @get @api
-  Scenario: APITESTS2 GET Scenario
+  Scenario: GET Scenario 2
   Given that param "headers.contentType" is set to value "application/json"
   Given that param "base_url.url" is set to value "https://reqres.in"
   When I make a "GET" REST Call with URI "/api/users?page=2" and store the response with Dictionary Key "GetUsers"
@@ -11,7 +11,7 @@
   And I add the value at json path "$.data[?(@.email=='michael.lawson@reqres.in')].email" from response with Dictionary Key "GetUsers" and store it in Dictionary Key "email"
 
   @post @api
-  Scenario: APITESTS2 POST Scenario
+  Scenario: POST Scenario 2
   Given that param "headers.contentType" is set to value "application/json"
   Given that param "base_url.url" is set to value "https://reqres.in"
   When I read the JSON from file "src/main/resources/testData/postreqres.json" into Dictionary Key "PostUsers"
@@ -19,7 +19,7 @@
   Then I verify that the response code is "201" for the response with Dictionary Key "PostUsers"
 
   @put @api
-  Scenario: APITESTS2 PUT Scenario
+  Scenario: PUT Scenario 2
   Given that param "headers.contentType" is set to value "application/json"
   Given that param "base_url.url" is set to value "https://reqres.in"
   When I read the JSON from file "src/main/resources/testData/postreqres.json" into Dictionary Key "PutUsers"
@@ -27,14 +27,14 @@
   Then I verify that the response code is "200" for the response with Dictionary Key "PutUsers"
 
   @delete @api
-  Scenario: APITESTS2 DELETE Scenario
+  Scenario: DELETE Scenario 2
   Given that param "headers.contentType" is set to value "application/json"
   Given that param "base_url.url" is set to value "https://reqres.in"
   When I make a "DELETE" REST Call with URI "/api/users/2" and store the response with Dictionary Key "PutUsers"
   Then I verify that the response code is "200" for the response with Dictionary Key "PutUsers"
 
   @patch @api
-  Scenario: APITESTS2 PATCH Scenario
+  Scenario: PATCH Scenario 2
   Given that param "headers.contentType" is set to value "application/json"
   Given that param "base_url.url" is set to value "https://reqres.in"
   When I read the JSON from file "src/main/resources/testData/postreqres.json" into Dictionary Key "PutUsers"
