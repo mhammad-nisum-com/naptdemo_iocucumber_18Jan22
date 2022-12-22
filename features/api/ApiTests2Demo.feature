@@ -16,7 +16,7 @@
   Given that param "base_url.url" is set to value "https://reqres.in"
   When I read the JSON from file "src/main/resources/testData/postreqres.json" into Dictionary Key "PostUsers"
   When I make a "POST" REST Call with URL "/api/users" and Body from Dictionary Key "PostUsers"
-  Then I verify that the response code is "200" for the response with Dictionary Key "PostUsers"
+  Then I verify that the response code is "201" for the response with Dictionary Key "PostUsers"
 
   @put @api
   Scenario: PUT Scenario 2
@@ -31,7 +31,7 @@
   Given that param "headers.contentType" is set to value "application/json"
   Given that param "base_url.url" is set to value "https://reqres.in"
   When I make a "DELETE" REST Call with URI "/api/users/2" and store the response with Dictionary Key "PutUsers"
-  Then I verify that the response code is "201" for the response with Dictionary Key "PutUsers"
+  Then I verify that the response code is "200" for the response with Dictionary Key "PutUsers"
 
   @patch @api
   Scenario: PATCH Scenario 2
