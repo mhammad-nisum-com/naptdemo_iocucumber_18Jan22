@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
         glue={"com.nisum.samplesite"},
         tags = "@DemoSite",
         plugin={"pretty", "html:target/cucumber.html", "json:target/cucumber.json"}
+
 )
 
 public class TestRunner{
