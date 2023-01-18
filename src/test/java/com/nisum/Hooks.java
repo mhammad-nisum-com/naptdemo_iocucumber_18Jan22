@@ -1,9 +1,8 @@
 package com.nisum;
 
-import com.napt.framework.ui.runner.EnvVariables;
+import com.napt.framework.api.runner.EnvVariables;
 import com.napt.framework.ui.runner.WebDriverManager;
 import com.napt.framework.ui.utils.StepUtils;
-
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -26,7 +25,9 @@ public class Hooks {
     public void beforeScenario(Scenario sc) throws MalformedURLException {
         log.info("Scenario: " + sc.getName());
         if(!EnvVariables.getEnvVariables().get("testType").toString().toLowerCase().equalsIgnoreCase("API")) {
+            System.out.println("before set driver 2");
             WebDriverManager.setDriver2();
+            System.out.println("after set driver 2");
             if (!StepUtils.MEW()) {
                 WebDriverManager.getDriver().manage().window().maximize();
             }
