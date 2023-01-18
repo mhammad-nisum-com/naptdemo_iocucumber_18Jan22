@@ -1,6 +1,6 @@
 Feature: FEATURE2 To test checkout feature of Sample Site on Mobile and UI
 
-    @DemoSite @Pass
+    @DemoSite @f2s1
     Scenario Outline: FEATURE2 Verify checkout flow of SauceDemo Site
     Given that I navigate SauceDemo Home
       Then I verify that I have landed correctly on the page
@@ -30,7 +30,7 @@ Feature: FEATURE2 To test checkout feature of Sample Site on Mobile and UI
 #    When I select a non-existent item "Sauce"
 #      Then I am not navigated to Item Details Page
 
-  @DemoSite @Fail
+  @DemoSite @f2s2
   Scenario Outline: FEATURE2 Verify checkout flow of SauceDemo Site
     Given that I navigate SauceDemo Home
     Then I verify that I have landed correctly on the page
