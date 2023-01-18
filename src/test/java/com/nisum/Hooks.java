@@ -32,6 +32,8 @@ public class Hooks {
                 WebDriverManager.getDriver().manage().window().maximize();
             }
             WebDriverManager.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        }else{
+            log.info("running api tests");
         }
     }
 
@@ -71,7 +73,9 @@ public class Hooks {
             } catch (WebDriverException e) {
                 log.warn("Driver could not be reset, please see debug log for more details");
                 log.debug(e.getMessage());
+                WebDriverManager.destroyDriver();
             }
+            WebDriverManager.destroyDriver();
         }
     }
 }
