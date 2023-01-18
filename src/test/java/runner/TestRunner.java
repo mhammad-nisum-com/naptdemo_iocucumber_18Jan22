@@ -8,8 +8,9 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features="features/",
-        glue={"com.nisum"},
-        plugin={"pretty", "html:target/Destination", "json:target/cucumber.json"}
+        glue={"com.nisum.samplesite"},
+        tags = "@DemoSite",
+        plugin={"pretty", "html:target/cucumber.html", "json:target/cucumber.json"}
 )
 
 public class TestRunner{

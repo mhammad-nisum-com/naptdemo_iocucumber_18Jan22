@@ -3,9 +3,10 @@ package com.nisum;
 import com.napt.framework.ui.runner.EnvVariables;
 import com.napt.framework.ui.runner.WebDriverManager;
 import com.napt.framework.ui.utils.StepUtils;
-import io.cucumber.core.api.Scenario;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -46,7 +47,7 @@ public class Hooks {
                 TakesScreenshot takeScreenshot = (TakesScreenshot) WebDriverManager.getDriver();
                 try {
                     byte[] data = takeScreenshot.getScreenshotAs(OutputType.BYTES);
-                    sc.embed(data, "image/png");
+                    sc.attach(data, "image/png", "image");
                     log.info("Screenshot Embed it in the report");
                 } catch (ClassCastException cce) {
                     cce.printStackTrace();
